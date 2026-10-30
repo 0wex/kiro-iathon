@@ -4,6 +4,7 @@ import {
 	NewspaperIcon,
 	RouteIcon,
 	SettingsIcon,
+	TriangleAlertIcon,
 	TruckIcon,
 } from "@iathon-kiro/ui/components/icons";
 import type { LinkProps } from "@tanstack/react-router";
@@ -18,6 +19,11 @@ interface DashboardNavigationEntry {
 }
 
 export const DASHBOARD_NAVIGATION: DashboardNavigationEntry[] = [
+	{
+		to: "/dashboard/reportes",
+		label: m.nav_citizen_reports(),
+		icon: TriangleAlertIcon,
+	},
 	{ to: "/dashboard", label: m.nav_map(), icon: MapIcon, exact: true },
 	{
 		to: "/dashboard/revisar-ruta",

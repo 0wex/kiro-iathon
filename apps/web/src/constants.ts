@@ -4,6 +4,11 @@ import {
 	MS_PER_HOUR,
 	MS_PER_MINUTE,
 } from "@iathon-kiro/business/constants";
+import {
+	type HazardKind,
+	PIURA_BOUNDS,
+	type ReportPriority,
+} from "@iathon-kiro/business/citizen-reports/index";
 import type { DemoProfile } from "@iathon-kiro/business/demo-account";
 import type { AuthShellLabels } from "@iathon-kiro/ui/components/auth-shell";
 import type {
@@ -207,7 +212,7 @@ export const SEEN_ALERTS_STORAGE_PREFIX = "illapa-seen-alerts-v1";
 export const TOO_MANY_REQUESTS_STATUS = 429;
 export const CONFLICT_STATUS = 409;
 export const DEMO_START_ROUTES = {
-	fleet: "/dashboard/revisar-ruta",
+	fleet: "/dashboard/reportes",
 	engineer: "/ingenieria",
 } as const satisfies Record<DemoProfile, string>;
 export const AUTH_ERROR_MESSAGES: Record<string, () => string> = {
@@ -298,3 +303,61 @@ export const ROLE_HOME_PATHS = {
 	fleet: "/dashboard",
 	engineer: "/ingenieria",
 } as const satisfies Record<UserRole, string>;
+
+interface CitizenReportPriorityLevel {
+	variant: RiskLevel["variant"];
+	label: () => string;
+	markerClassName: string;
+}
+
+export const CITIZEN_REPORT_PRIORITY_LEVELS: Record<
+	ReportPriority,
+	CitizenReportPriorityLevel
+> = {
+	critica: {
+		variant: "critical",
+		label: m.citizen_reports_priority_critica,
+		markerClassName: "bg-risk-critical text-risk-critical-foreground",
+	},
+	alta: {
+		variant: "high",
+		label: m.citizen_reports_priority_alta,
+		markerClassName: "bg-risk-high text-risk-high-foreground",
+	},
+	media: {
+		variant: "moderate",
+		label: m.citizen_reports_priority_media,
+		markerClassName: "bg-risk-moderate text-risk-moderate-foreground",
+	},
+	baja: {
+		variant: "low",
+		label: m.citizen_reports_priority_baja,
+		markerClassName: "bg-risk-low text-risk-low-foreground",
+	},
+};
+
+export const CITIZEN_REPORT_HAZARD_LABELS: Record<HazardKind, () => string> = {
+	inundacion: m.citizen_reports_hazard_inundacion,
+	huayco: m.citizen_reports_hazard_huayco,
+	deslizamiento: m.citizen_reports_hazard_deslizamiento,
+	"colapso-drenaje": m.citizen_reports_hazard_colapso_drenaje,
+	"erosion-defensa": m.citizen_reports_hazard_erosion_defensa,
+	otro: m.citizen_reports_hazard_otro,
+};
+
+export const PIURA_MAP_FIT_PADDING_PX = 24;
+export const PIURA_INITIAL_VIEW_STATE = {
+	bounds: [
+		[PIURA_BOUNDS.west, PIURA_BOUNDS.south],
+		[PIURA_BOUNDS.east, PIURA_BOUNDS.north],
+	] satisfies [[number, number], [number, number]],
+	fitBoundsOptions: { padding: PIURA_MAP_FIT_PADDING_PX },
+};
+export const CITIZEN_REPORT_FOCUS_ZOOM_LEVEL = 12;
+export const CITIZEN_REPORT_FOCUS_DURATION_MS = 600;
+export const CITIZEN_REPORT_COORDINATE_DECIMALS = 5;
+export const CITIZEN_REPORT_SKELETON_KEYS = ["first", "second", "third"];
+export const CITIZEN_REPORT_PHOTO_MAX_SIDES_PX = [1280, 960, 640];
+export const CITIZEN_REPORT_PHOTO_JPEG_QUALITIES = [0.85, 0.7, 0.55, 0.4];
+export const BYTES_PER_KILOBYTE = 1024;
+export const GEOLOCATION_TIMEOUT_MS = 10_000;
