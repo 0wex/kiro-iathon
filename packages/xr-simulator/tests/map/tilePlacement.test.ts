@@ -9,7 +9,11 @@ const center = { lon: -76.38, lat: -11.84 };
 const lonPerMeter = 1 / (111_320 * Math.cos((center.lat * Math.PI) / 180));
 const latPerMeter = 1 / METERS_PER_DEGREE_LAT;
 
-function square(lon: number, lat: number, sideMeters: number): [number, number][][] {
+function square(
+	lon: number,
+	lat: number,
+	sideMeters: number,
+): [number, number][][] {
 	const halfLon = (sideMeters / 2) * lonPerMeter;
 	const halfLat = (sideMeters / 2) * latPerMeter;
 	return [
@@ -25,9 +29,15 @@ function square(lon: number, lat: number, sideMeters: number): [number, number][
 
 const tileBox = { west: -76.39, south: -11.85, east: -76.37, north: -11.83 };
 const sources = {
-	blocks: [{ id: "15070100100011#0", rings: square(center.lon, center.lat, 200) }],
-	places: [{ id: "1507010001", name: "MATUCANA", lon: center.lon, lat: center.lat }],
-	landCover: [{ landCover: "Cardonal", rings: square(center.lon, center.lat, 1500) }],
+	blocks: [
+		{ id: "15070100100011#0", rings: square(center.lon, center.lat, 200) },
+	],
+	places: [
+		{ id: "1507010001", name: "MATUCANA", lon: center.lon, lat: center.lat },
+	],
+	landCover: [
+		{ landCover: "Cardonal", rings: square(center.lon, center.lat, 1500) },
+	],
 };
 const highland = () => 2400;
 
@@ -83,6 +93,8 @@ describe("placeTileObjects", () => {
 	});
 
 	it("is deterministic", () => {
-		expect(placeTileObjects("14/1/2", tileBox, sources, highland)).toEqual(objects);
+		expect(placeTileObjects("14/1/2", tileBox, sources, highland)).toEqual(
+			objects,
+		);
 	});
 });

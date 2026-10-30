@@ -106,7 +106,9 @@ const VEGETATION_BY_LAND_COVER: Record<string, VegetationRule[]> = {
 		{ model: "thornShrub", plantsPerHectare: 12 },
 		{ model: "cactus", plantsPerHectare: 1 },
 	],
-	"Matorral arbustivo altimontano": [{ model: "thornShrub", plantsPerHectare: 12 }],
+	"Matorral arbustivo altimontano": [
+		{ model: "thornShrub", plantsPerHectare: 12 },
+	],
 	"Matorral esclerófilo de montaña montano": [
 		{ model: "thornShrub", plantsPerHectare: 14 },
 	],
@@ -121,7 +123,9 @@ const VEGETATION_BY_LAND_COVER: Record<string, VegetationRule[]> = {
 	"Bosque relicto mesoandino": HIGHLAND_RELICT_FOREST,
 	"Bosque relicto mesoandino de coníferas": HIGHLAND_RELICT_FOREST,
 	"Plantación Forestal": [{ model: "eucalyptus", plantsPerHectare: 22 }],
-	"Agricultura costera y andina": [{ model: "eucalyptus", plantsPerHectare: 2 }],
+	"Agricultura costera y andina": [
+		{ model: "eucalyptus", plantsPerHectare: 2 },
+	],
 };
 
 /** FNV-1a 32-bit hash: a stable seed from a block id or tile key. */
@@ -152,7 +156,11 @@ export function isInsidePolygon(
 ): boolean {
 	let inside = false;
 	for (const ring of rings)
-		for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+		for (
+			let index = 0, previous = ring.length - 1;
+			index < ring.length;
+			previous = index++
+		) {
 			const [lonA, latA] = ring[index];
 			const [lonB, latB] = ring[previous];
 			if (
@@ -168,7 +176,10 @@ export function regionForElevation(elevationMeters: number): Region {
 	return elevationMeters < COAST_MAX_ELEVATION_M ? "costa" : "sierra";
 }
 
-export function chooseHouseType(region: Region, random: () => number): HouseType {
+export function chooseHouseType(
+	region: Region,
+	random: () => number,
+): HouseType {
 	const options = HOUSE_TYPES_BY_REGION[region];
 	const total = options.reduce((sum, option) => sum + option.weight, 0);
 	let draw = random() * total;
@@ -191,7 +202,8 @@ export function blockHeading(rings: PolygonRings): number {
 	let heading = 0;
 	for (let index = 1; index < outer.length; index++) {
 		const east = (outer[index][0] - outer[index - 1][0]) * lonScale;
-		const north = (outer[index][1] - outer[index - 1][1]) * METERS_PER_DEGREE_LAT;
+		const north =
+			(outer[index][1] - outer[index - 1][1]) * METERS_PER_DEGREE_LAT;
 		const length = Math.hypot(east, north);
 		if (length > longest) {
 			longest = length;
@@ -202,7 +214,12 @@ export function blockHeading(rings: PolygonRings): number {
 }
 
 export function ringBounds(ring: [number, number][]): LonLatBox {
-	const box = { west: Infinity, south: Infinity, east: -Infinity, north: -Infinity };
+	const box = {
+		west: Number.POSITIVE_INFINITY,
+		south: Number.POSITIVE_INFINITY,
+		east: Number.NEGATIVE_INFINITY,
+		north: Number.NEGATIVE_INFINITY,
+	};
 	for (const [lon, lat] of ring) {
 		box.west = Math.min(box.west, lon);
 		box.east = Math.max(box.east, lon);
@@ -235,8 +252,16 @@ export function housesInBlock(
 	const cos = Math.cos(heading);
 	const sin = Math.sin(heading);
 	const houses: PlacedHouse[] = [];
-	for (let along = -halfDiagonal; along <= halfDiagonal; along += HOUSE_SPACING_M)
-		for (let across = -halfDiagonal; across <= halfDiagonal; across += HOUSE_SPACING_M) {
+	for (
+		let along = -halfDiagonal;
+		along <= halfDiagonal;
+		along += HOUSE_SPACING_M
+	)
+		for (
+			let across = -halfDiagonal;
+			across <= halfDiagonal;
+			across += HOUSE_SPACING_M
+		) {
 			const jitterAlong = (random() - 0.5) * 2 * HOUSE_JITTER_M;
 			const jitterAcross = (random() - 0.5) * 2 * HOUSE_JITTER_M;
 			const east = (along + jitterAlong) * cos - (across + jitterAcross) * sin;
@@ -266,7 +291,11 @@ export function vegetationRuleFor(
 function crossingsAt(rings: PolygonRings, lat: number): number[] {
 	const crossings: number[] = [];
 	for (const ring of rings)
-		for (let index = 0, previous = ring.length - 1; index < ring.length; previous = index++) {
+		for (
+			let index = 0, previous = ring.length - 1;
+			index < ring.length;
+			previous = index++
+		) {
 			const [lonA, latA] = ring[index];
 			const [lonB, latB] = ring[previous];
 			if (latA > lat !== latB > lat)
@@ -312,11 +341,13 @@ export function vegetationInTile(
 		for (let lon = tileBox.west; lon < tileBox.east; lon += cellLon) {
 			const draw = random();
 			const strip = strips[Math.floor(random() * VEGETATION_ROW_STRIPS)];
-			const plantLon = lon + cellLon * (0.5 + (random() - 0.5) * VEGETATION_JITTER_RATIO);
+			const plantLon =
+				lon + cellLon * (0.5 + (random() - 0.5) * VEGETATION_JITTER_RATIO);
 			const heading = random() * Math.PI * 2;
 			const variant = random();
 			const areaIndex = strip.crossings.findIndex(
-				(crossings) => crossings.filter((crossing) => crossing < plantLon).length % 2 === 1,
+				(crossings) =>
+					crossings.filter((crossing) => crossing < plantLon).length % 2 === 1,
 			);
 			if (areaIndex < 0) continue;
 			let threshold = 0;
@@ -326,7 +357,13 @@ export function vegetationInTile(
 			)) {
 				threshold += rule.plantsPerHectare * cellHectares;
 				if (draw < threshold) {
-					plants.push({ model: rule.model, lon: plantLon, lat: strip.lat, heading, variant });
+					plants.push({
+						model: rule.model,
+						lon: plantLon,
+						lat: strip.lat,
+						heading,
+						variant,
+					});
 					break;
 				}
 			}

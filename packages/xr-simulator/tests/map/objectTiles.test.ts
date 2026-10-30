@@ -16,7 +16,9 @@ describe("objectTilesAround", () => {
 
 	it("starts with the tile under the focus, at the object zoom", () => {
 		const tiles = objectTilesAround(matucana, 1);
-		expect(tiles[0]).toEqual(lonLatToTile(matucana.lon, matucana.lat, OBJECT_TILE_ZOOM));
+		expect(tiles[0]).toEqual(
+			lonLatToTile(matucana.lon, matucana.lat, OBJECT_TILE_ZOOM),
+		);
 		for (const tile of tiles) expect(tile.z).toBe(OBJECT_TILE_ZOOM);
 	});
 

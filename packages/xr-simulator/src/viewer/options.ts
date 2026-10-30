@@ -38,7 +38,9 @@ export function resolveEndpoints(
 		objectSources: options.objectSources
 			? {
 					ineiBaseUrl: withoutTrailingSlash(options.objectSources.ineiBaseUrl),
-					minamBaseUrl: withoutTrailingSlash(options.objectSources.minamBaseUrl),
+					minamBaseUrl: withoutTrailingSlash(
+						options.objectSources.minamBaseUrl,
+					),
 				}
 			: null,
 		credentials: options.credentials ?? "same-origin",

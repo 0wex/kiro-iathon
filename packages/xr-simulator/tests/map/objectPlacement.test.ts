@@ -16,10 +16,13 @@ import {
 const METERS_PER_DEGREE_LAT = 110_540;
 
 /** Square block of `sideMeters` centred on (lon, lat), as a closed lon/lat ring. */
-function squareBlock(lon: number, lat: number, sideMeters: number): PolygonRings {
+function squareBlock(
+	lon: number,
+	lat: number,
+	sideMeters: number,
+): PolygonRings {
 	const halfLat = sideMeters / 2 / METERS_PER_DEGREE_LAT;
-	const halfLon =
-		sideMeters / 2 / (111_320 * Math.cos((lat * Math.PI) / 180));
+	const halfLon = sideMeters / 2 / (111_320 * Math.cos((lat * Math.PI) / 180));
 	return [
 		[
 			[lon - halfLon, lat - halfLat],
@@ -43,7 +46,9 @@ describe("createRandom", () => {
 		}
 	});
 	it("gives different sequences for different seeds", () => {
-		expect(createRandom(hashText("a"))()).not.toBe(createRandom(hashText("b"))());
+		expect(createRandom(hashText("a"))()).not.toBe(
+			createRandom(hashText("b"))(),
+		);
 	});
 });
 
@@ -128,17 +133,17 @@ describe("housesInBlock", () => {
 		for (const house of houses) expect(sierraTypes).toContain(house.type);
 	});
 	it("places nothing in a block too small for a house", () => {
-		expect(housesInBlock("tiny", squareBlock(-76.38, -11.84, 3), "costa")).toEqual(
-			[],
-		);
+		expect(
+			housesInBlock("tiny", squareBlock(-76.38, -11.84, 3), "costa"),
+		).toEqual([]);
 	});
 });
 
 describe("vegetationRuleFor", () => {
 	it("maps MINAM land-cover classes to phase-1 models", () => {
-		expect(vegetationRuleFor("Cardonal", 1500).map((rule) => rule.model)).toContain(
-			"cactus",
-		);
+		expect(
+			vegetationRuleFor("Cardonal", 1500).map((rule) => rule.model),
+		).toContain("cactus");
 		expect(
 			vegetationRuleFor("Pajonal andino", 4200).map((rule) => rule.model),
 		).toContain("ichu");
@@ -152,8 +157,12 @@ describe("vegetationRuleFor", () => {
 		).toContain("eucalyptus");
 	});
 	it("swaps the thorny shrub for tola above the puna line", () => {
-		const low = vegetationRuleFor("Matorral arbustivo", 2500).map((rule) => rule.model);
-		const high = vegetationRuleFor("Matorral arbustivo", 4000).map((rule) => rule.model);
+		const low = vegetationRuleFor("Matorral arbustivo", 2500).map(
+			(rule) => rule.model,
+		);
+		const high = vegetationRuleFor("Matorral arbustivo", 4000).map(
+			(rule) => rule.model,
+		);
 		expect(low).toContain("thornShrub");
 		expect(high).toContain("tola");
 		expect(high).not.toContain("thornShrub");
@@ -190,7 +199,9 @@ describe("vegetationInTile", () => {
 		const plants = vegetationInTile("14/1234/5678", tileBox, [cardonal], flat);
 		expect(plants.length).toBeGreaterThan(0);
 		for (const plant of plants) {
-			expect(isInsidePolygon([plant.lon, plant.lat], cardonal.rings)).toBe(true);
+			expect(isInsidePolygon([plant.lon, plant.lat], cardonal.rings)).toBe(
+				true,
+			);
 			expect(["cactus", "thornShrub"]).toContain(plant.model);
 		}
 	});

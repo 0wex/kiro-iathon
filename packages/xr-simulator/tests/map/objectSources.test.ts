@@ -16,21 +16,31 @@ describe("INEI WFS urls", () => {
 		expect(url.pathname).toBe("/inei-api/Interoperabilidad/ows");
 		expect(url.searchParams.get("service")).toBe("WFS");
 		expect(url.searchParams.get("request")).toBe("GetFeature");
-		expect(url.searchParams.get("typeNames")).toBe("Interoperabilidad:ig_manzana");
+		expect(url.searchParams.get("typeNames")).toBe(
+			"Interoperabilidad:ig_manzana",
+		);
 		expect(url.searchParams.get("outputFormat")).toBe("application/json");
 		expect(url.searchParams.get("bbox")).toBe(
 			"-11.86,-76.4,-11.84,-76.38,urn:ogc:def:crs:EPSG::4326",
 		);
 	});
 	it("asks the populated-place layer the same way", () => {
-		const url = new URL(populatedPlacesUrl("/inei-api", tileBox), "http://viewer.test");
-		expect(url.searchParams.get("typeNames")).toBe("Interoperabilidad:ig_centropoblado");
+		const url = new URL(
+			populatedPlacesUrl("/inei-api", tileBox),
+			"http://viewer.test",
+		);
+		expect(url.searchParams.get("typeNames")).toBe(
+			"Interoperabilidad:ig_centropoblado",
+		);
 	});
 });
 
 describe("MINAM land cover url", () => {
 	it("asks the class field as simplified GeoJSON intersecting the tile", () => {
-		const url = new URL(landCoverUrl("/minam-api", tileBox), "http://viewer.test");
+		const url = new URL(
+			landCoverUrl("/minam-api", tileBox),
+			"http://viewer.test",
+		);
 		expect(url.pathname).toBe(
 			"/minam-api/arcgis/rest/services/Servicios_GeoPERU/ServicioCoberturaVegetal_MINAM/MapServer/0/query",
 		);
@@ -39,7 +49,9 @@ describe("MINAM land cover url", () => {
 		expect(url.searchParams.get("outSR")).toBe("4326");
 		expect(url.searchParams.get("outFields")).toBe("CobVeg2013");
 		expect(url.searchParams.get("f")).toBe("geojson");
-		expect(Number(url.searchParams.get("maxAllowableOffset"))).toBeGreaterThan(0);
+		expect(Number(url.searchParams.get("maxAllowableOffset"))).toBeGreaterThan(
+			0,
+		);
 	});
 });
 
@@ -77,7 +89,9 @@ describe("blocksFromGeoJson", () => {
 		expect(
 			blocksFromGeoJson({
 				type: "FeatureCollection",
-				features: [{ type: "Feature", properties: { idmanzana: "x" }, geometry: null }],
+				features: [
+					{ type: "Feature", properties: { idmanzana: "x" }, geometry: null },
+				],
 			}),
 		).toEqual([]);
 	});

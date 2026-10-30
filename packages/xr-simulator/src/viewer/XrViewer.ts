@@ -8,6 +8,7 @@ import {
 } from "../map/imagery/imagerySource";
 import { type LodProfile, pickLodProfile } from "../map/lod/lodProfile";
 import { MapContextView } from "../map/MapContextView";
+import { httpObjectSourcesApi } from "../map/objects/sources";
 import { PeruOverview } from "../map/PeruOverview";
 import { startScreen, TilesClient } from "../map/tilesClient";
 import { WeatherController } from "../map/weather/WeatherController";
@@ -34,7 +35,6 @@ import {
 	vrReduce,
 } from "../xr/vrMode";
 import { ModeSwitcher, type ViewerScreen } from "./ModeSwitcher";
-import { httpObjectSourcesApi } from "../map/objects/sources";
 import { resolveEndpoints, type XrViewerEndpointOptions } from "./options";
 import type {
 	ModeHost,

@@ -13,7 +13,10 @@ import {
 } from "@babylonjs/core";
 import { type LocalFrame, localToLonLat, worldToLocal } from "../lod/quadtree";
 import { lonLatToWorld, tileBoundsLonLat } from "../tileMath";
-import { OBJECT_TILE_CACHE_SIZE, OBJECTS_UPDATE_INTERVAL_MS } from "./constants";
+import {
+	OBJECT_TILE_CACHE_SIZE,
+	OBJECTS_UPDATE_INTERVAL_MS,
+} from "./constants";
 import { buildModel, MODEL_VARIANT_COUNT, type ObjectModel } from "./models";
 import { objectTileKey, objectTilesAround } from "./objectTiles";
 import type { ObjectSourcesApi } from "./sources";
@@ -53,7 +56,8 @@ export class ObjectsLayer {
 	private readonly tiles = new Map<string, ObjectTile>();
 	private readonly meshes = new Map<string, Mesh>();
 	private readonly material: StandardMaterial;
-	private lights: { sky: HemisphericLight; sun: DirectionalLight } | null = null;
+	private lights: { sky: HemisphericLight; sun: DirectionalLight } | null =
+		null;
 	private wantedKeys: string[] = [];
 	private inFlight = 0;
 	private lastUpdate = 0;
@@ -100,7 +104,10 @@ export class ObjectsLayer {
 	update(now: number, focus: { x: number; z: number }, viewKm: number): void {
 		if (now - this.lastUpdate >= OBJECTS_UPDATE_INTERVAL_MS) {
 			this.lastUpdate = now;
-			const wanted = objectTilesAround(localToLonLat(this.frame, focus.x, focus.z), viewKm);
+			const wanted = objectTilesAround(
+				localToLonLat(this.frame, focus.x, focus.z),
+				viewKm,
+			);
 			const keys = wanted.map(objectTileKey);
 			if (keys.join() !== this.wantedKeys.join()) {
 				this.wantedKeys = keys;
@@ -109,7 +116,8 @@ export class ObjectsLayer {
 			for (const tile of wanted) {
 				const key = objectTileKey(tile);
 				if (this.inFlight >= MAX_TILES_IN_FLIGHT) break;
-				if (!this.tiles.has(key)) void this.loadTile(key, tileBoundsLonLat(tile));
+				if (!this.tiles.has(key))
+					void this.loadTile(key, tileBoundsLonLat(tile));
 			}
 			// At most one rebuild per interval, even when several tiles land together.
 			if (this.dirty) this.rebuild();
@@ -130,7 +138,10 @@ export class ObjectsLayer {
 		return this.heightKm(x, z) * 1000;
 	}
 
-	private async loadTile(key: string, box: ReturnType<typeof tileBoundsLonLat>): Promise<void> {
+	private async loadTile(
+		key: string,
+		box: ReturnType<typeof tileBoundsLonLat>,
+	): Promise<void> {
 		const tile: ObjectTile = { objects: null, failed: false };
 		this.tiles.set(key, tile);
 		this.inFlight++;
@@ -144,11 +155,17 @@ export class ObjectsLayer {
 		if (this.disposed) return;
 		const valueOf = <Value>(result: PromiseSettledResult<Value[]>): Value[] =>
 			result.status === "fulfilled" ? result.value : [];
-		tile.failed = [blocks, places, landCover].every((result) => result.status === "rejected");
+		tile.failed = [blocks, places, landCover].every(
+			(result) => result.status === "rejected",
+		);
 		tile.objects = placeTileObjects(
 			key,
 			box,
-			{ blocks: valueOf(blocks), places: valueOf(places), landCover: valueOf(landCover) },
+			{
+				blocks: valueOf(blocks),
+				places: valueOf(places),
+				landCover: valueOf(landCover),
+			},
 			(lon, lat) => this.elevationMeters(lon, lat),
 		);
 		this.evictUnwanted();
@@ -188,10 +205,18 @@ export class ObjectsLayer {
 	 */
 	private lightMesh(mesh: Mesh): void {
 		if (!this.lights) {
-			const sky = new HemisphericLight("peru-objects-sky", new Vector3(0, 1, 0), this.scene);
+			const sky = new HemisphericLight(
+				"peru-objects-sky",
+				new Vector3(0, 1, 0),
+				this.scene,
+			);
 			sky.intensity = 0.65;
 			sky.groundColor = new Color3(0.35, 0.3, 0.25);
-			const sun = new DirectionalLight("peru-objects-sun", new Vector3(-0.4, -1, 0.3), this.scene);
+			const sun = new DirectionalLight(
+				"peru-objects-sun",
+				new Vector3(-0.4, -1, 0.3),
+				this.scene,
+			);
 			sun.intensity = 0.7;
 			this.lights = { sky, sun };
 		}
@@ -200,7 +225,9 @@ export class ObjectsLayer {
 	}
 
 	private isVisible(object: PlacedObject): boolean {
-		return object.kind === "plant" ? this.visibility.vegetation : this.visibility.houses;
+		return object.kind === "plant"
+			? this.visibility.vegetation
+			: this.visibility.houses;
 	}
 
 	private rebuild(): void {
@@ -234,7 +261,9 @@ export class ObjectsLayer {
 				const [x, z] = worldToLocal(this.frame, world.x, world.y);
 				scaling.setAll(
 					SCENE_UNITS_PER_METER *
-						(object.kind === "plant" ? PLANT_MIN_SCALE + PLANT_SCALE_RANGE * object.variant : 1),
+						(object.kind === "plant"
+							? PLANT_MIN_SCALE + PLANT_SCALE_RANGE * object.variant
+							: 1),
 				);
 				translation.set(x, this.heightKm(x, z) * this.exaggeration, z);
 				// Babylon's left-handed yaw turns +x towards -z, so the heading (east → north) is negated.

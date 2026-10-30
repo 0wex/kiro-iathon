@@ -98,7 +98,9 @@ function polygonsOf(geometry: GeoJsonGeometry | null): PolygonRings[] {
 	return [];
 }
 
-export function blocksFromGeoJson(collection: GeoJsonFeatureCollection): CityBlock[] {
+export function blocksFromGeoJson(
+	collection: GeoJsonFeatureCollection,
+): CityBlock[] {
 	return collection.features.flatMap((feature) =>
 		polygonsOf(feature.geometry).map((rings, part) => ({
 			id: `${String(feature.properties?.idmanzana)}#${part}`,
@@ -146,7 +148,9 @@ export function httpObjectSourcesApi(
 	minamBase: string,
 	credentials: RequestCredentials = "same-origin",
 ): ObjectSourcesApi {
-	const getCollection = async (url: string): Promise<GeoJsonFeatureCollection> => {
+	const getCollection = async (
+		url: string,
+	): Promise<GeoJsonFeatureCollection> => {
 		const response = await fetch(url, {
 			signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
 			credentials,
@@ -155,9 +159,12 @@ export function httpObjectSourcesApi(
 		return response.json();
 	};
 	return {
-		blocks: async (box) => blocksFromGeoJson(await getCollection(blocksUrl(ineiBase, box))),
+		blocks: async (box) =>
+			blocksFromGeoJson(await getCollection(blocksUrl(ineiBase, box))),
 		populatedPlaces: async (box) =>
-			populatedPlacesFromGeoJson(await getCollection(populatedPlacesUrl(ineiBase, box))),
+			populatedPlacesFromGeoJson(
+				await getCollection(populatedPlacesUrl(ineiBase, box)),
+			),
 		landCover: async (box) =>
 			landCoverFromGeoJson(await getCollection(landCoverUrl(minamBase, box))),
 	};

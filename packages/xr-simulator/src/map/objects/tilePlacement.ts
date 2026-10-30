@@ -24,12 +24,35 @@ export interface TileSources {
 }
 
 export type PlacedObject =
-	| { kind: "house"; model: HouseType; lon: number; lat: number; heading: number; variant: number }
-	| { kind: "plant"; model: VegetationModel; lon: number; lat: number; heading: number; variant: number }
-	| { kind: "landmark"; model: "plaza" | "church"; lon: number; lat: number; heading: number; variant: number };
+	| {
+			kind: "house";
+			model: HouseType;
+			lon: number;
+			lat: number;
+			heading: number;
+			variant: number;
+	  }
+	| {
+			kind: "plant";
+			model: VegetationModel;
+			lon: number;
+			lat: number;
+			heading: number;
+			variant: number;
+	  }
+	| {
+			kind: "landmark";
+			model: "plaza" | "church";
+			lon: number;
+			lat: number;
+			heading: number;
+			variant: number;
+	  };
 
 function isInsideTile(box: LonLatBox, lon: number, lat: number): boolean {
-	return lon >= box.west && lon < box.east && lat >= box.south && lat < box.north;
+	return (
+		lon >= box.west && lon < box.east && lat >= box.south && lat < box.north
+	);
 }
 
 /**
@@ -44,28 +67,56 @@ export function placeTileObjects(
 	elevationAt: (lon: number, lat: number) => number,
 ): PlacedObject[] {
 	const lonPerMeter =
-		1 / (METERS_PER_DEGREE_LON_AT_EQUATOR * Math.cos((((box.south + box.north) / 2) * Math.PI) / 180));
+		1 /
+		(METERS_PER_DEGREE_LON_AT_EQUATOR *
+			Math.cos((((box.south + box.north) / 2) * Math.PI) / 180));
 	const latPerMeter = 1 / METERS_PER_DEGREE_LAT;
 	const isNearPlaza = (lon: number, lat: number) =>
 		sources.places.some(
 			(place) =>
-				Math.hypot((lon - place.lon) / lonPerMeter, (lat - place.lat) / latPerMeter) <=
-				PLAZA_CLEAR_RADIUS_M,
+				Math.hypot(
+					(lon - place.lon) / lonPerMeter,
+					(lat - place.lat) / latPerMeter,
+				) <= PLAZA_CLEAR_RADIUS_M,
 		);
 	const objects: PlacedObject[] = [];
 	for (const place of sources.places) {
 		const churchLon = place.lon + CHURCH_OFFSET_M * lonPerMeter;
 		if (isInsideTile(box, place.lon, place.lat))
-			objects.push({ kind: "landmark", model: "plaza", lon: place.lon, lat: place.lat, heading: 0, variant: 0 });
+			objects.push({
+				kind: "landmark",
+				model: "plaza",
+				lon: place.lon,
+				lat: place.lat,
+				heading: 0,
+				variant: 0,
+			});
 		if (isInsideTile(box, churchLon, place.lat))
-			objects.push({ kind: "landmark", model: "church", lon: churchLon, lat: place.lat, heading: Math.PI / 2, variant: 0 });
+			objects.push({
+				kind: "landmark",
+				model: "church",
+				lon: churchLon,
+				lat: place.lat,
+				heading: Math.PI / 2,
+				variant: 0,
+			});
 	}
 	for (const block of sources.blocks) {
 		const [firstLon, firstLat] = block.rings[0][0];
 		const region = regionForElevation(elevationAt(firstLon, firstLat));
 		for (const house of housesInBlock(block.id, block.rings, region))
-			if (isInsideTile(box, house.lon, house.lat) && !isNearPlaza(house.lon, house.lat))
-				objects.push({ kind: "house", model: house.type, lon: house.lon, lat: house.lat, heading: house.heading, variant: house.variant });
+			if (
+				isInsideTile(box, house.lon, house.lat) &&
+				!isNearPlaza(house.lon, house.lat)
+			)
+				objects.push({
+					kind: "house",
+					model: house.type,
+					lon: house.lon,
+					lat: house.lat,
+					heading: house.heading,
+					variant: house.variant,
+				});
 	}
 	const blockAreas = sources.blocks.map((block) => ({
 		rings: block.rings,
@@ -80,8 +131,16 @@ export function placeTileObjects(
 				lat <= block.bounds.north &&
 				isInsidePolygon([lon, lat], block.rings),
 		);
-	for (const plant of vegetationInTile(tileKey, box, sources.landCover, elevationAt))
-		if (!isNearPlaza(plant.lon, plant.lat) && !isInsideBlock(plant.lon, plant.lat))
+	for (const plant of vegetationInTile(
+		tileKey,
+		box,
+		sources.landCover,
+		elevationAt,
+	))
+		if (
+			!isNearPlaza(plant.lon, plant.lat) &&
+			!isInsideBlock(plant.lon, plant.lat)
+		)
 			objects.push({ kind: "plant", ...plant });
 	return objects;
 }
