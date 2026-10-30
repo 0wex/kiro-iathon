@@ -1,0 +1,479 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >-
+  Mapa ciudadano de riesgo (FEN Piura): CloudFront in front of the apps/web SPA,
+  the report photos bucket and an HTTP API whose Lambda runs apps/server inside a
+  private VPC with RDS for MySQL 8.4 and Amazon Bedrock. Deploy with
+  deploy/aws/deploy.sh.
+
+Parameters:
+  BedrockModelId:
+    Type: String
+    Default: amazon.nova-lite-v1:0
+    Description: >-
+      Converse model with image input and tool use. A geo inference profile
+      such as us.amazon.nova-lite-v1:0 also works.
+  BedrockRegion:
+    Type: String
+    Default: ""
+    Description: >-
+      Bedrock Runtime region. Empty means the stack region; the VPC has no NAT,
+      so Bedrock is only reachable through the endpoint in the stack region.
+  PublicUrl:
+    Type: String
+    Default: ""
+    Description: >-
+      The CloudFront https URL (the WebUrl output). Empty on the first deploy;
+      deploy.sh fills it on the second pass for BETTER_AUTH_URL and
+      ALLOWED_ORIGINS.
+  ServiceVersion:
+    Type: String
+    Default: unknown
+    Description: Build identity stamped on every log event (the git commit).
+
+Conditions:
+  HasBedrockRegion: !Not [!Equals [!Ref BedrockRegion, ""]]
+
+Globals:
+  Function:
+    Runtime: nodejs24.x
+    Architectures:
+      - arm64
+
+Resources:
+  Vpc:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.40.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-vpc
+
+  PrivateSubnetA:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.40.1.0/24
+      AvailabilityZone: !Select [0, !GetAZs ""]
+      MapPublicIpOnLaunch: false
+
+  PrivateSubnetB:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref Vpc
+      CidrBlock: 10.40.2.0/24
+      AvailabilityZone: !Select [1, !GetAZs ""]
+      MapPublicIpOnLaunch: false
+
+  PrivateRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref Vpc
+
+  PrivateSubnetARouteTable:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetA
+      RouteTableId: !Ref PrivateRouteTable
+
+  PrivateSubnetBRouteTable:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PrivateSubnetB
+      RouteTableId: !Ref PrivateRouteTable
+
+  # No internet or NAT gateway: the only routes out of the VPC are these two
+  # endpoints, so the Lambda can reach S3, Bedrock and RDS and nothing else.
+  S3GatewayEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcEndpointType: Gateway
+      VpcId: !Ref Vpc
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.s3
+      RouteTableIds:
+        - !Ref PrivateRouteTable
+
+  BedrockRuntimeEndpoint:
+    Type: AWS::EC2::VPCEndpoint
+    Properties:
+      VpcEndpointType: Interface
+      VpcId: !Ref Vpc
+      ServiceName: !Sub com.amazonaws.${AWS::Region}.bedrock-runtime
+      PrivateDnsEnabled: true
+      SubnetIds:
+        - !Ref PrivateSubnetA
+        - !Ref PrivateSubnetB
+      SecurityGroupIds:
+        - !Ref EndpointSecurityGroup
+
+  LambdaSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: apps/server Lambda
+      VpcId: !Ref Vpc
+      # HTTPS goes to the Bedrock interface endpoint and the S3 gateway
+      # endpoint; with no NAT there is no other HTTPS destination.
+      SecurityGroupEgress:
+        - Description: Bedrock Runtime and S3 endpoints
+          IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  LambdaToDatabaseEgress:
+    Type: AWS::EC2::SecurityGroupEgress
+    Properties:
+      GroupId: !Ref LambdaSecurityGroup
+      Description: MySQL
+      IpProtocol: tcp
+      FromPort: 3306
+      ToPort: 3306
+      DestinationSecurityGroupId: !Ref DatabaseSecurityGroup
+
+  EndpointSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Bedrock Runtime interface endpoint
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: HTTPS from the Lambda
+          IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          SourceSecurityGroupId: !Ref LambdaSecurityGroup
+
+  DatabaseSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: RDS for MySQL
+      VpcId: !Ref Vpc
+      SecurityGroupIngress:
+        - Description: MySQL from the Lambda
+          IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          SourceSecurityGroupId: !Ref LambdaSecurityGroup
+
+  # A plain generated secret instead of ManageMasterUserPassword: the RDS
+  # managed secret rotates every 7 days, and the Lambda reads the password once
+  # per deploy through a dynamic reference.
+  DatabaseSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: RDS for MySQL master credentials
+      GenerateSecretString:
+        SecretStringTemplate: '{"username":"fen_admin"}'
+        GenerateStringKey: password
+        PasswordLength: 32
+        ExcludePunctuation: true
+
+  BetterAuthSecret:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: BETTER_AUTH_SECRET for apps/server
+      GenerateSecretString:
+        PasswordLength: 64
+        ExcludePunctuation: true
+
+  # 43 base64 alphabet characters decode to the 32-byte AES-256 key that
+  # packages/business/src/crypto expects.
+  CredentialsEncryptionKey:
+    Type: AWS::SecretsManager::Secret
+    Properties:
+      Description: CREDENTIALS_ENCRYPTION_KEY for apps/server (base64, 32 bytes)
+      GenerateSecretString:
+        PasswordLength: 43
+        ExcludePunctuation: true
+
+  DatabaseSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: Private subnets for RDS
+      SubnetIds:
+        - !Ref PrivateSubnetA
+        - !Ref PrivateSubnetB
+
+  # packages/db connects without TLS; the traffic never leaves the private
+  # subnets and only the Lambda security group can open 3306.
+  DatabaseParameterGroup:
+    Type: AWS::RDS::DBParameterGroup
+    Properties:
+      Description: MySQL 8.4 for the citizen risk map
+      Family: mysql8.4
+      Parameters:
+        require_secure_transport: "0"
+
+  # Snapshot on delete and on replacement: citizen reports are the one thing a
+  # redeploy cannot recreate. `sam delete` leaves a final snapshot behind.
+  Database:
+    Type: AWS::RDS::DBInstance
+    DeletionPolicy: Snapshot
+    UpdateReplacePolicy: Snapshot
+    Properties:
+      Engine: mysql
+      EngineVersion: "8.4"
+      DBInstanceClass: db.t4g.micro
+      AllocatedStorage: "20"
+      StorageType: gp3
+      StorageEncrypted: true
+      DBName: fen
+      MasterUsername: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:username}}"
+      MasterUserPassword: !Sub "{{resolve:secretsmanager:${DatabaseSecret}:SecretString:password}}"
+      DBSubnetGroupName: !Ref DatabaseSubnetGroup
+      DBParameterGroupName: !Ref DatabaseParameterGroup
+      VPCSecurityGroups:
+        - !Ref DatabaseSecurityGroup
+      PubliclyAccessible: false
+      MultiAZ: false
+      BackupRetentionPeriod: 1
+      DeletionProtection: false
+
+  PhotosBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  WebBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      OwnershipControls:
+        Rules:
+          - ObjectOwnership: BucketOwnerEnforced
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+
+  PhotosBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref PhotosBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: CloudFrontReadsReportPhotos
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub ${PhotosBucket.Arn}/citizen-reports/*
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+
+  WebBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref WebBucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Sid: CloudFrontReadsWebApp
+            Effect: Allow
+            Principal:
+              Service: cloudfront.amazonaws.com
+            Action: s3:GetObject
+            Resource: !Sub ${WebBucket.Arn}/*
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Sub arn:${AWS::Partition}:cloudfront::${AWS::AccountId}:distribution/${Distribution}
+
+  ServerLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      RetentionInDays: 14
+
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+
+  ServerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Description: apps/server (Hono + oRPC) bundled by pnpm --filter server build:lambda
+      CodeUri: apps/server/dist-lambda/
+      Handler: lambda.handler
+      MemorySize: 1024
+      # API Gateway HTTP APIs give up at 30 s; the planner stops at 25 s.
+      Timeout: 29
+      LoggingConfig:
+        LogGroup: !Ref ServerLogGroup
+      VpcConfig:
+        SubnetIds:
+          - !Ref PrivateSubnetA
+          - !Ref PrivateSubnetB
+        SecurityGroupIds:
+          - !Ref LambdaSecurityGroup
+      Environment:
+        Variables:
+          APP_ENV: production
+          SERVICE_VERSION: !Ref ServiceVersion
+          DATABASE_URL: !Sub "mysql://{{resolve:secretsmanager:${DatabaseSecret}:SecretString:username}}:{{resolve:secretsmanager:${DatabaseSecret}:SecretString:password}}@${Database.Endpoint.Address}:${Database.Endpoint.Port}/fen"
+          BETTER_AUTH_SECRET: !Sub "{{resolve:secretsmanager:${BetterAuthSecret}}}"
+          CREDENTIALS_ENCRYPTION_KEY: !Sub "{{resolve:secretsmanager:${CredentialsEncryptionKey}}}"
+          BETTER_AUTH_URL: !Ref PublicUrl
+          ALLOWED_ORIGINS: !Ref PublicUrl
+          CLIENT_IP_HEADER: x-viewer-ip
+          BEDROCK_REGION: !If [HasBedrockRegion, !Ref BedrockRegion, !Ref AWS::Region]
+          BEDROCK_MODEL_ID: !Ref BedrockModelId
+          REPORT_PHOTOS_BUCKET: !Ref PhotosBucket
+          # The fleet demo's routing and the tiles/weather simulators are not
+          # part of this stack. A closed loopback port makes those calls fail
+          # at once instead of waiting on an unroutable host.
+          OSRM_BASE_URL: http://127.0.0.1:9
+          TILES_API_URL: http://127.0.0.1:9
+          WEATHER_API_URL: http://127.0.0.1:9
+      Policies:
+        - Statement:
+            - Sid: InvokeConfiguredModel
+              Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource:
+                - !Sub
+                  - arn:${AWS::Partition}:bedrock:${ResolvedRegion}::foundation-model/${BedrockModelId}
+                  - ResolvedRegion: !If [HasBedrockRegion, !Ref BedrockRegion, !Ref AWS::Region]
+                - !Sub
+                  - arn:${AWS::Partition}:bedrock:${ResolvedRegion}:${AWS::AccountId}:inference-profile/${BedrockModelId}
+                  - ResolvedRegion: !If [HasBedrockRegion, !Ref BedrockRegion, !Ref AWS::Region]
+            - Sid: InvokeModelThroughInferenceProfile
+              Effect: Allow
+              Action:
+                - bedrock:InvokeModel
+              Resource: !Sub arn:${AWS::Partition}:bedrock:*::foundation-model/*
+              Condition:
+                StringLike:
+                  bedrock:InferenceProfileArn: !Sub
+                    - arn:${AWS::Partition}:bedrock:${ResolvedRegion}:${AWS::AccountId}:inference-profile/${BedrockModelId}
+                    - ResolvedRegion: !If [HasBedrockRegion, !Ref BedrockRegion, !Ref AWS::Region]
+            - Sid: ReportPhotos
+              Effect: Allow
+              Action:
+                - s3:PutObject
+                - s3:GetObject
+              Resource: !Sub ${PhotosBucket.Arn}/citizen-reports/*
+      Events:
+        DefaultRoute:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+
+  CloudFrontOriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Name: !Sub ${AWS::StackName}-s3
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+  # SPA routing on the web behavior only. Distribution-wide custom error
+  # responses would also turn the API's 401/403/404 JSON into index.html.
+  SpaRewriteFunction:
+    Type: AWS::CloudFront::Function
+    Properties:
+      Name: !Sub ${AWS::StackName}-spa-rewrite
+      AutoPublish: true
+      FunctionConfig:
+        Comment: Serve index.html for client-side routes such as /demo
+        Runtime: cloudfront-js-2.0
+      FunctionCode: |
+        function handler(event) {
+          var request = event.request;
+          var lastSegment = request.uri.split("/").pop();
+          if (lastSegment.indexOf(".") === -1) {
+            request.uri = "/index.html";
+          }
+          return request;
+        }
+
+  Distribution:
+    Type: AWS::CloudFront::Distribution
+    Properties:
+      DistributionConfig:
+        Enabled: true
+        Comment: !Sub ${AWS::StackName} citizen risk map
+        HttpVersion: http2and3
+        PriceClass: PriceClass_100
+        DefaultRootObject: index.html
+        Origins:
+          - Id: web
+            DomainName: !GetAtt WebBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt CloudFrontOriginAccessControl.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+          - Id: photos
+            DomainName: !GetAtt PhotosBucket.RegionalDomainName
+            OriginAccessControlId: !GetAtt CloudFrontOriginAccessControl.Id
+            S3OriginConfig:
+              OriginAccessIdentity: ""
+          - Id: api
+            DomainName: !Sub ${HttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}
+            CustomOriginConfig:
+              OriginProtocolPolicy: https-only
+              OriginSSLProtocols:
+                - TLSv1.2
+        DefaultCacheBehavior:
+          TargetOriginId: web
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          # Managed CachingOptimized
+          CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          FunctionAssociations:
+            - EventType: viewer-request
+              FunctionARN: !GetAtt SpaRewriteFunction.FunctionMetadata.FunctionARN
+        CacheBehaviors:
+          - PathPattern: /citizen-reports/*
+            TargetOriginId: photos
+            ViewerProtocolPolicy: redirect-to-https
+            Compress: true
+            CachePolicyId: 658327ea-f89d-4fab-a63d-7e88639e58f6
+          - PathPattern: /rpc/*
+            TargetOriginId: api
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+            # Managed CachingDisabled and AllViewerExceptHostHeader: API Gateway
+            # needs its own Host header, and the viewer address reaches the
+            # Lambda as CloudFront-Viewer-Address.
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+          - PathPattern: /api/*
+            TargetOriginId: api
+            ViewerProtocolPolicy: redirect-to-https
+            AllowedMethods: [GET, HEAD, OPTIONS, PUT, PATCH, POST, DELETE]
+            CachePolicyId: 4135ea2d-6df8-44a3-9df3-4b5a84be39ad
+            OriginRequestPolicyId: b689b0a8-53d0-40ab-baf2-68738e2966ac
+
+Outputs:
+  WebUrl:
+    Description: Frontend URL (register <WebUrl>/demo in the portal)
+    Value: !Sub https://${Distribution.DomainName}
+  ApiUrl:
+    Description: The API lives under the same origin, at /rpc and /api
+    Value: !Sub https://${Distribution.DomainName}
+  DemoUrl:
+    Description: Signs in to the demo account and opens /dashboard/reportes
+    Value: !Sub https://${Distribution.DomainName}/demo
+  WebBucketName:
+    Value: !Ref WebBucket
+  PhotosBucketName:
+    Value: !Ref PhotosBucket
+  DistributionId:
+    Value: !Ref Distribution
