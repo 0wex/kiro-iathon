@@ -1,0 +1,14 @@
+{
+	"enabled": true,
+	"name": "Review tasks when the spec changes",
+	"description": "Keeps tasks.md consistent with requirements.md and design.md.",
+	"version": "1",
+	"when": {
+		"type": "fileEdited",
+		"patterns": [".kiro/specs/**/requirements.md", ".kiro/specs/**/design.md"]
+	},
+	"then": {
+		"type": "askAgent",
+		"prompt": "The spec changed. Compare requirements.md and design.md with tasks.md in the same folder: list every requirement without a task, every task that no longer matches the design, and propose the updated task list in order. Do not mark tasks as done."
+	}
+}

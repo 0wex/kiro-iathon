@@ -1,0 +1,14 @@
+{
+	"enabled": true,
+	"name": "Run tests on save",
+	"description": "Runs the affected package's tests when a TypeScript source file is saved.",
+	"version": "1",
+	"when": {
+		"type": "fileEdited",
+		"patterns": ["packages/**/*.ts", "apps/server/src/**/*.ts"]
+	},
+	"then": {
+		"type": "askAgent",
+		"prompt": "A TypeScript file was saved. Run `pnpm --filter <package of the saved file> test` and `pnpm check-types`. If something fails, explain the failure and propose the smallest fix; do not edit files without asking."
+	}
+}

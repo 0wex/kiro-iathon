@@ -1,4 +1,6 @@
-# iathon kiro
+Neighbours, brigades and local authorities in Piura have no shared, prioritized view of the critical points that El Niño (FEN) rains create, so they report each point with a photo on a prioritized risk map and Amazon Bedrock writes a contingency plan for each critical point.
+
+# iathon kiro · Mapa ciudadano de riesgo
 
 pnpm monorepo: Hono + oRPC API (`apps/server`), Vite dashboard (`apps/web`), Astro marketing site (`apps/illapa`), Expo app (`apps/native`), scraper and fleet-sync services, better-auth, Drizzle + MySQL 8.4, and evlog wide-event logging. Production and staging run on one AWS EC2 box with Dokploy: Node 24 services and nginx static sites.
 
