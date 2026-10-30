@@ -31,3 +31,9 @@ Product: a citizen risk map for Piura during El Niño (FEN). Neighbours, brigade
 - Never log with `console.log`; use the evlog wide event (`context.log.set`).
 - Never make a route public without adding it to `PUBLIC_PROCEDURE_PATHS` on purpose.
 - A Bedrock failure must never break the flow: return the template contingency plan marked as `plantilla`.
+
+## Deployment
+
+- Infrastructure as code lives in `template.yaml` (AWS SAM); `deploy/aws/deploy.sh` is the only deploy path.
+- Deploy only when the team decides to; an agent session never deploys on its own.
+- No AWS keys in code or env files: the Lambda's IAM role grants Bedrock and S3.

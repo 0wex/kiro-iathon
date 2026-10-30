@@ -32,12 +32,12 @@
   - Six Piura example reports at public places, flagged `is_example`, inserted when missing.
   - _Requirements: 4.4_
 
-- [ ] 3. AWS deployment with SAM
-- [ ] 3.1 `template.yaml`
+- [x] 3. AWS deployment with SAM
+- [x] 3.1 `template.yaml`
   - VPC with private subnets, RDS MySQL 8.4, Lambda for apps/server, HTTP API, S3 photos and web buckets, CloudFront with the API under `/rpc/*` and `/api/*` and photos under `/citizen-reports/*`.
   - Secrets Manager secrets, Bedrock and S3 VPC endpoints, least-privilege IAM.
   - _Requirements: 3.1, 4.3, 5.1_
-- [ ] 3.2 Lambda entry and deploy script
+- [x] 3.2 Lambda entry and deploy script
   - Lambda entry for the server that migrates on cold start; photo URLs served from the same origin.
   - Deploy script that builds, runs `sam deploy`, builds the web with the CloudFront URL and syncs it.
   - _Requirements: 1.4, 5.1_

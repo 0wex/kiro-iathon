@@ -4,6 +4,16 @@ Neighbours, brigades and local authorities in Piura have no shared, prioritized 
 
 pnpm monorepo: Hono + oRPC API (`apps/server`), Vite dashboard (`apps/web`), Astro marketing site (`apps/illapa`), Expo app (`apps/native`), scraper and fleet-sync services, better-auth, Drizzle + MySQL 8.4, and evlog wide-event logging. Production and staging run on one AWS EC2 box with Dokploy: Node 24 services and nginx static sites.
 
+## Deploy to AWS (SAM)
+
+`template.yaml` deploys the citizen risk map into one AWS account: CloudFront (dashboard + API on one origin), API Gateway HTTP API, Lambda (Node 24, `apps/server`), RDS for MySQL 8.4 in private subnets, S3 for the dashboard and report photos, Secrets Manager, and VPC endpoints for Bedrock and S3. Spec: [.kiro/specs/mapa-ciudadano-riesgo](.kiro/specs/mapa-ciudadano-riesgo).
+
+1. Prerequisites: AWS CLI with credentials for the target account, AWS SAM CLI, Node 24 and pnpm. In the Bedrock console of the deploy region, make sure the model is available (default `amazon.nova-lite-v1:0`); without it every plan falls back to the template.
+2. Run `deploy/aws/deploy.sh` from the repository root. Optional overrides: `STACK_NAME`, `AWS_REGION` (default `us-east-1`), `BEDROCK_MODEL_ID`. The script builds the Lambda bundle, runs `sam deploy` (twice on the first deploy, to pass the CloudFront URL back to the server), builds the dashboard, uploads it to S3 and invalidates CloudFront.
+3. The script prints `WebUrl`. Register `<WebUrl>/demo` as the frontend: it signs in the demo account and opens "Reportes ciudadanos".
+
+Cost: RDS `db.t4g.micro` and two interface endpoints run while the stack exists. `sam delete` removes the stack but keeps a final RDS snapshot (citizen reports cannot be recreated); delete it by hand when no longer needed.
+
 ## Product docs
 
 [Project brief](docs/project_brief.md) · [MVP PRD](docs/prd.md) · [Design system](docs/DESIGN.md)
