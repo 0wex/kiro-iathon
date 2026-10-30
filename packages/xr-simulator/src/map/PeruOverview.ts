@@ -151,6 +151,14 @@ const ORBIT_MIN_RADIUS = 2;
 const ORBIT_MAX_RADIUS = 6000;
 /** Orbit near plane: radius / ORBIT_NEAR_RATIO, between 0.05 and 1 km (depth precision far away). */
 const ORBIT_NEAR_RATIO = 40;
+/** focusOn: relief samples along the view line, skipping the first part next to the target. */
+const FOCUS_SIGHT_SAMPLES = 16;
+const FOCUS_SIGHT_SKIP = 0.2;
+/** Clearance kept between the view line and the relief (scene km). */
+const FOCUS_CLEARANCE_KM = 0.3;
+/** focusOn tilts towards a top-down view by this step until the target is in sight. */
+const FOCUS_BETA_STEP_RAD = 0.1;
+const FOCUS_MIN_BETA_RAD = 0.15;
 
 /** Farthest pick distance (scene km). */
 const PICK_DISTANCE = 20_000;
@@ -249,8 +257,7 @@ export class PeruOverview implements FlightHost {
 		to: Vector3;
 		r0: number;
 		r1: number;
-		/** Orbit angle tweens (rad); a double-click zoom keeps the current ones. */
-		alpha?: { from: number; to: number };
+		/** Polar angle tween (rad); a double-click zoom keeps the current one. */
 		beta?: { from: number; to: number };
 		t: number;
 	} | null = null;
@@ -1035,29 +1042,40 @@ export class PeruOverview implements FlightHost {
 	}
 
 	/**
-	 * Eases the orbit camera onto a ground point (elevation in m, since the relief there may not
-	 * be loaded yet), ending `radiusKm` away, tilted to `betaRad` and on the side of `viewFrom`.
+	 * Eases the orbit camera onto a ground point, ending `radiusKm` away and tilted to `betaRad`.
+	 * The elevation (m) comes from the caller: the relief there may still be too coarse.
 	 */
 	focusOn(
 		point: { lon: number; lat: number; elevationM: number },
-		viewFrom: { lon: number; lat: number },
 		radiusKm: number,
 		betaRad: number,
 	): void {
 		this.setCameraMode("orbit");
-		const local = (lon: number, lat: number) => {
-			const world = lonLatToWorld(lon, lat);
-			return worldToLocal(this.frame, world.x, world.y);
-		};
-		const [x, z] = local(point.lon, point.lat);
-		const [sideX, sideZ] = local(viewFrom.lon, viewFrom.lat);
+		const world = lonLatToWorld(point.lon, point.lat);
+		const [x, z] = worldToLocal(this.frame, world.x, world.y);
 		const ground = new Vector3(
 			x,
 			(point.elevationM / 1000) * this.exaggeration,
 			z,
 		);
-		// The orbit camera sits at target + r·(cos α sin β, cos β, sin α sin β); turn the short way.
-		const alphaTurn = Math.atan2(sideZ - z, sideX - x) - this.camera.alpha;
+		// Exaggerated valleys hide the target behind a ridge: look more from above until it is clear.
+		const alpha = this.camera.alpha;
+		const inSight = (beta: number) => {
+			for (let sample = 0; sample <= FOCUS_SIGHT_SAMPLES; sample++) {
+				const distance =
+					radiusKm *
+					(FOCUS_SIGHT_SKIP +
+						((1 - FOCUS_SIGHT_SKIP) * sample) / FOCUS_SIGHT_SAMPLES);
+				const eyeX = x + distance * Math.cos(alpha) * Math.sin(beta);
+				const eyeZ = z + distance * Math.sin(alpha) * Math.sin(beta);
+				const eyeY = ground.y + distance * Math.cos(beta);
+				if (eyeY < this.groundAt(eyeX, eyeZ) + FOCUS_CLEARANCE_KM) return false;
+			}
+			return true;
+		};
+		let beta = betaRad;
+		while (beta > FOCUS_MIN_BETA_RAD && !inSight(beta))
+			beta -= FOCUS_BETA_STEP_RAD;
 		this.orbitZoom = {
 			from: this.camera.target.clone(),
 			to: Vector3.TransformCoordinates(
@@ -1066,13 +1084,7 @@ export class PeruOverview implements FlightHost {
 			),
 			r0: this.camera.radius,
 			r1: radiusKm,
-			alpha: {
-				from: this.camera.alpha,
-				to:
-					this.camera.alpha +
-					Math.atan2(Math.sin(alphaTurn), Math.cos(alphaTurn)),
-			},
-			beta: { from: this.camera.beta, to: betaRad },
+			beta: { from: this.camera.beta, to: Math.max(beta, FOCUS_MIN_BETA_RAD) },
 			t: 0,
 		};
 	}
@@ -1228,8 +1240,6 @@ export class PeruOverview implements FlightHost {
 					true,
 				);
 				this.camera.radius = z.r0 + (z.r1 - z.r0) * k;
-				if (z.alpha)
-					this.camera.alpha = z.alpha.from + (z.alpha.to - z.alpha.from) * k;
 				if (z.beta)
 					this.camera.beta = z.beta.from + (z.beta.to - z.beta.from) * k;
 				if (z.t >= 1) this.orbitZoom = null;

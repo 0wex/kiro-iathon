@@ -1,14 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { EVENT_GRID_RESOLUTION } from "../../src/dashboard/constants";
 import {
 	DISASTER_EVENTS,
-	DISASTER_PRESETS,
+	DISASTER_KIND_LABELS,
 	parseEventCatalogue,
 } from "../../src/dashboard/events";
-import { localCellSize } from "../../src/map/peruTerrain";
-
-const METERS_PER_DEGREE_LAT = 110_540;
-const METERS_PER_DEGREE_LON_AT_EQUATOR = 111_320;
+import { PERU_BBOX } from "../../src/map/tileMath";
 
 const validEvent = {
 	id: "huayco-chosica",
@@ -18,8 +14,7 @@ const validEvent = {
 	region: "Lima",
 	startedAt: "2026-03-15T14:20:00-05:00",
 	rainfallMm: 38,
-	center: { lon: -76.697, lat: -11.937 },
-	release: { lon: -76.704, lat: -11.925 },
+	location: { lon: -76.7, lat: -11.93 },
 };
 
 describe("DISASTER_EVENTS", () => {
@@ -27,22 +22,16 @@ describe("DISASTER_EVENTS", () => {
 		const ids = DISASTER_EVENTS.map((event) => event.id);
 		expect(new Set(ids).size).toBe(ids.length);
 		const kinds = new Set(DISASTER_EVENTS.map((event) => event.kind));
-		for (const kind of Object.keys(DISASTER_PRESETS))
+		for (const kind of Object.keys(DISASTER_KIND_LABELS))
 			expect(kinds).toContain(kind);
 	});
 
-	it("releases every event inside its simulation grid", () => {
-		for (const event of DISASTER_EVENTS) {
-			const halfSpanMeters =
-				(EVENT_GRID_RESOLUTION * localCellSize(event.center.lat)) / 2;
-			const eastMeters =
-				(event.release.lon - event.center.lon) *
-				METERS_PER_DEGREE_LON_AT_EQUATOR *
-				Math.cos((event.center.lat * Math.PI) / 180);
-			const northMeters =
-				(event.release.lat - event.center.lat) * METERS_PER_DEGREE_LAT;
-			expect(Math.abs(eastMeters)).toBeLessThan(halfSpanMeters);
-			expect(Math.abs(northMeters)).toBeLessThan(halfSpanMeters);
+	it("places every event inside the area the map covers", () => {
+		for (const { location } of DISASTER_EVENTS) {
+			expect(location.lon).toBeGreaterThanOrEqual(PERU_BBOX.west);
+			expect(location.lon).toBeLessThanOrEqual(PERU_BBOX.east);
+			expect(location.lat).toBeGreaterThanOrEqual(PERU_BBOX.south);
+			expect(location.lat).toBeLessThanOrEqual(PERU_BBOX.north);
 		}
 	});
 });
@@ -59,9 +48,9 @@ describe("parseEventCatalogue", () => {
 	});
 
 	it("rejects a missing field, naming the event and the field", () => {
-		const { rainfallMm: _omitted, ...withoutRainfall } = validEvent;
-		expect(() => parseEventCatalogue([withoutRainfall])).toThrow(
-			'Evento "huayco-chosica": falta el campo "rainfallMm"',
+		const { location: _omitted, ...withoutLocation } = validEvent;
+		expect(() => parseEventCatalogue([withoutLocation])).toThrow(
+			'Evento "huayco-chosica": falta el campo "location"',
 		);
 	});
 

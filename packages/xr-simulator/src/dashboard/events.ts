@@ -1,15 +1,19 @@
-import { DEFAULT_MATERIAL } from "../solver/params";
-import type { MaterialParams } from "../solver/Solver";
 import catalogue from "./events.json";
 
 export type DisasterKind = "huayco" | "inundacion" | "deslizamiento";
+
+export const DISASTER_KIND_LABELS: Record<DisasterKind, string> = {
+	huayco: "Huayco",
+	inundacion: "Inundación",
+	deslizamiento: "Deslizamiento",
+};
 
 export interface LonLat {
 	lon: number;
 	lat: number;
 }
 
-/** A simulated event of the catalogue: where it happens, where the flow starts and its inputs. */
+/** An event of the catalogue: what happened, where and when. */
 export interface DisasterEvent {
 	id: string;
 	kind: DisasterKind;
@@ -18,53 +22,9 @@ export interface DisasterEvent {
 	region: string;
 	/** ISO 8601 with offset. */
 	startedAt: string;
-	/** Rain behind the event, shown on its card (a scenario input, not a measurement). */
 	rainfallMm: number;
-	/** Centre of the simulated terrain. */
-	center: LonLat;
-	/** Where the flow is released. */
-	release: LonLat;
+	location: LonLat;
 }
-
-/** How each kind of event is simulated with the shallow-flow solver. */
-export interface DisasterPreset {
-	label: string;
-	material: MaterialParams;
-	volumeM3: number;
-	peakDischargeM3s: number;
-	releaseRadiusM: number;
-	/** Simulated time recorded, past the end of the release so the flow can settle. */
-	durationS: number;
-}
-
-export const DISASTER_PRESETS: Record<DisasterKind, DisasterPreset> = {
-	huayco: {
-		label: "Huayco",
-		material: DEFAULT_MATERIAL,
-		volumeM3: 120_000,
-		peakDischargeM3s: 400,
-		releaseRadiusM: 40,
-		durationS: 900,
-	},
-	// Water barely resists flowing: almost no Coulomb friction and a high turbulent coefficient.
-	inundacion: {
-		label: "Inundación",
-		material: { ...DEFAULT_MATERIAL, mu: 0.01, xi: 2_000 },
-		volumeM3: 800_000,
-		peakDischargeM3s: 1_500,
-		releaseRadiusM: 60,
-		durationS: 1_500,
-	},
-	// A short, massive release of a much more frictional material that stops close to its source.
-	deslizamiento: {
-		label: "Deslizamiento",
-		material: { ...DEFAULT_MATERIAL, mu: 0.25, xi: 200 },
-		volumeM3: 150_000,
-		peakDischargeM3s: 1_500,
-		releaseRadiusM: 60,
-		durationS: 600,
-	},
-};
 
 const REQUIRED_FIELDS = [
 	"id",
@@ -74,8 +34,7 @@ const REQUIRED_FIELDS = [
 	"region",
 	"startedAt",
 	"rainfallMm",
-	"center",
-	"release",
+	"location",
 ] as const;
 
 function assertDisasterEvent(entry: unknown): asserts entry is DisasterEvent {
@@ -86,7 +45,7 @@ function assertDisasterEvent(entry: unknown): asserts entry is DisasterEvent {
 				`Evento "${fields.get("id")}": falta el campo "${field}"`,
 			);
 	const kind = String(fields.get("kind"));
-	if (!Object.hasOwn(DISASTER_PRESETS, kind))
+	if (!Object.hasOwn(DISASTER_KIND_LABELS, kind))
 		throw new Error(`Evento "${fields.get("id")}": tipo desconocido "${kind}"`);
 }
 

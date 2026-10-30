@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Eventos simulados</title>
+    <title>Desastres naturales</title>
   </head>
   <body class="app-body">
     <div class="dash xr-viewer">
       <header class="dash-header">
-        <h1>Eventos simulados</h1>
-        <span class="badge badge-info">Datos simulados</span>
+        <h1>Desastres naturales</h1>
+        <span class="badge badge-info">Datos de ejemplo</span>
       </header>
       <aside class="dash-events" aria-label="Eventos">
         <h2>Eventos</h2>
@@ -17,27 +17,13 @@
       </aside>
       <main class="dash-map" aria-label="Mapa 3D"></main>
       <aside class="dash-card" aria-live="polite">
-        <p class="dash-card-kind"></p>
-        <h2 class="dash-card-title"></h2>
-        <dl class="dash-card-facts"></dl>
-        <p class="dash-card-status"></p>
+        <p class="dash-card-empty">Elige un evento de la lista o del mapa.</p>
+        <div class="dash-card-body" hidden>
+          <p class="dash-card-kind"></p>
+          <h2 class="dash-card-title">Evento</h2>
+          <dl class="dash-card-facts"></dl>
+        </div>
       </aside>
-      <footer class="dash-timeline">
-        <div class="dash-controls">
-          <button type="button" class="dash-play" aria-label="Pausar">Pausar</button>
-          <input type="range" class="dash-scrub" min="0" max="0" step="10" value="0" aria-label="Tiempo simulado" />
-          <span class="dash-clock">0:00 / 0:00</span>
-          <label class="dash-speed">Velocidad <select></select></label>
-        </div>
-        <div class="dash-charts">
-          <figure class="dash-chart" data-metric="affectedAreaHa" data-unit="ha">
-            <figcaption>Área afectada <span class="dash-chart-value"></span></figcaption>
-          </figure>
-          <figure class="dash-chart" data-metric="maxSpeed" data-unit="m/s">
-            <figcaption>Velocidad máxima del flujo <span class="dash-chart-value"></span></figcaption>
-          </figure>
-        </div>
-      </footer>
     </div>
     <script type="module" src="/src/pages/dashboard.ts"></script>
   </body>
