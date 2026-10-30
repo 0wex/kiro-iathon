@@ -1,4 +1,8 @@
 import { PUBLIC_PROCEDURE_PATHS } from "@iathon-kiro/api/constants";
+import {
+	type CitizenReportServices,
+	createCitizenReportServices,
+} from "@iathon-kiro/api/citizen-reports/services";
 import type { Context as ApiContext } from "@iathon-kiro/api/context";
 import { handleDemoRequest } from "@iathon-kiro/api/demo-request";
 import { resetDemo } from "@iathon-kiro/api/demo-reset";
@@ -93,6 +97,10 @@ interface DemoRequestWindow {
 }
 
 const demoRequestWindows = new Map<string | undefined, DemoRequestWindow>();
+
+// The AWS clients cache credentials from the default chain (the IAM role), so
+// they are built once per process instead of per request.
+let citizenReportServices: CitizenReportServices | undefined;
 
 // Hono's executionCtx getter throws when there is no ExecutionContext
 // (Node test runs); degrade to letting the promise float.
@@ -260,6 +268,12 @@ app.use("/*", async (c, next) => {
 		encryptionKey: ENV.CREDENTIALS_ENCRYPTION_KEY,
 		osrmBaseUrl: ENV.OSRM_BASE_URL,
 		waitUntil: waitUntilFor(c),
+		citizenReports: (citizenReportServices ??= createCitizenReportServices({
+			bedrockRegion: ENV.BEDROCK_REGION,
+			bedrockModelId: ENV.BEDROCK_MODEL_ID,
+			photosBucket: ENV.REPORT_PHOTOS_BUCKET,
+			photosRegion: ENV.AWS_REGION,
+		})),
 	};
 
 	const rpcResult = await rpcHandler.handle(c.req.raw, {

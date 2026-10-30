@@ -82,3 +82,20 @@ export const DEFAULT_RISK_SEGMENT_LIMIT_ROWS = 2000;
 export const MAX_RISK_SEGMENT_LIMIT_ROWS = 10_000;
 export const RISK_DISCLAIMER_MESSAGE =
 	"Índice heurístico relativo de apoyo a decisiones, no una probabilidad calibrada. Contrasta siempre con las alertas oficiales de SENAMHI, INDECI y SUTRAN y revisa la fecha de cada evaluación.";
+
+export const CITIZEN_REPORT_NOT_FOUND_MESSAGE = "No encontramos ese reporte.";
+export const CITIZEN_REPORTS_UNAVAILABLE_MESSAGE =
+	"Los reportes ciudadanos no están configurados en este servidor.";
+export const REPORT_PHOTO_KEY_PREFIX = "citizen-reports/";
+export const REPORT_PHOTO_FORMATS = {
+	"image/jpeg": "jpeg",
+	"image/png": "png",
+	"image/webp": "webp",
+} as const;
+
+export const CONTINGENCY_PLAN_TOOL_NAME = "plan_de_contingencia";
+export const BEDROCK_CALL_TIMEOUT_MS = 20_000;
+// Delays before the 2nd and 3rd attempt; only ThrottlingException is retried.
+export const BEDROCK_THROTTLING_RETRY_DELAYS_MS = [500, 1000];
+export const BEDROCK_PLAN_MAX_OUTPUT_TOKENS = 1500;
+export const BEDROCK_PLAN_TEMPERATURE = 0.2;

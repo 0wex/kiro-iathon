@@ -53,6 +53,10 @@ export const server = Cloudflare.Worker("server", {
 		TILES_API_URL: Config.String("TILES_API_URL"),
 		WEATHER_API_URL: Config.String("WEATHER_API_URL"),
 		CLIENT_IP_HEADER: Config.String("CLIENT_IP_HEADER"),
+		BEDROCK_REGION: Config.String("BEDROCK_REGION"),
+		BEDROCK_MODEL_ID: Config.String("BEDROCK_MODEL_ID"),
+		REPORT_PHOTOS_BUCKET: Config.String("REPORT_PHOTOS_BUCKET"),
+		AWS_REGION: Config.String("AWS_REGION"),
 		SERVICE_VERSION: serviceVersion,
 	},
 	dev: {

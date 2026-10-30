@@ -12,6 +12,7 @@
 	},
 	"dependencies": {
 		"@aws-sdk/client-bedrock-runtime": "catalog:",
+		"@aws-sdk/client-s3": "catalog:",
 		"@iathon-kiro/auth": "workspace:*",
 		"@iathon-kiro/business": "workspace:*",
 		"@iathon-kiro/db": "workspace:*",
