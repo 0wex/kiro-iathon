@@ -43,15 +43,16 @@ import {
 import { LodTerrain, viewOf } from "./lod/LodTerrain";
 import { LOD_PROFILES, type LodProfile } from "./lod/lodProfile";
 import {
+	type LocalFrame,
 	localToLonLat,
 	localToWorld,
 	peruFrame,
 	worldToLocal,
 } from "./lod/quadtree";
 import { raycastGround } from "./lod/raycast";
+import { OverviewFly } from "./OverviewFly";
 import { ObjectsLayer } from "./objects/ObjectsLayer";
 import type { ObjectSourcesApi } from "./objects/sources";
-import { OverviewFly } from "./OverviewFly";
 import {
 	activeSiteMarker,
 	EXAGGERATION,
@@ -96,6 +97,23 @@ const NO_IMAGERY: OverviewImagery = {
 	mode: "relief",
 	onChange: () => {},
 };
+
+/** A layer a host page draws on the relief (e.g. the disaster dashboard's flow). */
+export interface OverviewOverlay {
+	setExaggeration(exaggeration: number): void;
+	/** Every rendered frame while the relief is loaded; `now` in ms. */
+	update(now: number): void;
+	dispose(): void;
+}
+
+export interface OverviewOverlayContext {
+	scene: Scene;
+	/** The map root: overlay meshes parent to it, in the overview's local kilometres. */
+	parent: TransformNode;
+	frame: LocalFrame;
+	/** Unexaggerated ground height (km) of the drawn relief at a local (x, z). */
+	heightKm: (x: number, z: number) => number;
+}
 
 export interface PickedPoint {
 	lon: number;
@@ -231,6 +249,9 @@ export class PeruOverview implements FlightHost {
 		to: Vector3;
 		r0: number;
 		r1: number;
+		/** Orbit angle tweens (rad); a double-click zoom keeps the current ones. */
+		alpha?: { from: number; to: number };
+		beta?: { from: number; to: number };
 		t: number;
 	} | null = null;
 	private flyZoom: ZoomTween | null = null;
@@ -261,6 +282,7 @@ export class PeruOverview implements FlightHost {
 	private readonly cloudSheet: CloudSheet | null = null;
 	/** Houses and vegetation near the ground; null when the host configured no INEI/MINAM proxy. */
 	private readonly objects: ObjectsLayer | null = null;
+	private readonly overlays = new Set<OverviewOverlay>();
 
 	constructor(
 		engine: AbstractEngine,
@@ -444,7 +466,9 @@ export class PeruOverview implements FlightHost {
 			toggles.innerHTML = `
         <button type="button" data-objects="houses" aria-pressed="true">Casas</button>
         <button type="button" data-objects="vegetation" aria-pressed="true">Vegetación</button>`;
-			const buttons = [...toggles.querySelectorAll<HTMLButtonElement>("button")];
+			const buttons = [
+				...toggles.querySelectorAll<HTMLButtonElement>("button"),
+			];
 			for (const button of buttons)
 				button.onclick = () => {
 					button.setAttribute(
@@ -951,7 +975,9 @@ export class PeruOverview implements FlightHost {
 			);
 			if (this.objects) {
 				const focus =
-					!this.inVr && this.mode === "orbit" ? this.camera.target : cam.globalPosition;
+					!this.inVr && this.mode === "orbit"
+						? this.camera.target
+						: cam.globalPosition;
 				// The VR maquette shows all of Peru on a table: no objects there.
 				const viewKm = this.mapPlaced
 					? Number.POSITIVE_INFINITY
@@ -960,6 +986,7 @@ export class PeruOverview implements FlightHost {
 						: focus.y - this.groundAt(focus.x, focus.z);
 				this.objects.update(now, focus, viewKm);
 			}
+			for (const overlay of this.overlays) overlay.update(now);
 			if (now - this.lastHud > HUD_INTERVAL_MS) {
 				this.lastHud = now;
 				const s = this.terrain.stats;
@@ -977,6 +1004,7 @@ export class PeruOverview implements FlightHost {
 	dispose(): void {
 		this.fly.dispose();
 		this.objects?.dispose();
+		for (const overlay of this.overlays) overlay.dispose();
 		this.terrain?.dispose();
 		this.scene.dispose();
 	}
@@ -984,6 +1012,69 @@ export class PeruOverview implements FlightHost {
 	/** Debug/verification hook (window.__app.overview.weatherStats()). */
 	weatherStats() {
 		return this.weather?.gpu.stats() ?? null;
+	}
+
+	/** Lets a host page draw on the relief; the overlay follows the exaggeration until removed. */
+	addOverlay<Overlay extends OverviewOverlay>(
+		create: (context: OverviewOverlayContext) => Overlay,
+	): Overlay {
+		const overlay = create({
+			scene: this.scene,
+			parent: this.mapRoot,
+			frame: this.frame,
+			heightKm: (x, z) => this.terrain?.heightKm(x, z) ?? 0,
+		});
+		overlay.setExaggeration(this.exaggeration);
+		this.overlays.add(overlay);
+		return overlay;
+	}
+
+	removeOverlay(overlay: OverviewOverlay): void {
+		this.overlays.delete(overlay);
+		overlay.dispose();
+	}
+
+	/**
+	 * Eases the orbit camera onto a ground point (elevation in m, since the relief there may not
+	 * be loaded yet), ending `radiusKm` away, tilted to `betaRad` and on the side of `viewFrom`.
+	 */
+	focusOn(
+		point: { lon: number; lat: number; elevationM: number },
+		viewFrom: { lon: number; lat: number },
+		radiusKm: number,
+		betaRad: number,
+	): void {
+		this.setCameraMode("orbit");
+		const local = (lon: number, lat: number) => {
+			const world = lonLatToWorld(lon, lat);
+			return worldToLocal(this.frame, world.x, world.y);
+		};
+		const [x, z] = local(point.lon, point.lat);
+		const [sideX, sideZ] = local(viewFrom.lon, viewFrom.lat);
+		const ground = new Vector3(
+			x,
+			(point.elevationM / 1000) * this.exaggeration,
+			z,
+		);
+		// The orbit camera sits at target + r·(cos α sin β, cos β, sin α sin β); turn the short way.
+		const alphaTurn = Math.atan2(sideZ - z, sideX - x) - this.camera.alpha;
+		this.orbitZoom = {
+			from: this.camera.target.clone(),
+			to: Vector3.TransformCoordinates(
+				ground,
+				this.mapRoot.computeWorldMatrix(true),
+			),
+			r0: this.camera.radius,
+			r1: radiusKm,
+			alpha: {
+				from: this.camera.alpha,
+				to:
+					this.camera.alpha +
+					Math.atan2(Math.sin(alphaTurn), Math.cos(alphaTurn)),
+			},
+			beta: { from: this.camera.beta, to: betaRad },
+			t: 0,
+		};
 	}
 
 	/** Debug/verification hook (window.__app.overview.objectStats()). */
@@ -1052,6 +1143,7 @@ export class PeruOverview implements FlightHost {
 		this.terrain?.setLook(this.look());
 		this.cloudSheet?.setExaggeration(v);
 		this.objects?.setExaggeration(v);
+		for (const overlay of this.overlays) overlay.setExaggeration(v);
 		this.placeMarker();
 		this.placeSiteMarker();
 		// A higher relief must not swallow the fly camera.
@@ -1136,6 +1228,10 @@ export class PeruOverview implements FlightHost {
 					true,
 				);
 				this.camera.radius = z.r0 + (z.r1 - z.r0) * k;
+				if (z.alpha)
+					this.camera.alpha = z.alpha.from + (z.alpha.to - z.alpha.from) * k;
+				if (z.beta)
+					this.camera.beta = z.beta.from + (z.beta.to - z.beta.from) * k;
 				if (z.t >= 1) this.orbitZoom = null;
 			}
 		}
