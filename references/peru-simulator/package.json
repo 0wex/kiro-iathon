@@ -1,0 +1,27 @@
+{
+  "name": "peru-simulator",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clouds": "uv run --project scripts/clouds python scripts/clouds/goes_clouds.py",
+    "clouds:test": "uv run --project scripts/clouds pytest -q scripts/clouds",
+    "weather": "uv run --project services/weather python services/weather/main.py",
+    "weather:test": "uv run --project services/weather pytest -q services/weather"
+  },
+  "dependencies": {
+    "geotiff": "^3.0.5",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/three": "^0.186.0",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.4",
+    "vitest": "^5.0.5"
+  }
+}

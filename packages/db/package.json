@@ -1,0 +1,29 @@
+{
+	"name": "@hack-the-andes-project/db",
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*.ts"
+	},
+	"scripts": {
+		"build": "tsc -b",
+		"check-types": "tsc -b",
+		"db:push": "drizzle-kit push",
+		"db:generate": "drizzle-kit generate",
+		"db:migrate": "drizzle-kit migrate",
+		"db:studio": "drizzle-kit studio",
+		"env:generate": "varlock codegen"
+	},
+	"dependencies": {
+		"drizzle-orm": "catalog:",
+		"mysql2": "catalog:",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@hack-the-andes-project/config": "workspace:*",
+		"@types/geojson": "catalog:",
+		"drizzle-kit": "catalog:",
+		"typescript": "^6.0.3",
+		"varlock": "catalog:"
+	}
+}

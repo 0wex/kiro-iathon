@@ -1,0 +1,41 @@
+{
+	"name": "@hack-the-andes-project/business",
+	"private": true,
+	"type": "module",
+	"exports": {
+		".": "./src/index.ts",
+		"./*": "./src/*.ts"
+	},
+	"scripts": {
+		"build": "tsc -b",
+		"check-types": "tsc -b",
+		"test": "vitest run"
+	},
+	"dependencies": {
+		"@hack-the-andes-project/db": "workspace:*",
+		"@turf/along": "catalog:",
+		"@turf/bearing": "catalog:",
+		"@turf/destination": "catalog:",
+		"@turf/boolean-point-in-polygon": "catalog:",
+		"@turf/buffer": "catalog:",
+		"@turf/helpers": "catalog:",
+		"@turf/length": "catalog:",
+		"@turf/line-intersect": "catalog:",
+		"@turf/nearest-point-on-line": "catalog:",
+		"drizzle-orm": "catalog:",
+		"evlog": "catalog:",
+		"ngraph.graph": "catalog:",
+		"ngraph.path": "catalog:",
+		"zod": "catalog:",
+		"@turf/bbox": "catalog:",
+		"@turf/distance": "catalog:",
+		"@turf/simplify": "catalog:"
+	},
+	"devDependencies": {
+		"@hack-the-andes-project/config": "workspace:*",
+		"@types/geojson": "catalog:",
+		"mysql2": "catalog:",
+		"typescript": "^6.0.3",
+		"vitest": "catalog:"
+	}
+}

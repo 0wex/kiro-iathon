@@ -1,0 +1,43 @@
+---
+interface Audience {
+	name: string;
+	need: string;
+}
+
+const audiences: Audience[] = [
+	{
+		name: "Transportistas de carga",
+		need: "Saber qué ruta cerrar antes de asignar unidades y conductores.",
+	},
+	{
+		name: "Operadores logísticos",
+		need: "Avisar al cliente con horas de anticipación y no después del retraso.",
+	},
+	{
+		name: "Agroexportadores",
+		need: "Proteger la ventana de cosecha a puerto cuando el norte se inunda.",
+	},
+	{
+		name: "Minería y energía",
+		need: "Anticipar bloqueos y heladas en los corredores de altura.",
+	},
+];
+---
+
+<section aria-labelledby="audience-title" class="border-y border-border bg-muted">
+	<div class="mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:py-32">
+		<header class="flex max-w-3xl flex-col gap-5">
+			<p class="type-label text-muted-foreground">Operaciones en movimiento</p>
+			<h2 id="audience-title" class="type-title">Para quién es</h2>
+			<p class="type-lead text-muted-foreground">Para quienes planifican rutas, coordinan despachos y protegen las ventanas de entrega en el Perú.</p>
+		</header>
+		<ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+			{audiences.map((audience) => (
+				<li class="flex flex-col gap-4 rounded-lg border border-border bg-card p-5">
+					<h3 class="type-heading hyphens-auto">{audience.name}</h3>
+					<p class="type-body text-muted-foreground">{audience.need}</p>
+				</li>
+			))}
+		</ul>
+	</div>
+</section>

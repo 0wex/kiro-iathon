@@ -1,0 +1,24 @@
+/* The viewer embedded in another page: base.css (page-wide resets) is not loaded; app.css holds
+   the whole look, scoped to `.xr-viewer`. */
+.xr-viewer {
+	overflow: hidden;
+}
+.xr-viewer.app {
+	position: absolute;
+	inset: 0;
+}
+/* The huayco simulator's own UI (and the map's back button under it) is shown only while it is
+   the active mode; other modes bring their own panels and their own way back to the map. */
+.xr-viewer[data-active-mode]:not([data-active-mode="huayco"])
+> :is(
+	.hud,
+	.panel-host,
+	.toolbar,
+	.timeline,
+	.xr-buttons,
+	.imagery-sim,
+	.weather-sim,
+	.peru-back
+) {
+	display: none;
+}

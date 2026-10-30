@@ -1,0 +1,116 @@
+---
+import { DEMO_REQUESTS_PATH } from "@hack-the-andes-project/business/demo-request";
+import { buttonVariants } from "@hack-the-andes-project/ui/components/button";
+import DemoRequestDialog from "@hack-the-andes-project/ui/components/demo-request-dialog";
+import { MapLegend } from "@hack-the-andes-project/ui/components/map-legend";
+import {
+	SeverityBadge,
+	SeverityDot,
+} from "@hack-the-andes-project/ui/components/severity";
+import {
+	CONTACT_PHONE_DISPLAY,
+	CONTACT_PHONE_E164,
+	HERO_CORRIDOR_COUNT,
+	HERO_MAP_MOBILE_HEIGHT_PX,
+} from "@/constants";
+import { ENV } from "@/env.public";
+import { HERO_FEED } from "@/hero-data";
+import HeroMap from "./hero-map";
+---
+
+<section class="relative min-h-svh overflow-hidden border-b border-border bg-background text-foreground" aria-labelledby="hero-title">
+	<div
+		class="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-3/5 bg-linear-to-r from-background via-background/95 to-background/0 lg:block"
+		aria-hidden="true"
+	>
+	</div>
+
+	<div
+		class="pointer-events-none mx-auto grid min-h-svh max-w-7xl gap-10 px-5 pt-28 pb-10 sm:px-8 lg:grid-cols-12 lg:grid-rows-1 lg:items-end lg:pb-16"
+	>
+		<div class="pointer-events-auto relative z-10 max-w-xl self-center lg:col-span-6">
+			<h1 id="hero-title" class="type-display">
+				Despacha sabiendo qué pasa en la ruta.
+			</h1>
+			<p class="type-lead mt-6 max-w-md text-muted-foreground">
+				Illapa reúne las alertas de lluvias, huaicos, heladas, incendios y
+				bloqueos del Perú, las cruza con tu red de corredores y te avisa qué
+				tramos se ven afectados y por cuánto tiempo.
+			</p>
+			<div class="mt-8 flex flex-wrap items-center gap-3">
+				<a
+					href={`${ENV.PUBLIC_APP_URL}/demo`}
+					class={buttonVariants({ variant: "default", size: "lg" })}
+				>
+					Probar demo
+				</a>
+				<a
+					href={`${ENV.PUBLIC_APP_URL}/login?mode=sign-up`}
+					class={buttonVariants({ variant: "outline", size: "lg" })}
+				>
+					Crear cuenta
+				</a>
+				<a
+					href={`${ENV.PUBLIC_APP_URL}/login`}
+					class={buttonVariants({ variant: "link", size: "lg" })}
+				>
+					Ya tengo cuenta
+				</a>
+			</div>
+			<div class="mt-3">
+				<DemoRequestDialog
+					client:load
+					endpoint={`${ENV.PUBLIC_API_URL}${DEMO_REQUESTS_PATH}`}
+					contactPhone={CONTACT_PHONE_E164}
+					contactPhoneDisplay={CONTACT_PHONE_DISPLAY}
+					triggerVariant="ghost"
+				/>
+			</div>
+			<p class="type-body mt-10 text-muted-foreground">
+				Hecho para operaciones de carga en el Perú, con datos del SENAMHI,
+				ENFEN, INDECI, Provías y la NASA.
+			</p>
+		</div>
+
+		<div
+			class="pointer-events-auto relative h-(--hero-map-height) w-full overflow-hidden rounded-lg border border-border lg:absolute lg:inset-y-0 lg:right-0 lg:left-1/4 lg:h-auto lg:w-auto lg:rounded-none lg:border-0"
+			style={`--hero-map-height: ${HERO_MAP_MOBILE_HEIGHT_PX}px`}
+		>
+			<HeroMap client:only="react" />
+		</div>
+
+		<aside
+			aria-label="Alertas recientes de ejemplo"
+			class="pointer-events-auto relative z-10 w-full lg:max-w-sm justify-self-start overflow-hidden rounded-lg border border-border bg-card text-card-foreground lg:col-span-5 lg:col-start-8 lg:justify-self-end"
+		>
+			<div class="flex items-baseline justify-between gap-3 border-b border-border px-5 py-3">
+				<h2 class="type-heading">Tu red, hoy</h2>
+				<span class="type-data text-muted-foreground">Ejemplo · {HERO_CORRIDOR_COUNT} corredores</span>
+			</div>
+			<ol class="divide-y divide-border">
+				{
+					HERO_FEED.map((entry) => (
+						<li class="grid grid-cols-[auto_1fr] gap-x-3 px-5 py-3">
+							<span class="mt-1.5 flex items-start">
+								<SeverityDot severity={entry.severity} />
+							</span>
+							<div>
+								<div class="flex items-baseline justify-between gap-3">
+									<span class="font-sans text-sm font-medium">{entry.corridor}</span>
+									<span class="type-data shrink-0 text-muted-foreground">{entry.time}</span>
+								</div>
+								<p class="type-body mt-2 text-muted-foreground">{entry.message}</p>
+								<div class="mt-3">
+									<SeverityBadge severity={entry.severity} />
+								</div>
+							</div>
+						</li>
+					))
+				}
+			</ol>
+			<div class="border-t border-border p-3">
+				<MapLegend className="border-0 bg-transparent p-0" />
+			</div>
+		</aside>
+	</div>
+</section>

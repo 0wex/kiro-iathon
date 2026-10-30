@@ -1,0 +1,788 @@
+import {
+	Ray as BabylonRay,
+	Color3,
+	type LinesMesh,
+	MeshBuilder,
+	type MotionControllerComponentType,
+	Quaternion,
+	Vector3,
+	type WebXRDefaultExperience,
+	WebXRFeatureName,
+	type WebXRInputSource,
+	WebXRState,
+} from "@babylonjs/core";
+import {
+	clampAltitude,
+	clampToBounds,
+	DoubleTap,
+	deadZone,
+	FLY,
+	gazeVelocity,
+	gripStickMove,
+	snapTurnStep,
+	type Vec3,
+	ZoomTween,
+	zoomTarget,
+} from "../map/flight";
+import type { FlightHost } from "../map/PeruOverview";
+import {
+	applyRig,
+	composeRig,
+	IDENTITY_RIG,
+	type Rig,
+	yawAbout,
+} from "../map/rig";
+import { entryActions, pointCardContent } from "../ui/sections";
+import { readVrTheme } from "../ui/vr/theme";
+import { VrCreditLabel, VrInstructionsCard } from "../ui/vr/VrInfoCards";
+import { VrPointCard } from "../ui/vr/VrPointCard";
+import { VrWeatherMenu } from "../ui/vr/VrWeatherMenu";
+import {
+	fromTableLocal,
+	leaderStart,
+	placePointCard,
+	toTableLocal,
+} from "./cardPlacement";
+import {
+	creditOutOfView,
+	flightCreditPose,
+	tableCreditPose,
+	vrCreditContent,
+} from "./credit";
+import {
+	INSTRUCTIONS_START,
+	type InstructionsState,
+	instructionsPose,
+	instructionsStep,
+} from "./instructions";
+import {
+	type GrabHand,
+	mapRootFromPose,
+	TableGrab,
+	tableInFront,
+	tableScaleLimits,
+} from "./mapTable";
+import { controllerYaw, type MaquettePose, snapTurn } from "./placement";
+import {
+	controlsHint,
+	gripUse,
+	triggerUse,
+	type VrEvent,
+	type VrState,
+	type VrView,
+} from "./vrMode";
+
+/**
+ * Scale: the overview scene is in km and WebXR maps 1 real metre to 1 scene unit, so the
+ * flight is over a 1:1000 relief model (1 m around you = 1 km of Peru; the vertical
+ * exaggeration of the web slider applies on top).
+ */
+const STICK_DEAD_ZONE = 0.15;
+/** Weather menu (X): distance along the gaze and shift to the left of it, beside the card (m). */
+const WEATHER_MENU_DISTANCE = 0.9;
+const WEATHER_MENU_LEFT = 0.45;
+
+/** The app's VR state (src/xr/vrMode.ts), shared with the simulator's VR in the same session. */
+export interface VrMapLink {
+	state(): VrState;
+	dispatch(e: VrEvent): void;
+}
+
+/**
+ * Immersive VR over the Peru overview (Quest): flight ("Vuelo") or the whole map on a table
+ * ("Maqueta"), and the "Simular aquí" card (S2). Loaded with a dynamic import only when VR over
+ * the map is first needed; the session can be shared with the simulator's XrController
+ * (src/xr/sharedSession.ts).
+ */
+export class OverviewXr {
+	private inXr = false;
+	private startPending = false;
+	private snap = { armed: true };
+	private readonly buttons = new Map<string, boolean>();
+	/** "Controles" (S15): placed once in the world, dismissed with «Entendido» for the page. */
+	private instructions: VrInstructionsCard | null = null;
+	private instructionsState: InstructionsState = INSTRUCTIONS_START;
+	/** View currently applied to the rig and the map root (follows the app's VR state). */
+	private view: VrView = "vuelo";
+	/** After a pause (the simulator had the session) the first frame only records button states. */
+	private primeButtons = false;
+	private card: VrPointCard | null = null;
+	private weatherMenu: VrWeatherMenu | null = null;
+	private cardShown = "";
+	private cardBusy = false;
+	private cardError: string | null = null;
+	/** The marked point (world), and in the maquette also in the table's frame to follow it. */
+	private cardMarker: { world: Vec3; tableLocal: Vec3 | null } | null = null;
+	/** Hairline from the card to the marked point (S13). */
+	private leader: LinesMesh | null = null;
+	/** The card dragged by its header with a trigger: controller, ray length and grab offset. */
+	private cardDrag: {
+		controllerId: string;
+		distance: number;
+		offset: Vector3;
+	} | null = null;
+	/** Label of the simulator being opened from the card (S5); null for "Simular aquí". */
+	private cardOpening: string | null = null;
+	/** Maquette: table pose (XR metres) and the grip manipulation. */
+	private table: MaquettePose | null = null;
+	private readonly tableGrab = new TableGrab();
+	private tableSnap = { armed: true };
+	/** Imagery and weather attribution as a small map credit (S16), never on a controller. */
+	private credit: VrCreditLabel | null = null;
+	/** Flight: the credit is placed again on the next frame (entering, view change, start view). */
+	private creditStale = true;
+	private readonly ray = new BabylonRay(Vector3.Zero(), Vector3.Forward());
+	private zoom: ZoomTween | null = null;
+	private readonly gripTap = new DoubleTap();
+	/** Everything the rig moved this frame (stick, zoom, snap turn, clamps). */
+	private frameMove: Rig = IDENTITY_RIG;
+
+	private constructor(
+		private readonly host: FlightHost,
+		private readonly xr: WebXRDefaultExperience,
+		private readonly link: VrMapLink,
+	) {
+		const cam = xr.baseExperience.camera;
+		// We place the user ourselves; on exit the web camera keeps its own state.
+		cam.compensateOnFirstFrame = false;
+		cam.minZ = 0.02;
+		cam.maxZ = 20_000;
+		xr.baseExperience.sessionManager.onXRFrameObservable.add(() =>
+			this.frame(),
+		);
+		xr.baseExperience.onStateChangedObservable.add((state) => {
+			if (state === WebXRState.IN_XR) {
+				this.inXr = true;
+				this.startPending = true;
+				this.snap = { armed: true };
+				this.view = "vuelo";
+				this.card = new VrPointCard(
+					this.host.scene,
+					{
+						simulate: () => this.simulateFromCard(),
+						cancel: () => this.closeCard(true),
+						setView: (view) => this.link.dispatch({ type: "set-view", view }),
+						openEntry: (id) => this.openEntryFromCard(id),
+					},
+					entryActions(this.host.entries()),
+				);
+				this.leader = MeshBuilder.CreateLines(
+					"peru-vr-card-leader",
+					{ points: [Vector3.Zero(), Vector3.Zero()], updatable: true },
+					this.host.scene,
+				);
+				// The border hairline's colour without its alpha: over the relief a 13 % line vanishes.
+				this.leader.color = Color3.FromHexString(
+					readVrTheme().colors.border.slice(0, 7),
+				);
+				this.leader.isPickable = false;
+				this.leader.setEnabled(false);
+				const weather = this.host.weatherMenu();
+				this.weatherMenu = weather
+					? new VrWeatherMenu(
+							this.host.scene,
+							weather,
+							(id) => this.host.weatherAction(id),
+							() => this.reopenInstructions(),
+						)
+					: null;
+				this.credit = new VrCreditLabel(this.host.scene);
+				this.creditStale = true;
+				this.instructions = new VrInstructionsCard(this.host.scene, () => {
+					this.instructionsState = instructionsStep(
+						this.instructionsState,
+						"dismiss",
+					);
+					this.instructions?.hide();
+				});
+				this.instructionsState = instructionsStep(
+					this.instructionsState,
+					"enter",
+				);
+				// Eye buffer height (WebGL layer); the LOD measures its screen-space error in it.
+				const layer = xr.baseExperience.sessionManager.session?.renderState
+					.baseLayer as XRWebGLLayer | undefined;
+				this.host.vrChanged(true, layer?.framebufferHeight || undefined);
+			} else if (state === WebXRState.NOT_IN_XR && this.inXr) {
+				this.inXr = false;
+				this.instructions?.dispose();
+				this.instructions = null;
+				this.instructionsState = instructionsStep(
+					this.instructionsState,
+					"exit",
+				);
+				this.credit?.dispose();
+				this.credit = null;
+				this.card?.dispose();
+				this.card = null;
+				this.leader?.dispose();
+				this.leader = null;
+				this.cardMarker = null;
+				this.cardDrag = null;
+				this.weatherMenu?.dispose();
+				this.weatherMenu = null;
+				this.cardShown = "";
+				this.cardBusy = false;
+				this.cardError = null;
+				this.buttons.clear();
+				this.zoom = null;
+				this.table = null;
+				this.tableGrab.reset();
+				this.view = "vuelo";
+				this.host.setMapPlacement(null);
+				this.host.vrChanged(false);
+			}
+		});
+	}
+
+	static async create(
+		host: FlightHost,
+		webgpu: boolean,
+		link: VrMapLink,
+	): Promise<OverviewXr> {
+		const xr = await host.scene.createDefaultXRExperienceAsync({
+			disableDefaultUI: true,
+			floorMeshes: [],
+			disableTeleportation: true,
+			disableHandTracking: true,
+		});
+		if (webgpu)
+			xr.baseExperience.featuresManager.enableFeature(
+				WebXRFeatureName.LAYERS,
+				"stable",
+			);
+		return new OverviewXr(host, xr, link);
+	}
+
+	get experience(): WebXRDefaultExperience {
+		return this.xr;
+	}
+
+	async enter(): Promise<void> {
+		await this.xr.baseExperience.enterXRAsync("immersive-vr", "local-floor");
+	}
+
+	/** The map gets the shared session back (from the simulator): fresh button edges, no card. */
+	resumed(): void {
+		this.primeButtons = true;
+		this.zoom = null;
+		this.tableGrab.reset();
+		this.cardBusy = false;
+		this.cardError = null;
+		this.card?.hide();
+	}
+
+	private frame(): void {
+		if (!this.inXr) return;
+		if (this.startPending) {
+			this.startPending = false;
+			this.toStartView();
+			if (this.instructionsState.shown) this.showInstructions();
+			return;
+		}
+		const left = this.controller("left");
+		const right = this.controller("right");
+		if (this.primeButtons) {
+			this.primeButtons = false;
+			for (const c of [left, right]) {
+				if (!c) continue;
+				for (const [id, type] of [
+					["xr-standard-trigger", "trigger"],
+					["xr-standard-squeeze", "squeeze"],
+					["a-button"],
+					["b-button"],
+					["x-button"],
+					["y-button"],
+				] as const)
+					this.pressedOnce(c, id, type);
+			}
+			return;
+		}
+		this.syncCredit();
+		this.frameMove = IDENTITY_RIG;
+		const wanted = this.link.state().view;
+		if (wanted !== this.view) this.applyView(wanted);
+		if (left && this.pressedOnce(left, "y-button"))
+			this.link.dispatch({ type: "toggle-view" });
+		if (left && this.pressedOnce(left, "x-button")) {
+			if (this.weatherMenu) this.toggleWeatherMenu();
+			else this.reopenInstructions();
+		}
+		// Trigger: on the card it presses the card's buttons (pointer selection), on its header it
+		// drags the card; otherwise the view decides.
+		const triggered: WebXRInputSource[] = [];
+		for (const c of [left, right]) {
+			if (!c || !this.pressedOnce(c, "xr-standard-trigger", "trigger"))
+				continue;
+			c.getWorldPointerRayToRef(this.ray);
+			const card = this.card;
+			const cardPick = card?.visible
+				? this.ray.intersectsMesh(card.mesh)
+				: null;
+			if (card && cardPick?.pickedPoint && card.onHeader(cardPick.pickedPoint))
+				this.cardDrag = {
+					controllerId: c.uniqueId,
+					distance: cardPick.distance,
+					offset: card.mesh.position.subtract(cardPick.pickedPoint),
+				};
+			const cardHit = [this.card, this.weatherMenu, this.instructions].some(
+				(panel) => panel?.visible && this.ray.intersectsMesh(panel.mesh).hit,
+			);
+			if (triggerUse(this.view, cardHit) === "zoom") triggered.push(c);
+		}
+		if (gripUse(this.view) === "table") this.tableFrame(left, right);
+		else this.flightFrame(left, right, triggered);
+		this.dragCard(left, right);
+
+		if (right && this.pressedOnce(right, "a-button")) {
+			right.getWorldPointerRayToRef(this.ray);
+			const o = this.ray.origin;
+			const d = this.ray.direction;
+			const marker = this.host.hitRay([o.x, o.y, o.z], [d.x, d.y, d.z]);
+			if (marker && this.host.pickRay([o.x, o.y, o.z], [d.x, d.y, d.z])) {
+				void right.motionController?.pulse(0.5, 60);
+				this.openCard(marker);
+			}
+		}
+		if (right && this.pressedOnce(right, "b-button"))
+			void this.xr.baseExperience.exitXRAsync();
+		this.syncCard();
+		this.syncLeader();
+		const weather = this.weatherMenu?.visible ? this.host.weatherMenu() : null;
+		if (weather) this.weatherMenu?.update(weather);
+	}
+
+	/** The controls card at its spawn pose, beside the gaze, where it then stays (S15). */
+	private showInstructions(): void {
+		const cam = this.xr.baseExperience.camera;
+		const head = cam.position;
+		const gaze = cam.getDirection(Vector3.Forward());
+		this.instructions?.showAt(
+			instructionsPose([head.x, head.y, head.z], [gaze.x, gaze.y, gaze.z]),
+			controlsHint(this.view),
+		);
+	}
+
+	/** «Controles» in the weather menu (or X without one) brings the card back. */
+	private reopenInstructions(): void {
+		this.instructionsState = instructionsStep(this.instructionsState, "reopen");
+		this.showInstructions();
+	}
+
+	/** X: the weather menu (S8) opens beside the gaze, or closes. */
+	private toggleWeatherMenu(): void {
+		const menu = this.weatherMenu;
+		if (!menu) return;
+		if (menu.visible) {
+			menu.hide();
+			return;
+		}
+		const cam = this.xr.baseExperience.camera;
+		const head = cam.position;
+		const gaze = cam.getDirection(Vector3.Forward());
+		const left = cam.getDirection(Vector3.Left());
+		menu.showAt([
+			head.x + gaze.x * WEATHER_MENU_DISTANCE + left.x * WEATHER_MENU_LEFT,
+			head.y + gaze.y * WEATHER_MENU_DISTANCE + left.y * WEATHER_MENU_LEFT,
+			head.z + gaze.z * WEATHER_MENU_DISTANCE + left.z * WEATHER_MENU_LEFT,
+		]);
+	}
+
+	/** Flight ("Vuelo"): stick flight, grip climb/turn, snap turn, trigger zoom (unchanged controls). */
+	private flightFrame(
+		left: WebXRInputSource | undefined,
+		right: WebXRInputSource | undefined,
+		triggered: WebXRInputSource[],
+	): void {
+		const cam = this.xr.baseExperience.camera;
+		const stick = right?.motionController?.getComponentOfType("thumbstick");
+		// Boost: press the right stick.
+		const boost = !!stick?.pressed;
+		const forward = -deadZone(stick?.axes.y ?? 0, STICK_DEAD_ZONE);
+		const strafe = deadZone(stick?.axes.x ?? 0, STICK_DEAD_ZONE);
+		const dt = Math.min(this.host.scene.getEngine().getDeltaTime() / 1000, 0.1);
+		const p = cam.position;
+		const agl = () => p.y - this.host.groundAt(p.x, p.z);
+		const gaze = (): Vec3 => {
+			const g = cam.getDirection(Vector3.Forward());
+			return [g.x, g.y, g.z];
+		};
+		const grip =
+			!!right?.motionController?.getComponentOfType("squeeze")?.pressed;
+		if (
+			right &&
+			this.pressedOnce(right, "xr-standard-squeeze", "squeeze") &&
+			this.gripTap.press(performance.now() / 1000)
+		) {
+			this.toStartView();
+			void right.motionController?.pulse(0.5, 80);
+			return;
+		}
+		if (grip) {
+			// Grip held: the right stick climbs/descends and turns about the vertical through the head.
+			const g = gripStickMove(
+				{ x: stick?.axes.x ?? 0, y: stick?.axes.y ?? 0 },
+				agl(),
+				dt,
+				boost,
+			);
+			if (g.dy !== 0 || g.yaw !== 0) this.zoom?.cancel();
+			if (g.yaw !== 0) this.move(yawAbout(g.yaw, [p.x, p.y, p.z]));
+			if (g.dy !== 0) this.move({ yaw: 0, t: [0, g.dy, 0] });
+		} else if (forward !== 0 || strafe !== 0) {
+			this.zoom?.cancel();
+			const v = gazeVelocity({ forward, strafe, boost }, gaze(), agl());
+			this.move({ yaw: 0, t: [v[0] * dt, v[1] * dt, v[2] * dt] });
+		}
+		// Optional extra: left stick X snap-turns 30° about the head; turning the head/body works as well.
+		const rx =
+			left?.motionController?.getComponentOfType("thumbstick")?.axes.x ?? 0;
+		const step = snapTurnStep(this.snap, rx);
+		this.snap = step.state;
+		if (step.turn) this.move(yawAbout(step.turn, [p.x, p.y, p.z]));
+		// Trigger: smooth zoom toward the relief point under that controller's ray.
+		for (const c of triggered) {
+			c.getWorldPointerRayToRef(this.ray);
+			const o = this.ray.origin;
+			const d = this.ray.direction;
+			const hit = this.host.hitRay([o.x, o.y, o.z], [d.x, d.y, d.z]);
+			if (!hit) continue;
+			const eye: Vec3 = [p.x, p.y, p.z];
+			this.zoom = new ZoomTween(
+				eye,
+				zoomTarget(
+					eye,
+					hit,
+					(x, z) => this.host.groundAt(x, z),
+					this.host.bounds(),
+				),
+			);
+			void c.motionController?.pulse(0.4, 40);
+		}
+		if (this.zoom) {
+			this.move({ yaw: 0, t: this.zoom.step(dt) });
+			if (this.zoom.done) this.zoom = null;
+		}
+		this.clamp();
+		// The card travels with the user's rig.
+		if (this.card?.visible) {
+			const c = this.card.mesh.position;
+			const q = applyRig(this.frameMove, [c.x, c.y, c.z]);
+			c.set(q[0], q[1], q[2]);
+		}
+	}
+
+	/**
+	 * Maquette: one grip moves and turns the table, two grips scale it; the right stick turns it
+	 * 30°; a right grip double press brings it back in front of you at its fitted size.
+	 */
+	private tableFrame(
+		left: WebXRInputSource | undefined,
+		right: WebXRInputSource | undefined,
+	): void {
+		if (!this.table) return;
+		if (
+			right &&
+			this.pressedOnce(right, "xr-standard-squeeze", "squeeze") &&
+			this.gripTap.press(performance.now() / 1000)
+		) {
+			this.tableGrab.reset();
+			this.placeTableInFront();
+			void right.motionController?.pulse(0.5, 80);
+			return;
+		}
+		const held: GrabHand[] = [];
+		for (const c of [left, right]) {
+			if (!c?.motionController?.getComponentOfType("squeeze")?.pressed)
+				continue;
+			const p = (c.grip ?? c.pointer).absolutePosition;
+			const f = c.pointer.forward;
+			held.push({
+				id: c.uniqueId,
+				position: [p.x, p.y, p.z],
+				yaw: controllerYaw([f.x, f.y, f.z]),
+			});
+		}
+		this.table = this.tableGrab.step(
+			this.table,
+			held,
+			tableScaleLimits(this.host.bounds()),
+		);
+		const rx =
+			right?.motionController?.getComponentOfType("thumbstick")?.axes.x ?? 0;
+		const step = snapTurnStep(this.tableSnap, rx);
+		this.tableSnap = step.state;
+		if (step.turn && !this.tableGrab.active)
+			this.table = snapTurn(this.table, step.turn);
+		this.host.setMapPlacement(mapRootFromPose(this.host.bounds(), this.table));
+	}
+
+	/** Switches the rig and the map root between flight and the table. */
+	private applyView(view: VrView): void {
+		this.view = view;
+		this.creditStale = true;
+		this.zoom = null;
+		this.tableGrab.reset();
+		this.card?.hide();
+		this.instructions?.setText(controlsHint(view));
+		if (view === "maqueta") {
+			// Real scale, standing at the origin: the map comes to the user, not the reverse.
+			const cam = this.xr.baseExperience.camera;
+			cam.position.set(0, cam.realWorldHeight || 1.6, 0);
+			this.tableSnap = { armed: true };
+			this.placeTableInFront();
+		} else {
+			this.table = null;
+			this.host.setMapPlacement(null);
+			this.toStartView();
+		}
+	}
+
+	private placeTableInFront(): void {
+		const p = this.xr.baseExperience.camera.position;
+		this.table = tableInFront(
+			[p.x, p.y, p.z],
+			this.headYaw(),
+			this.host.bounds(),
+		);
+		this.host.setMapPlacement(mapRootFromPose(this.host.bounds(), this.table));
+	}
+
+	/** A marked the point: the card appears beside it (S13), where it stays unless dragged. */
+	private openCard(marker: Vec3): void {
+		if (!this.card) return;
+		const cam = this.xr.baseExperience.camera;
+		const head = cam.position;
+		const gaze = cam.getDirection(Vector3.Forward());
+		this.cardError = null;
+		this.cardDrag = null;
+		this.cardMarker = {
+			world: marker,
+			tableLocal: this.table ? toTableLocal(marker, this.table) : null,
+		};
+		this.card.showAt(
+			placePointCard({
+				marker,
+				head: [head.x, head.y, head.z],
+				gaze: [gaze.x, gaze.y, gaze.z],
+				view: this.view,
+				cardSize: this.card.size,
+			}).position,
+		);
+		this.cardShown = "";
+	}
+
+	/** Trigger held after grabbing the header: the card follows the ray at the grab length. */
+	private dragCard(
+		left: WebXRInputSource | undefined,
+		right: WebXRInputSource | undefined,
+	): void {
+		const drag = this.cardDrag;
+		if (!drag) return;
+		const controller = [left, right].find(
+			(c) => c?.uniqueId === drag.controllerId,
+		);
+		if (
+			!this.card?.visible ||
+			!controller?.motionController?.getComponentOfType("trigger")?.pressed
+		) {
+			this.cardDrag = null;
+			return;
+		}
+		controller.getWorldPointerRayToRef(this.ray);
+		const position = this.ray.origin
+			.add(this.ray.direction.scale(drag.distance))
+			.addInPlace(drag.offset);
+		this.card.showAt([position.x, position.y, position.z]);
+	}
+
+	/** The leader from the card's edge to the marked point, which follows a moved table. */
+	private syncLeader(): void {
+		const leader = this.leader;
+		const card = this.card;
+		const marked = this.cardMarker;
+		if (!leader) return;
+		if (!card?.visible || !marked) {
+			leader.setEnabled(false);
+			return;
+		}
+		const marker =
+			marked.tableLocal && this.table
+				? fromTableLocal(marked.tableLocal, this.table)
+				: marked.world;
+		const head = this.xr.baseExperience.camera.position;
+		const position = card.mesh.position;
+		const start = leaderStart(
+			[position.x, position.y, position.z],
+			[head.x, head.y, head.z],
+			marker,
+			card.size.width,
+		);
+		MeshBuilder.CreateLines("peru-vr-card-leader", {
+			points: [new Vector3(...start), new Vector3(...marker)],
+			instance: leader,
+		});
+		leader.setEnabled(true);
+	}
+
+	private closeCard(forget: boolean): void {
+		if (this.cardBusy) return;
+		this.card?.hide();
+		this.cardError = null;
+		if (forget) this.host.clearPick();
+	}
+
+	/** "Simular aquí" on the card: the web button's flow; on success the simulator takes the session. */
+	private simulateFromCard(): void {
+		if (this.cardBusy || !this.host.picked()) return;
+		this.cardBusy = true;
+		this.cardError = null;
+		void this.host.simulatePicked().then((error) => {
+			this.cardBusy = false;
+			this.cardError = error;
+			if (!error) this.card?.hide();
+		});
+	}
+
+	/** Another simulator from the card (S5): it opens at its own origin and takes the session. */
+	private openEntryFromCard(id: string): void {
+		if (this.cardBusy) return;
+		this.cardBusy = true;
+		this.cardError = null;
+		this.cardOpening =
+			this.host.entries().find((entry) => entry.id === id)?.label ?? null;
+		void this.host.openEntry(id).then((error) => {
+			this.cardBusy = false;
+			this.cardOpening = null;
+			this.cardError = error;
+			if (!error) this.card?.hide();
+		});
+	}
+
+	private syncCard(): void {
+		const card = this.card;
+		if (!card?.visible) return;
+		const picked = this.host.picked();
+		if (!picked && !this.cardBusy) {
+			card.hide();
+			return;
+		}
+		const c = pointCardContent({
+			picked,
+			busy: this.cardBusy,
+			error: this.cardError,
+			view: this.view,
+			entries: this.host.entries(),
+			opening: this.cardOpening,
+		});
+		const key = JSON.stringify(c);
+		if (key === this.cardShown) return;
+		this.cardShown = key;
+		card.update(c);
+	}
+
+	/**
+	 * Start view (entering VR and grip double press): middle of the map, facing north, above the
+	 * highest relief, the map level (S10). Only yaw is changed, never pitch or roll.
+	 */
+	private toStartView(): void {
+		this.creditStale = true;
+		this.zoom = null;
+		const start = this.host.vrStart();
+		this.card?.hide();
+		this.turn(start.yaw - this.headYaw());
+		this.xr.baseExperience.camera.position.set(...start.position);
+		this.clamp();
+	}
+
+	/** Moves the user's rig (head and controllers): yaw about the vertical, then translation. */
+	private move(m: Rig): void {
+		if (m.yaw === 0 && m.t[0] === 0 && m.t[1] === 0 && m.t[2] === 0) return;
+		const cam = this.xr.baseExperience.camera;
+		const p = applyRig(m, [cam.position.x, cam.position.y, cam.position.z]);
+		if (m.yaw !== 0) {
+			cam.rotationQuaternion = Quaternion.RotationAxis(
+				Vector3.Up(),
+				m.yaw,
+			).multiply(cam.rotationQuaternion);
+		}
+		cam.position.set(p[0], p[1], p[2]);
+		this.frameMove = composeRig(this.frameMove, m);
+	}
+
+	private clamp(): void {
+		const p = this.xr.baseExperience.camera.position;
+		const [x, z] = clampToBounds(p.x, p.z, this.host.bounds());
+		const y = clampAltitude(
+			p.y,
+			this.host.groundAt(x, z),
+			1,
+			FLY.clearance,
+			FLY.maxAltitude,
+		);
+		this.move({ yaw: 0, t: [x - p.x, y - p.y, z - p.z] });
+	}
+
+	private headYaw(): number {
+		const f = this.xr.baseExperience.camera.getDirection(Vector3.Forward());
+		return Math.atan2(f.x, f.z);
+	}
+
+	/** Turns the user about the world vertical through the head (no roll). */
+	private turn(angle: number): void {
+		const cam = this.xr.baseExperience.camera;
+		cam.rotationQuaternion = Quaternion.RotationAxis(
+			Vector3.Up(),
+			angle,
+		).multiply(cam.rotationQuaternion);
+	}
+
+	private controller(handedness: XRHandedness): WebXRInputSource | undefined {
+		return this.xr.input.controllers.find(
+			(c) => c.inputSource.handedness === handedness,
+		);
+	}
+
+	/** Rising edge of a button, by component id or, failing that, by component type. */
+	private pressedOnce(
+		input: WebXRInputSource,
+		component: string,
+		type?: MotionControllerComponentType,
+	): boolean {
+		const key = `${input.uniqueId}:${component}`;
+		const mc = input.motionController;
+		const now = !!(
+			mc?.getComponent(component) ??
+			(type ? mc?.getComponentOfType(type) : null)
+		)?.pressed;
+		const before = this.buttons.get(key) ?? false;
+		this.buttons.set(key, now);
+		return now && !before;
+	}
+
+	/**
+	 * The map credit whenever imagery or weather layers are visible: on the near edge of the
+	 * maquette, or low in the flight view, world-stable until it leaves the view.
+	 */
+	private syncCredit(): void {
+		const credit = this.credit;
+		if (!credit) return;
+		credit.show(
+			vrCreditContent(this.host.imageryCredit(), this.host.weatherCredit()),
+		);
+		if (!credit.visible) return;
+		if (this.table) {
+			credit.place(tableCreditPose(this.host.bounds(), this.table));
+			return;
+		}
+		const cam = this.xr.baseExperience.camera;
+		const head: Vec3 = [cam.position.x, cam.position.y, cam.position.z];
+		const forward = cam.getDirection(Vector3.Forward());
+		const gaze: Vec3 = [forward.x, forward.y, forward.z];
+		const at = credit.mesh.position;
+		if (this.creditStale || creditOutOfView(head, gaze, [at.x, at.y, at.z])) {
+			this.creditStale = false;
+			credit.place(flightCreditPose(head, gaze));
+		}
+	}
+}

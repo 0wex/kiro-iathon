@@ -1,0 +1,12 @@
+export const ID_LENGTH_CHARS = 36;
+export const TEXT_LENGTH_CHARS = 255;
+export const STATUS_LENGTH_CHARS = 32;
+export const TIMESTAMP_PRECISION_DIGITS = 3;
+export const PROVIDER_LENGTH_CHARS = 32;
+export const VEHICLE_PLATE_LENGTH_CHARS = 32;
+export const SEVERITY_LENGTH_CHARS = 16;
+export const TITLE_LENGTH_CHARS = 512;
+export const DEMO_NAME_MAX_LENGTH_CHARS = 120;
+export const DEMO_COMPANY_MAX_LENGTH_CHARS = 160;
+export const DEMO_PHONE_MAX_LENGTH_CHARS = 40;
+export const DEMO_EMAIL_MAX_LENGTH_CHARS = 254;

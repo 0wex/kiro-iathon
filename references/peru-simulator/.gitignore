@@ -1,0 +1,12 @@
+node_modules
+dist
+.DS_Store
+# Cloud overlay pipeline: downloaded GOES files, Python env, generated latest image
+scripts/clouds/.cache/
+scripts/clouds/.venv/
+__pycache__/
+.pytest_cache/
+public/clouds/latest.*
+# Weather backend: Python env and GRIB / grid cache
+services/weather/.venv/
+services/weather/.cache/

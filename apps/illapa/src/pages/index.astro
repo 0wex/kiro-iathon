@@ -1,0 +1,29 @@
+---
+import Audience from "@/components/audience.astro";
+import DemoCta from "@/components/demo-cta.astro";
+import Engineering from "@/components/engineering.astro";
+import Hazards from "@/components/hazards.astro";
+import Hero from "@/components/hero.astro";
+import HowItWorks from "@/components/how-it-works.astro";
+import SiteFooter from "@/components/site-footer.astro";
+import SiteNav from "@/components/site-nav.astro";
+import Sources from "@/components/sources.astro";
+import Base from "@/layouts/base.astro";
+---
+
+<Base
+	title="ILLAPA: alertas climáticas y de ruta para la logística del Perú"
+	description="ILLAPA cruza las alertas de lluvias, huaicos, heladas, incendios y bloqueos del Perú con tu red de corredores y te avisa qué tramos se ven afectados antes de despachar."
+>
+	<SiteNav />
+	<main class="min-w-0">
+		<Hero />
+		<Hazards />
+		<HowItWorks />
+		<Sources />
+		<Audience />
+		<Engineering />
+		<DemoCta />
+	</main>
+	<SiteFooter />
+</Base>

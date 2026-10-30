@@ -1,0 +1,35 @@
+---
+interface Source {
+	name: string;
+	role: string;
+}
+
+const sources: Source[] = [
+	{ name: "SENAMHI", role: "avisos meteorológicos e hidrológicos" },
+	{ name: "ENFEN", role: "estado del Niño costero" },
+	{ name: "INDECI y COEN", role: "emergencias declaradas" },
+	{ name: "Provías Nacional", role: "estado de la red vial" },
+	{ name: "Sutran", role: "restricciones de tránsito" },
+	{ name: "IGP", role: "sismos y actividad volcánica" },
+	{ name: "DHN", role: "oleaje y cierre de puertos" },
+	{ name: "NASA FIRMS", role: "focos de calor satelitales" },
+];
+---
+
+<section id="fuentes" aria-labelledby="fuentes-title">
+	<div class="mx-auto grid max-w-7xl gap-12 px-5 py-24 sm:px-8 lg:grid-cols-12 lg:py-32">
+		<header class="flex flex-col gap-5 lg:col-span-4">
+			<p class="type-label text-muted-foreground">Fuentes oficiales</p>
+			<h2 id="fuentes-title" class="type-title">Las mismas fuentes que ya consultas, en un solo lugar</h2>
+			<p class="type-lead text-muted-foreground">No inventamos pronósticos. Leemos lo que publican las entidades oficiales, lo georreferenciamos y lo cruzamos con tu red.</p>
+		</header>
+		<dl class="min-w-0 overflow-hidden rounded-lg border border-border bg-card lg:col-span-8">
+			{sources.map((source) => (
+				<div class="grid gap-3 border-t border-border p-5 first:border-t-0 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-8">
+					<dt class="type-label">{source.name}</dt>
+					<dd class="type-body text-muted-foreground">{source.role}</dd>
+				</div>
+			))}
+		</dl>
+	</div>
+</section>

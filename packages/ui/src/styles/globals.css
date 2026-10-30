@@ -1,0 +1,298 @@
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/jetbrains-mono";
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@source "../../../apps/**/*.{ts,tsx}";
+@source "../**/*.{ts,tsx}";
+
+@custom-variant dark (&:is(.dark *));
+
+@custom-variant hover {
+	@media (hover: hover) {
+		&:hover {
+			@slot;
+		}
+	}
+	&[data-preview~="hover"] {
+		@slot;
+	}
+}
+@custom-variant focus-visible (&:focus-visible, &[data-preview~="focus"]);
+@custom-variant active (&:active, &[data-preview~="active"]);
+
+:root {
+	--background: #f2f7f8;
+	--foreground: #0a2530;
+	--card: #ffffff;
+	--card-foreground: #0a2530;
+	--popover: #ffffff;
+	--popover-foreground: #0a2530;
+	--primary: #0b6e78;
+	--primary-foreground: #ffffff;
+	--secondary: #e4eff1;
+	--secondary-foreground: #0a2530;
+	--muted: #e4eff1;
+	--muted-foreground: #4d6b74;
+	--accent: #d5e8ec;
+	--accent-foreground: #0a2530;
+	--destructive: #c92a22;
+	--destructive-foreground: #ffffff;
+	--border: #0a253021;
+	--input: #0a253029;
+	--ring: #0b6e78;
+	--risk-low: #3e7d18;
+	--risk-low-foreground: #ffffff;
+	--risk-moderate: #e8bc00;
+	--risk-moderate-foreground: #0a090b;
+	--risk-high: #d96200;
+	--risk-high-foreground: #0a090b;
+	--risk-critical: #c92a22;
+	--risk-critical-foreground: #ffffff;
+	--info: #2459c9;
+	--info-foreground: #ffffff;
+	--success: var(--risk-low);
+	--success-foreground: var(--risk-low-foreground);
+	--chart-1: #0b6e78;
+	--chart-2: #2459c9;
+	--chart-3: #6d4fd8;
+	--chart-4: #557782;
+	--chart-5: #8a6a1f;
+	--sidebar: #ffffff;
+	--sidebar-foreground: var(--foreground);
+	--sidebar-primary: var(--primary);
+	--sidebar-primary-foreground: var(--primary-foreground);
+	--sidebar-accent: var(--accent);
+	--sidebar-accent-foreground: var(--accent-foreground);
+	--sidebar-border: var(--border);
+	--sidebar-ring: var(--ring);
+	--radius: 14px;
+	--brand-river: #0b6e78;
+	--brand-starlight: #8a6a1f;
+}
+
+.dark {
+	--background: #06181f;
+	--foreground: #e4f3f4;
+	--card: #0b252f;
+	--card-foreground: #e4f3f4;
+	--popover: #10303c;
+	--popover-foreground: #e4f3f4;
+	--primary: #34c6c2;
+	--primary-foreground: #04161b;
+	--secondary: #10303c;
+	--secondary-foreground: #e4f3f4;
+	--muted: #10303c;
+	--muted-foreground: #8eb2ba;
+	--accent: #15394a;
+	--accent-foreground: #e4f3f4;
+	--destructive: #ff5148;
+	--destructive-foreground: #06181f;
+	--border: #e4f3f41f;
+	--input: #e4f3f42e;
+	--ring: #6fe0dc;
+	--risk-low: #8fd45a;
+	--risk-low-foreground: #06181f;
+	--risk-moderate: #f4d03f;
+	--risk-moderate-foreground: #06181f;
+	--risk-high: #ff8a2a;
+	--risk-high-foreground: #06181f;
+	--risk-critical: #ff5148;
+	--risk-critical-foreground: #06181f;
+	--info: #6b9bff;
+	--info-foreground: #06181f;
+	--success: var(--risk-low);
+	--success-foreground: var(--risk-low-foreground);
+	--chart-1: #34c6c2;
+	--chart-2: #6b9bff;
+	--chart-3: #a78bfa;
+	--chart-4: #7fa6b0;
+	--chart-5: #f3e7c9;
+	--sidebar: #0b252f;
+	--sidebar-foreground: var(--foreground);
+	--sidebar-primary: var(--primary);
+	--sidebar-primary-foreground: var(--primary-foreground);
+	--sidebar-accent: var(--accent);
+	--sidebar-accent-foreground: var(--accent-foreground);
+	--sidebar-border: var(--border);
+	--sidebar-ring: var(--ring);
+	--brand-river: #34c6c2;
+	--brand-starlight: #f3e7c9;
+}
+
+@theme inline {
+	--font-sans: "Archivo Variable", ui-sans-serif, system-ui, sans-serif;
+	--font-mono:
+		"JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco,
+		Consolas, monospace;
+	--font-heading: "Archivo Variable", "Arial Black", ui-sans-serif, sans-serif;
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-card: var(--card);
+	--color-card-foreground: var(--card-foreground);
+	--color-popover: var(--popover);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-primary: var(--primary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-secondary: var(--secondary);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-muted: var(--muted);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-accent: var(--accent);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-destructive: var(--destructive);
+	--color-destructive-foreground: var(--destructive-foreground);
+	--color-border: var(--border);
+	--color-input: var(--input);
+	--color-ring: var(--ring);
+	--color-brand-river: var(--brand-river);
+	--color-brand-starlight: var(--brand-starlight);
+	--color-risk-low: var(--risk-low);
+	--color-risk-low-foreground: var(--risk-low-foreground);
+	--color-risk-moderate: var(--risk-moderate);
+	--color-risk-moderate-foreground: var(--risk-moderate-foreground);
+	--color-risk-high: var(--risk-high);
+	--color-risk-high-foreground: var(--risk-high-foreground);
+	--color-risk-critical: var(--risk-critical);
+	--color-risk-critical-foreground: var(--risk-critical-foreground);
+	--color-info: var(--info);
+	--color-info-foreground: var(--info-foreground);
+	--color-success: var(--success);
+	--color-success-foreground: var(--success-foreground);
+	--color-chart-1: var(--chart-1);
+	--color-chart-2: var(--chart-2);
+	--color-chart-3: var(--chart-3);
+	--color-chart-4: var(--chart-4);
+	--color-chart-5: var(--chart-5);
+	--color-sidebar: var(--sidebar);
+	--color-sidebar-foreground: var(--sidebar-foreground);
+	--color-sidebar-primary: var(--sidebar-primary);
+	--color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+	--color-sidebar-accent: var(--sidebar-accent);
+	--color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+	--color-sidebar-border: var(--sidebar-border);
+	--color-sidebar-ring: var(--sidebar-ring);
+	--radius-xs: 4px;
+	--radius-sm: 6px;
+	--radius-md: 10px;
+	--radius-lg: 14px;
+	--radius-xl: 18px;
+	--radius-2xl: 22px;
+	--radius-3xl: 26px;
+	--radius-4xl: 9999px;
+}
+
+@theme {
+	--shadow-2xs: 0 0 #0000;
+	--shadow-xs: 0 0 #0000;
+	--shadow-sm: 0 0 #0000;
+	--shadow-md: 0 0 #0000;
+	--shadow-lg: 0 0 #0000;
+	--shadow-xl: 0 0 #0000;
+	--shadow-2xl: 0 0 #0000;
+}
+
+@utility type-display {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-stretch: 125%;
+	font-size: clamp(2.5rem, 5vw + 0.75rem, 4.25rem);
+	line-height: 1;
+	letter-spacing: 0.005em;
+	text-transform: uppercase;
+	overflow-wrap: break-word;
+}
+
+@utility type-title {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-stretch: 125%;
+	font-size: clamp(1.75rem, 2.6vw + 0.75rem, 2.75rem);
+	line-height: 1.05;
+	letter-spacing: 0.005em;
+	text-transform: uppercase;
+	overflow-wrap: break-word;
+}
+
+@utility type-heading {
+	font-family: var(--font-heading);
+	font-weight: 800;
+	font-stretch: 125%;
+	font-size: 1.0625rem;
+	line-height: 1.2;
+	letter-spacing: 0.005em;
+	text-transform: uppercase;
+	overflow-wrap: break-word;
+}
+
+@utility type-lead {
+	font-family: var(--font-sans);
+	font-weight: 400;
+	font-size: clamp(1.0625rem, 0.5vw + 0.875rem, 1.25rem);
+	line-height: 1.6;
+}
+
+@utility type-body {
+	font-family: var(--font-sans);
+	font-weight: 400;
+	font-size: 0.9375rem;
+	line-height: 1.6;
+}
+
+@utility type-label {
+	font-family: var(--font-mono);
+	font-weight: 600;
+	font-size: 0.6875rem;
+	line-height: 1.4;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+
+@utility type-data {
+	font-family: var(--font-mono);
+	font-weight: 500;
+	font-size: 0.8125rem;
+	line-height: 1.45;
+	font-variant-numeric: tabular-nums;
+}
+
+@layer base {
+	html[data-font-size="sm"] {
+		font-size: 87.5%;
+	}
+	html[data-font-size="lg"] {
+		font-size: 112.5%;
+	}
+
+	* {
+		@apply border-border outline-ring;
+	}
+	body {
+		@apply font-sans bg-background text-foreground;
+	}
+	html {
+		@apply font-sans;
+	}
+	button:not(:disabled),
+	[role="button"]:not(:disabled) {
+		cursor: pointer;
+	}
+	.maplibregl-popup-content {
+		@apply bg-popover! text-popover-foreground! border! border-border! shadow-none! p-0! rounded-lg!;
+	}
+	.maplibregl-popup-tip {
+		@apply hidden!;
+	}
+	.maplibregl-ctrl-attrib {
+		@apply type-label! bg-popover! text-muted-foreground! border-border! rounded-lg! border! shadow-none! has-[:focus-visible]:ring-1! has-[:focus-visible]:ring-ring!;
+	}
+	.maplibregl-ctrl-attrib a {
+		@apply text-muted-foreground!;
+	}
+	.maplibregl-ctrl-attrib a:hover {
+		@apply text-foreground!;
+	}
+	.maplibregl-ctrl-attrib-button {
+		@apply bg-transparent! rounded-lg! shadow-none! focus-visible:outline-none! dark:invert;
+	}
+}

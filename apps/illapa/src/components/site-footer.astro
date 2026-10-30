@@ -1,0 +1,22 @@
+---
+import { IllapaLockup } from "@hack-the-andes-project/ui/components/illapa-logo";
+import { CONTACT_PHONE_DISPLAY, CONTACT_PHONE_E164 } from "@/constants";
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-border">
+	<div class="mx-auto flex max-w-7xl flex-col gap-6 px-5 py-8 sm:px-8 lg:flex-row lg:items-end lg:justify-between">
+		<div class="flex flex-col gap-3">
+			<IllapaLockup />
+			<p class="type-body text-muted-foreground">Inteligencia climática para la logística del Perú.</p>
+			<p class="type-label text-muted-foreground">Equipo Fénix · Hack the Andes</p>
+		</div>
+		<p class="type-data text-muted-foreground">
+			<a href={`tel:${CONTACT_PHONE_E164}`} class="underline-offset-4 hover:text-foreground hover:underline">
+				{CONTACT_PHONE_DISPLAY}
+			</a>
+			{" "}· Lima, Perú. {currentYear}.
+		</p>
+	</div>
+</footer>

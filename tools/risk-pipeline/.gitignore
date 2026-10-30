@@ -1,0 +1,5 @@
+output/
+.venv/
+__pycache__/
+output-build.log
+output-train.log

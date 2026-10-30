@@ -1,0 +1,4 @@
+export const ENCRYPTION_KEY_LENGTH_BYTES = 32;
+export const ENCRYPTION_IV_LENGTH_BYTES = 12;
+export const ENCRYPTION_ALGORITHM = "AES-GCM";
+export const CIPHERTEXT_SEPARATOR = ".";

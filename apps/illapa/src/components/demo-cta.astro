@@ -1,0 +1,24 @@
+---
+import { buttonVariants } from "@hack-the-andes-project/ui/components/button";
+import {
+	RainStreaks,
+	StarRiver,
+} from "@hack-the-andes-project/ui/components/mayu-art";
+import { ENV } from "@/env.public";
+---
+
+<section id="demo" aria-labelledby="demo-title" class="relative isolate overflow-hidden bg-background">
+	<StarRiver className="opacity-40" />
+	<RainStreaks className="text-foreground/10" />
+	<div class="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:py-32">
+		<div class="flex max-w-2xl flex-col gap-5">
+			<p class="type-label text-muted-foreground">Tu próxima ruta</p>
+			<h2 id="demo-title" class="type-title">Mira tu red sobre el mapa esta semana</h2>
+			<p class="type-lead text-muted-foreground">Crea una cuenta, carga tus corredores y te mostramos qué alertas los habrían tocado en la última temporada de lluvias.</p>
+			<div class="mt-3 flex flex-wrap items-center gap-3">
+				<a href={`${ENV.PUBLIC_APP_URL}/demo`} class={buttonVariants({ variant: "default", size: "lg" })}>Probar demo</a>
+				<a href={`${ENV.PUBLIC_APP_URL}/login?mode=sign-up`} class={buttonVariants({ variant: "outline", size: "lg" })}>Crear cuenta</a>
+			</div>
+		</div>
+	</div>
+</section>

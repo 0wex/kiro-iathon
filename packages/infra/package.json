@@ -1,0 +1,20 @@
+{
+	"name": "@hack-the-andes-project/infra",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"check-types": "tsc --noEmit",
+		"dev": "alchemy dev --profile cloudflare-franz",
+		"login": "alchemy profile edit --profile cloudflare-franz",
+		"refresh": "alchemy profile refresh --profile cloudflare-franz"
+	},
+	"devDependencies": {
+		"@effect/platform-bun": "4.0.5",
+		"@effect/platform-node": "4.0.5",
+		"@hack-the-andes-project/config": "workspace:*",
+		"alchemy": "2.0.0-beta.83",
+		"effect": "4.0.5",
+		"typescript": "^6.0.3",
+		"varlock": "catalog:"
+	}
+}

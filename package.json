@@ -1,0 +1,54 @@
+{
+	"name": "hack-the-andes-project",
+	"private": true,
+	"workspaces": [
+		"apps/*",
+		"packages/*"
+	],
+	"type": "module",
+	"scripts": {
+		"dev": "pnpm --filter @hack-the-andes-project/infra dev",
+		"dev:web": "pnpm --filter web dev:bare",
+		"dev:illapa": "pnpm --filter @hack-the-andes-project/infra dev --include illapa",
+		"dev:quest": "pnpm --filter illapa-quest dev",
+		"dev:native": "pnpm --filter native dev",
+		"build": "pnpm -r --if-present build",
+		"check-types": "pnpm -r check-types",
+		"test": "pnpm -r --if-present test",
+		"format:write": "biome check --write .",
+		"check": "biome check .",
+		"db:push": "pnpm --filter @hack-the-andes-project/db db:push",
+		"db:generate": "pnpm --filter @hack-the-andes-project/db db:generate",
+		"db:migrate": "pnpm --filter @hack-the-andes-project/db db:migrate",
+		"db:studio": "pnpm --filter @hack-the-andes-project/db db:studio",
+		"infra:login": "pnpm --filter @hack-the-andes-project/infra login",
+		"infra:refresh": "pnpm --filter @hack-the-andes-project/infra refresh",
+		"build:native:android": "pnpm --filter native build:android",
+		"build:native:ios": "pnpm --filter native build:ios",
+		"build:native:cloud:android": "pnpm --filter native build:android:cloud",
+		"build:native:cloud:ios": "pnpm --filter native build:ios:cloud",
+		"build:native:prod:android": "pnpm --filter native build:android:prod",
+		"build:native:prod:ios": "pnpm --filter native build:ios:prod",
+		"build:native:dev-client:android": "pnpm --filter native build:dev-client:android",
+		"build:native:dev-client:ios": "pnpm --filter native build:dev-client:ios",
+		"submit:native:android": "pnpm --filter native submit:android",
+		"submit:native:ios": "pnpm --filter native submit:ios",
+		"update:native:preview": "pnpm --filter native update:preview",
+		"update:native:prod": "pnpm --filter native update:prod",
+		"env:generate": "varlock codegen --path ./apps/web/ && varlock codegen --path ./apps/illapa/ && varlock codegen --path ./apps/server/ && varlock codegen --path ./apps/native/ && varlock codegen --path ./packages/db/ && varlock codegen --path ./apps/scraper/ && varlock codegen --path ./apps/fleet-sync/",
+		"postinstall": "pnpm env:generate",
+		"demo:reset": "node --experimental-strip-types apps/server/scripts/demo-reset.ts"
+	},
+	"dependencies": {
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.5.15",
+		"@cloudflare/workers-types": "catalog:",
+		"@hack-the-andes-project/config": "workspace:*",
+		"@types/node": "^26.4.1",
+		"typescript": "^6.0.3",
+		"varlock": "catalog:"
+	},
+	"packageManager": "pnpm@11.21.0"
+}

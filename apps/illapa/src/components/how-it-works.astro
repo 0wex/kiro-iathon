@@ -1,0 +1,50 @@
+---
+import { TopoBackground } from "@hack-the-andes-project/ui/components/contour-art";
+
+interface Step {
+	number: string;
+	title: string;
+	description: string;
+}
+
+const steps: Step[] = [
+	{
+		number: "01",
+		title: "Carga tu red",
+		description:
+			"Sube tus rutas, almacenes y puntos de entrega, o conéctalos desde tu TMS. ILLAPA los convierte en corredores vigilados.",
+	},
+	{
+		number: "02",
+		title: "Cruzamos cada alerta con tus corredores",
+		description:
+			"Cuando una fuente publica un aviso, calculamos qué tramos quedan dentro de la zona y qué despachos programados pasan por ahí.",
+	},
+	{
+		number: "03",
+		title: "Recibes el aviso con lo que necesitas decidir",
+		description:
+			"Tramo afectado, ventana estimada y la alternativa disponible, por WhatsApp, correo o API, antes de que el camión salga.",
+	},
+];
+---
+
+<section id="como-funciona" aria-labelledby="como-funciona-title" class="relative isolate overflow-hidden border-y border-border bg-card text-card-foreground">
+	<TopoBackground className="pointer-events-none text-foreground/[0.06]" />
+	<div class="relative mx-auto max-w-7xl px-5 py-24 sm:px-8 lg:py-32">
+		<header class="flex max-w-3xl flex-col gap-5">
+			<p class="type-label text-muted-foreground">Cómo funciona</p>
+			<h2 id="como-funciona-title" class="type-title">De un aviso regional a una decisión sobre tu despacho</h2>
+			<p class="type-lead text-muted-foreground">Tu red, las alertas oficiales y la información que necesitas antes de que el camión salga.</p>
+		</header>
+		<ol class="mt-14 grid gap-10 md:grid-cols-3">
+			{steps.map((step) => (
+				<li class="flex flex-col gap-4 rounded-lg border border-border bg-card p-5">
+					<span class="type-data text-muted-foreground">{step.number}</span>
+					<h3 class="type-heading">{step.title}</h3>
+					<p class="type-body text-muted-foreground">{step.description}</p>
+				</li>
+			))}
+		</ol>
+	</div>
+</section>

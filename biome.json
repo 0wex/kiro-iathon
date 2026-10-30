@@ -1,0 +1,158 @@
+{
+	"$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
+	"vcs": {
+		"enabled": false,
+		"clientKind": "git",
+		"useIgnoreFile": false
+	},
+	"files": {
+		"ignoreUnknown": false,
+		"includes": [
+			"**",
+			"!**/.next",
+			"!**/dist",
+			"!**/dist-node",
+			"!**/.turbo",
+			"!**/.nx",
+			"!**/dev-dist",
+			"!**/.zed",
+			"!**/.vscode",
+			"!**/routeTree.gen.ts",
+			"!**/src/paraglide",
+			"!**/*.inlang",
+			"!**/fixtures/**/*.json",
+			"!**/src-tauri",
+			"!**/.nuxt",
+			"!bts.jsonc",
+			"!references",
+			"!**/.expo",
+			"!**/.wrangler",
+			"!**/.alchemy",
+			"!**/.svelte-kit",
+			"!**/wrangler.jsonc",
+			"!**/.source",
+			"!**/convex/_generated",
+			"!.agents",
+			"!tools/risk-pipeline/output",
+			"!tools/risk-pipeline/.venv",
+			"!**/risk/model.generated.ts",
+			"!packages/tiles-schema",
+			"!**/.venv",
+			"!.claude",
+			"!**/.astro"
+		]
+	},
+	"formatter": {
+		"enabled": true,
+		"indentStyle": "tab"
+	},
+	"assist": {
+		"actions": {
+			"source": {
+				"organizeImports": "on"
+			}
+		}
+	},
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"preset": "recommended",
+			"correctness": {
+				"useExhaustiveDependencies": "info"
+			},
+			"nursery": {
+				"useSortedClasses": {
+					"level": "warn",
+					"fix": "safe",
+					"options": {
+						"functions": ["clsx", "cva", "cn"]
+					}
+				}
+			},
+			"style": {
+				"noParameterAssign": "error",
+				"useAsConstAssertion": "error",
+				"useDefaultParameterLast": "error",
+				"useEnumInitializers": "error",
+				"useSelfClosingElements": "error",
+				"useSingleVarDeclarator": "error",
+				"noUnusedTemplateLiteral": "error",
+				"useNumberNamespace": "error",
+				"noInferrableTypes": "error",
+				"noUselessElse": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"quoteStyle": "double"
+		}
+	},
+	"overrides": [
+		{
+			"includes": ["**/*.astro"],
+			"linter": {
+				"rules": {
+					"correctness": {
+						"noUnusedImports": "off",
+						"noUnusedVariables": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": ["packages/ui/src/components/map.tsx"],
+			"linter": {
+				"rules": {
+					"suspicious": {
+						"noShadowRestrictedNames": "off"
+					},
+					"a11y": {
+						"noSvgWithoutTitle": "off"
+					}
+				}
+			}
+		},
+		{
+			"includes": [
+				"packages/ui/src/components/breadcrumb.tsx",
+				"packages/ui/src/components/button-group.tsx",
+				"packages/ui/src/components/carousel.tsx",
+				"packages/ui/src/components/chart.tsx",
+				"packages/ui/src/components/code-block.tsx",
+				"packages/ui/src/components/field.tsx",
+				"packages/ui/src/components/input-group.tsx",
+				"packages/ui/src/components/input-otp.tsx",
+				"packages/ui/src/components/item.tsx",
+				"packages/ui/src/components/label.tsx",
+				"packages/ui/src/components/pagination.tsx",
+				"packages/ui/src/components/slider.tsx",
+				"packages/ui/src/lib/highlighter.tsx"
+			],
+			"linter": {
+				"rules": {
+					"a11y": {
+						"useSemanticElements": "off",
+						"useFocusableInteractive": "off",
+						"noNoninteractiveTabindex": "off",
+						"useKeyWithClickEvents": "off",
+						"noLabelWithoutControl": "off",
+						"noRedundantRoles": "off"
+					},
+					"suspicious": {
+						"noArrayIndexKey": "off",
+						"noDoubleEquals": "off"
+					},
+					"security": {
+						"noDangerouslySetInnerHtml": "off"
+					}
+				}
+			}
+		}
+	],
+	"css": {
+		"parser": {
+			"tailwindDirectives": true
+		}
+	}
+}

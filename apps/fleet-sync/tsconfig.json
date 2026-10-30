@@ -1,0 +1,12 @@
+{
+	"extends": "@hack-the-andes-project/config/tsconfig.base.json",
+	"references": [
+		{ "path": "../../packages/db" },
+		{ "path": "../../packages/business" }
+	],
+	"compilerOptions": {
+		"noEmit": true,
+		"allowImportingTsExtensions": true,
+		"paths": { "@/*": ["./src/*"] }
+	}
+}
