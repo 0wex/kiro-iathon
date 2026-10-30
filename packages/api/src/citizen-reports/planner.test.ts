@@ -11,6 +11,7 @@ import { describe, expect, it, vi } from "vitest";
 
 import {
 	BEDROCK_CALL_TIMEOUT_MS,
+	BEDROCK_PLAN_DEADLINE_MS,
 	BEDROCK_THROTTLING_RETRY_DELAYS_MS,
 	CONTINGENCY_PLAN_TOOL_NAME,
 } from "../constants";
@@ -290,8 +291,66 @@ describe("contingency planner", () => {
 		});
 	});
 
-	it("uses the designed timeout and backoff by default", () => {
+	it("caps a call at the time left before the overall deadline", async () => {
+		const bedrock = bedrockClient(
+			(_command, options) =>
+				new Promise((_resolve, reject) => {
+					options?.abortSignal?.addEventListener("abort", () =>
+						reject(namedError("AbortError")),
+					);
+				}),
+		);
+		const startedAt = performance.now();
+
+		const result = await generateContingencyPlan({
+			bedrock,
+			modelId: "model-id",
+			report,
+			nearbyReports: [],
+			photo: null,
+			timeoutMs: 5_000,
+			deadlineMs: 20,
+		});
+
+		expect(performance.now() - startedAt).toBeLessThan(1_000);
+		expect(bedrock.send).toHaveBeenCalledOnce();
+		expect(result).toMatchObject({
+			content: templatePlanFor("inundacion"),
+			source: "plantilla",
+			attempts: 1,
+			failureReason: "AbortError",
+		});
+	});
+
+	it("stops retrying throttled calls once the overall deadline would pass", async () => {
+		const bedrock = bedrockClient(async () => {
+			throw namedError("ThrottlingException");
+		});
+		const startedAt = performance.now();
+
+		const result = await generateContingencyPlan({
+			bedrock,
+			modelId: "model-id",
+			report,
+			nearbyReports: [],
+			photo: null,
+			retryDelaysMs: [5_000, 5_000],
+			deadlineMs: 50,
+		});
+
+		expect(performance.now() - startedAt).toBeLessThan(1_000);
+		expect(bedrock.send).toHaveBeenCalledOnce();
+		expect(result).toMatchObject({
+			content: templatePlanFor("inundacion"),
+			source: "plantilla",
+			attempts: 1,
+			failureReason: "deadline_exceeded",
+		});
+	});
+
+	it("uses the designed timeout, backoff and deadline by default", () => {
 		expect(BEDROCK_CALL_TIMEOUT_MS).toBe(20_000);
 		expect(BEDROCK_THROTTLING_RETRY_DELAYS_MS).toEqual([500, 1000]);
+		expect(BEDROCK_PLAN_DEADLINE_MS).toBe(25_000);
 	});
 });

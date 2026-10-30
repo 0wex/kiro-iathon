@@ -13,6 +13,7 @@ import {
 
 import {
 	BEDROCK_CALL_TIMEOUT_MS,
+	BEDROCK_PLAN_DEADLINE_MS,
 	BEDROCK_PLAN_MAX_OUTPUT_TOKENS,
 	BEDROCK_PLAN_TEMPERATURE,
 	BEDROCK_THROTTLING_RETRY_DELAYS_MS,
@@ -38,6 +39,7 @@ export interface ContingencyPlanRequest {
 	photo: ContingencyPlanPhoto | null;
 	timeoutMs?: number;
 	retryDelaysMs?: number[];
+	deadlineMs?: number;
 }
 
 export interface ContingencyPlanResult {
@@ -49,6 +51,7 @@ export interface ContingencyPlanResult {
 }
 
 const INVALID_PLAN_REASON = "invalid_plan";
+const DEADLINE_EXCEEDED_REASON = "deadline_exceeded";
 
 export async function generateContingencyPlan({
 	bedrock,
@@ -58,6 +61,7 @@ export async function generateContingencyPlan({
 	photo,
 	timeoutMs = BEDROCK_CALL_TIMEOUT_MS,
 	retryDelaysMs = BEDROCK_THROTTLING_RETRY_DELAYS_MS,
+	deadlineMs = BEDROCK_PLAN_DEADLINE_MS,
 }: ContingencyPlanRequest): Promise<ContingencyPlanResult> {
 	const userContent: ContentBlock[] = [
 		{ text: buildPlanRequestText(report, nearbyReports, photo !== null) },
@@ -99,12 +103,15 @@ export async function generateContingencyPlan({
 		latencyMs: Math.round(performance.now() - startedAt),
 		failureReason,
 	});
+	const remainingMs = () => startedAt + deadlineMs - performance.now();
 	let attempts = 0;
 	while (true) {
 		attempts += 1;
 		try {
 			const output = await bedrock.send(command, {
-				abortSignal: AbortSignal.timeout(timeoutMs),
+				abortSignal: AbortSignal.timeout(
+					Math.max(0, Math.floor(Math.min(timeoutMs, remainingMs()))),
+				),
 			});
 			const toolInput = output.output?.message?.content?.find(
 				(block) => block.toolUse?.name === CONTINGENCY_PLAN_TOOL_NAME,
@@ -124,6 +131,8 @@ export async function generateContingencyPlan({
 			const retryDelayMs = retryDelaysMs[attempts - 1];
 			if (errorName !== "ThrottlingException" || retryDelayMs === undefined)
 				return templateResult(attempts, errorName);
+			if (retryDelayMs >= remainingMs())
+				return templateResult(attempts, DEADLINE_EXCEEDED_REASON);
 			await new Promise((resolve) => setTimeout(resolve, retryDelayMs));
 		}
 	}

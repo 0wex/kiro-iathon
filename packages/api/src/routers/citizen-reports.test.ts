@@ -172,7 +172,7 @@ beforeEach(() => {
 		photos: {
 			put: photoPut,
 			read: photoRead,
-			publicUrl: (key) => `https://photos.example.com/${key}`,
+			publicUrl: (key) => `/${key}`,
 		},
 	};
 	log = createRequestLogger();
@@ -244,7 +244,7 @@ describe("citizenReports.list", () => {
 		});
 		expect(reports[1]).toMatchObject({
 			plan: null,
-			photoUrl: "https://photos.example.com/citizen-reports/new-media.jpeg",
+			photoUrl: "/citizen-reports/new-media.jpeg",
 			location: { lon: -80.64, lat: -5.19 },
 		});
 		expect(reports[2]?.photoUrl).toBeNull();
@@ -285,7 +285,7 @@ describe("citizenReports.create", () => {
 			priority: "alta",
 			isExample: false,
 			plan: null,
-			photoUrl: `https://photos.example.com/citizen-reports/${report.id}.jpeg`,
+			photoUrl: `/citizen-reports/${report.id}.jpeg`,
 		});
 		expect(report.createdAt).toBeInstanceOf(Date);
 		expect(photoPut).toHaveBeenCalledExactlyOnceWith(

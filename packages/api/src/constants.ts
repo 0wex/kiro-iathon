@@ -95,6 +95,9 @@ export const REPORT_PHOTO_FORMATS = {
 
 export const CONTINGENCY_PLAN_TOOL_NAME = "plan_de_contingencia";
 export const BEDROCK_CALL_TIMEOUT_MS = 20_000;
+// API Gateway HTTP APIs cut a request at 30 s and the Lambda at 29 s, so every
+// attempt together must leave room to answer with the template plan.
+export const BEDROCK_PLAN_DEADLINE_MS = 25_000;
 // Delays before the 2nd and 3rd attempt; only ThrottlingException is retried.
 export const BEDROCK_THROTTLING_RETRY_DELAYS_MS = [500, 1000];
 export const BEDROCK_PLAN_MAX_OUTPUT_TOKENS = 1500;

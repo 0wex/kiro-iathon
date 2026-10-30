@@ -62,10 +62,10 @@ export function createCitizenReportServices(
 				if (!object.Body) throw new Error(`Empty S3 object ${key}`);
 				return object.Body.transformToByteArray();
 			},
-			// The bucket policy grants public read on the report photo prefix only,
-			// so the browser loads photos straight from S3.
+			// CloudFront serves the photo prefix from the private bucket on the
+			// app's own origin, so the URL stays root-relative.
 			publicUrl(key) {
-				return `https://${config.photosBucket}.s3.${config.photosRegion}.amazonaws.com/${key}`;
+				return `/${key}`;
 			},
 		},
 	};
