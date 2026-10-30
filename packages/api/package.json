@@ -11,6 +11,7 @@
 		"test": "vitest run"
 	},
 	"dependencies": {
+		"@aws-sdk/client-bedrock-runtime": "catalog:",
 		"@iathon-kiro/auth": "workspace:*",
 		"@iathon-kiro/business": "workspace:*",
 		"@iathon-kiro/db": "workspace:*",
