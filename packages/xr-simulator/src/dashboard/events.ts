@@ -82,14 +82,17 @@ function assertDisasterEvent(entry: unknown): asserts entry is DisasterEvent {
 	const fields = new Map(Object.entries(entry ?? {}));
 	for (const field of REQUIRED_FIELDS)
 		if (fields.get(field) === undefined)
-			throw new Error(`Evento "${fields.get("id")}": falta el campo "${field}"`);
+			throw new Error(
+				`Evento "${fields.get("id")}": falta el campo "${field}"`,
+			);
 	const kind = String(fields.get("kind"));
 	if (!Object.hasOwn(DISASTER_PRESETS, kind))
 		throw new Error(`Evento "${fields.get("id")}": tipo desconocido "${kind}"`);
 }
 
 export function parseEventCatalogue(value: unknown): DisasterEvent[] {
-	if (!Array.isArray(value)) throw new Error("El catálogo de eventos debe ser una lista");
+	if (!Array.isArray(value))
+		throw new Error("El catálogo de eventos debe ser una lista");
 	return value.map((entry: unknown) => {
 		assertDisasterEvent(entry);
 		return entry;

@@ -69,6 +69,15 @@ The dashboard combines incident feeds with organization-scoped Geotab and Samsar
 
 See the [dashboard plan and operations notes](docs/dashboard-plan.md), [fleet-sync runbook](apps/fleet-sync/README.md), and [business module map](packages/business/README.md).
 
+## Simulated disaster dashboard
+
+`packages/xr-simulator/dashboard.html` shows simulated natural-disaster events (huayco, flood, landslide) on the 3D Peru map, with an event list, an event card and a timeline whose charts (affected area, peak flow speed) follow the playback. It needs no login or database, only the tiles API:
+
+1. `TILES_STORAGE=fs uv run --project services/tiles tiles serve --port 8080`
+2. `pnpm --filter @iathon-kiro/xr-simulator dev`, then open `http://localhost:5173/dashboard.html`.
+
+Events live in `packages/xr-simulator/src/dashboard/events.json` (place, start time, rain, terrain centre, release point). Each one runs in a Web Worker with the CPU shallow-flow solver on the ~37 m terrain around it, using the preset of its kind in `events.ts`. Every value shown is simulated, not measured.
+
 ## Predictive risk engine
 
 Illapa scores road segments for the risk of rain-triggered hazards (huaicos, landslides, floods) and compares routes by exposure. The pilot is the Carretera Central, Lima–Huancayo (PE-22).

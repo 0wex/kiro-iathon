@@ -46,6 +46,7 @@ export default defineConfig(({ mode }) => ({
 				xrBabylon: fileURLToPath(new URL("./xr-babylon.html", import.meta.url)),
 				gpuTests: fileURLToPath(new URL("./tests.html", import.meta.url)),
 				vrCards: fileURLToPath(new URL("./vr-cards.html", import.meta.url)),
+				dashboard: fileURLToPath(new URL("./dashboard.html", import.meta.url)),
 			},
 		},
 	},

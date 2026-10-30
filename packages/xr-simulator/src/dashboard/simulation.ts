@@ -1,4 +1,7 @@
-import { METERS_PER_DEGREE_LAT, METERS_PER_DEGREE_LON_AT_EQUATOR } from "../map/objects/constants";
+import {
+	METERS_PER_DEGREE_LAT,
+	METERS_PER_DEGREE_LON_AT_EQUATOR,
+} from "../map/objects/constants";
 import type { HeightGrid } from "../scenario/terrain";
 import { CpuSolver } from "../solver/cpu/CpuSolver";
 import { triangularHydrograph } from "../solver/params";
@@ -30,8 +33,8 @@ export interface EventRun {
 
 export interface SimulateEventOptions {
 	recordIntervalS?: number;
-	/** Fraction of the simulated duration done, after each recorded frame. */
-	onProgress?: (fraction: number) => void;
+	/** Every recorded frame, as soon as it is recorded (the first one at time 0 included). */
+	onFrame?: (frame: EventFrame) => void;
 }
 
 export function affectedAreaHectares(
@@ -49,12 +52,19 @@ function recordFrame(solver: CpuSolver, time: number): EventFrame {
 	let maxSpeed = 0;
 	state.h.forEach((depth, index) => {
 		if (depth > AFFECTED_DEPTH_M)
-			maxSpeed = Math.max(maxSpeed, Math.hypot(state.hu[index], state.hv[index]) / depth);
+			maxSpeed = Math.max(
+				maxSpeed,
+				Math.hypot(state.hu[index], state.hv[index]) / depth,
+			);
 	});
 	return {
 		time,
 		depth: state.h,
-		affectedAreaHa: affectedAreaHectares(state.h, solver.cellSize, AFFECTED_DEPTH_M),
+		affectedAreaHa: affectedAreaHectares(
+			state.h,
+			solver.cellSize,
+			AFFECTED_DEPTH_M,
+		),
 		maxSpeed,
 		volumeM3: solver.statsSync().volume,
 	};
@@ -62,7 +72,7 @@ function recordFrame(solver: CpuSolver, time: number): EventFrame {
 
 /**
  * Runs the event on its terrain with the CPU solver, recording the flow every interval.
- * Yields to the browser after each frame so the page stays responsive meanwhile.
+ * Yields after each frame so a worker can still receive messages meanwhile.
  */
 export async function simulateEvent(
 	grid: HeightGrid,
@@ -77,7 +87,8 @@ export async function simulateEvent(
 		(event.release.lon - event.center.lon) *
 			METERS_PER_DEGREE_LON_AT_EQUATOR *
 			Math.cos((event.center.lat * Math.PI) / 180);
-	const releaseZ = span / 2 + (event.release.lat - event.center.lat) * METERS_PER_DEGREE_LAT;
+	const releaseZ =
+		span / 2 + (event.release.lat - event.center.lat) * METERS_PER_DEGREE_LAT;
 	if (releaseX < 0 || releaseX > span || releaseZ < 0 || releaseZ > span)
 		throw new Error(
 			`Evento "${event.id}": el punto de inicio queda fuera del terreno simulado`,
@@ -88,17 +99,22 @@ export async function simulateEvent(
 		{
 			position: [releaseX, releaseZ],
 			radius: preset.releaseRadiusM,
-			hydrograph: triangularHydrograph(preset.volumeM3, preset.peakDischargeM3s),
+			hydrograph: triangularHydrograph(
+				preset.volumeM3,
+				preset.peakDischargeM3s,
+			),
 			enabled: true,
 			startTime: 0,
 		},
 	]);
-	const frames = [recordFrame(solver, 0)];
+	const frames: EventFrame[] = [];
 	const intervals = Math.round(preset.durationS / recordIntervalS);
-	for (let interval = 1; interval <= intervals; interval++) {
-		solver.advance(recordIntervalS, MAX_SUBSTEPS_PER_INTERVAL);
-		frames.push(recordFrame(solver, interval * recordIntervalS));
-		options.onProgress?.(interval / intervals);
+	for (let interval = 0; interval <= intervals; interval++) {
+		if (interval > 0)
+			solver.advance(recordIntervalS, MAX_SUBSTEPS_PER_INTERVAL);
+		const frame = recordFrame(solver, interval * recordIntervalS);
+		frames.push(frame);
+		options.onFrame?.(frame);
 		await new Promise((resolve) => setTimeout(resolve, 0));
 	}
 	return {

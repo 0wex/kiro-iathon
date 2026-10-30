@@ -5,8 +5,8 @@ import {
 	frameAt,
 	simulateEvent,
 } from "../../src/dashboard/simulation";
-import { DEFAULT_MATERIAL } from "../../src/solver/params";
 import type { HeightGrid } from "../../src/scenario/terrain";
+import { DEFAULT_MATERIAL } from "../../src/solver/params";
 
 const RESOLUTION = 32;
 const CELL_SIZE = 10;
@@ -16,7 +16,8 @@ function slopeGrid(): HeightGrid {
 	const heights = new Float32Array(RESOLUTION * RESOLUTION);
 	for (let row = 0; row < RESOLUTION; row++)
 		for (let column = 0; column < RESOLUTION; column++)
-			heights[row * RESOLUTION + column] = (RESOLUTION - column) * CELL_SIZE * 0.2;
+			heights[row * RESOLUTION + column] =
+				(RESOLUTION - column) * CELL_SIZE * 0.2;
 	return { resolution: RESOLUTION, cellSize: CELL_SIZE, heights };
 }
 
@@ -43,14 +44,21 @@ const preset: DisasterPreset = {
 
 describe("simulateEvent", () => {
 	it("records one frame per interval from 0 to the preset duration", async () => {
-		const run = await simulateEvent(slopeGrid(), event, preset, { recordIntervalS: 10 });
-		expect(run.frames.map((frame) => frame.time)).toEqual([0, 10, 20, 30, 40, 50, 60]);
+		const run = await simulateEvent(slopeGrid(), event, preset, {
+			recordIntervalS: 10,
+		});
+		expect(run.frames.map((frame) => frame.time)).toEqual([
+			0, 10, 20, 30, 40, 50, 60,
+		]);
 		expect(run.duration).toBe(60);
-		for (const frame of run.frames) expect(frame.depth).toHaveLength(RESOLUTION ** 2);
+		for (const frame of run.frames)
+			expect(frame.depth).toHaveLength(RESOLUTION ** 2);
 	});
 
 	it("starts dry and spreads the release over the terrain", async () => {
-		const run = await simulateEvent(slopeGrid(), event, preset, { recordIntervalS: 10 });
+		const run = await simulateEvent(slopeGrid(), event, preset, {
+			recordIntervalS: 10,
+		});
 		expect(run.frames[0].affectedAreaHa).toBe(0);
 		expect(run.frames[0].volumeM3).toBe(0);
 		const last = run.frames[run.frames.length - 1];
@@ -61,7 +69,9 @@ describe("simulateEvent", () => {
 	});
 
 	it("moves the flow downhill from the release point", async () => {
-		const run = await simulateEvent(slopeGrid(), event, preset, { recordIntervalS: 10 });
+		const run = await simulateEvent(slopeGrid(), event, preset, {
+			recordIntervalS: 10,
+		});
 		const depth = run.frames[run.frames.length - 1].depth;
 		let weighted = 0;
 		let total = 0;
@@ -73,19 +83,20 @@ describe("simulateEvent", () => {
 		expect(weighted / total).toBeGreaterThan(releaseX);
 	});
 
-	it("reports progress up to completion", async () => {
-		const progress: number[] = [];
-		await simulateEvent(slopeGrid(), event, preset, {
+	it("reports every frame as soon as it is recorded", async () => {
+		const reported: number[] = [];
+		const run = await simulateEvent(slopeGrid(), event, preset, {
 			recordIntervalS: 10,
-			onProgress: (fraction) => progress.push(fraction),
+			onFrame: (frame) => reported.push(frame.time),
 		});
-		expect(progress.at(-1)).toBe(1);
-		expect([...progress].sort((a, b) => a - b)).toEqual(progress);
+		expect(reported).toEqual(run.frames.map((frame) => frame.time));
 	});
 
 	it("rejects a release point outside the grid", async () => {
 		const farRelease = { ...event, release: { lon: -75.9, lat: -12 } };
-		await expect(simulateEvent(slopeGrid(), farRelease, preset)).rejects.toThrow(
+		await expect(
+			simulateEvent(slopeGrid(), farRelease, preset),
+		).rejects.toThrow(
 			'Evento "test": el punto de inicio queda fuera del terreno simulado',
 		);
 	});

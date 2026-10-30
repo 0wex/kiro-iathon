@@ -27,7 +27,8 @@ describe("DISASTER_EVENTS", () => {
 		const ids = DISASTER_EVENTS.map((event) => event.id);
 		expect(new Set(ids).size).toBe(ids.length);
 		const kinds = new Set(DISASTER_EVENTS.map((event) => event.kind));
-		for (const kind of Object.keys(DISASTER_PRESETS)) expect(kinds).toContain(kind);
+		for (const kind of Object.keys(DISASTER_PRESETS))
+			expect(kinds).toContain(kind);
 	});
 
 	it("releases every event inside its simulation grid", () => {
@@ -38,7 +39,8 @@ describe("DISASTER_EVENTS", () => {
 				(event.release.lon - event.center.lon) *
 				METERS_PER_DEGREE_LON_AT_EQUATOR *
 				Math.cos((event.center.lat * Math.PI) / 180);
-			const northMeters = (event.release.lat - event.center.lat) * METERS_PER_DEGREE_LAT;
+			const northMeters =
+				(event.release.lat - event.center.lat) * METERS_PER_DEGREE_LAT;
 			expect(Math.abs(eastMeters)).toBeLessThan(halfSpanMeters);
 			expect(Math.abs(northMeters)).toBeLessThan(halfSpanMeters);
 		}
@@ -51,9 +53,9 @@ describe("parseEventCatalogue", () => {
 	});
 
 	it("rejects an unknown kind, naming the event", () => {
-		expect(() => parseEventCatalogue([{ ...validEvent, kind: "tsunami" }])).toThrow(
-			'Evento "huayco-chosica": tipo desconocido "tsunami"',
-		);
+		expect(() =>
+			parseEventCatalogue([{ ...validEvent, kind: "tsunami" }]),
+		).toThrow('Evento "huayco-chosica": tipo desconocido "tsunami"');
 	});
 
 	it("rejects a missing field, naming the event and the field", () => {

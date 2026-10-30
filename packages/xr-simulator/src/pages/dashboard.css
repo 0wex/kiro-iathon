@@ -1,0 +1,264 @@
+/* Disaster dashboard (dashboard.html): the Peru viewer in the middle, Mayu cards around it.
+   Event-kind accents were validated with the dataviz palette checks (light and dark). */
+.dash {
+	--dash-huayco: #b8692e;
+	--dash-inundacion: #2f6fb3;
+	--dash-deslizamiento: #8f6f1f;
+	position: fixed;
+	inset: 0;
+	display: grid;
+	grid-template-columns: 280px minmax(0, 1fr) 300px;
+	grid-template-rows: auto minmax(0, 1fr) auto;
+	grid-template-areas:
+		"header header header"
+		"events map card"
+		"timeline timeline timeline";
+	gap: var(--xr-gap);
+	padding: var(--xr-gap);
+}
+.dark .dash {
+	--dash-huayco: #c4823a;
+	--dash-inundacion: #4f8fd0;
+	--dash-deslizamiento: #b08f33;
+}
+.dash [data-kind="huayco"] {
+	--dash-accent: var(--dash-huayco);
+}
+.dash [data-kind="inundacion"] {
+	--dash-accent: var(--dash-inundacion);
+}
+.dash [data-kind="deslizamiento"] {
+	--dash-accent: var(--dash-deslizamiento);
+}
+:root[data-kind="huayco"] .dash-timeline {
+	--dash-accent: var(--dash-huayco);
+}
+:root[data-kind="inundacion"] .dash-timeline {
+	--dash-accent: var(--dash-inundacion);
+}
+:root[data-kind="deslizamiento"] .dash-timeline {
+	--dash-accent: var(--dash-deslizamiento);
+}
+
+.dash-header {
+	grid-area: header;
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 0 4px;
+}
+.dash h1 {
+	margin: 0;
+	font-family: var(--xr-font-heading);
+	font-size: 1.25rem;
+}
+.dash h2 {
+	margin: 0 0 8px;
+	font-family: var(--xr-font-heading);
+	font-size: 1rem;
+}
+
+.dash-events,
+.dash-card,
+.dash-timeline {
+	background: var(--xr-card);
+	color: var(--xr-card-foreground);
+	border: 1px solid var(--xr-border);
+	border-radius: var(--xr-radius-lg);
+	padding: var(--xr-card-spacing);
+	min-height: 0;
+	overflow-y: auto;
+}
+.dash-events {
+	grid-area: events;
+}
+.dash-event-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: var(--xr-gap);
+}
+.dash .dash-event-list button {
+	display: grid;
+	gap: 2px;
+	width: 100%;
+	height: auto;
+	padding: 10px 12px;
+	text-align: left;
+	white-space: normal;
+	text-transform: none;
+	letter-spacing: normal;
+	font-family: var(--xr-font-sans);
+	font-weight: 400;
+	border-left: 4px solid var(--dash-accent);
+}
+.dash .dash-event-list button[aria-current="true"] {
+	background: var(--xr-secondary);
+	border-color: var(--dash-accent);
+}
+.dash-event-kind,
+.dash-card-kind {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.8rem;
+	color: var(--xr-muted-foreground);
+}
+.dash-event-kind::before,
+.dash-card-kind::before {
+	content: "";
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background: var(--dash-accent);
+}
+.dash-event-place {
+	font-size: 0.8rem;
+	color: var(--xr-muted-foreground);
+}
+
+.dash-map {
+	grid-area: map;
+	position: relative;
+	overflow: hidden;
+	border-radius: var(--xr-radius-lg);
+	border: 1px solid var(--xr-border);
+}
+.dash-map > .xr-viewer.app {
+	position: absolute;
+}
+/* The dashboard drives the map itself: no layer card, "Simular aquí" or weather panel. */
+.dash-map :is(.peru-overlay, .weather-panel, .peru-fly-pad) {
+	display: none !important;
+}
+
+.dash-card {
+	grid-area: card;
+}
+.dash-card-kind {
+	margin: 0 0 4px;
+}
+.dash-card-facts {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 6px 12px;
+	margin: 12px 0;
+	font-size: 0.9rem;
+}
+.dash-card-facts dt {
+	color: var(--xr-muted-foreground);
+}
+.dash-card-facts dd {
+	margin: 0;
+	text-align: right;
+	font-variant-numeric: tabular-nums;
+}
+.dash-card-status {
+	margin: 0;
+	font-size: 0.85rem;
+	color: var(--xr-muted-foreground);
+}
+
+.dash-timeline {
+	grid-area: timeline;
+	display: grid;
+	gap: 12px;
+}
+.dash-controls {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+.dash .dash-play {
+	min-width: 104px;
+}
+.dash-scrub {
+	flex: 1;
+}
+.dash-clock {
+	font-family: var(--xr-font-mono);
+	font-variant-numeric: tabular-nums;
+	font-size: 0.9rem;
+}
+.dash-speed {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.85rem;
+	color: var(--xr-muted-foreground);
+}
+.dash-charts {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 16px;
+}
+.dash-chart {
+	position: relative;
+	margin: 0;
+}
+.dash-chart figcaption {
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.85rem;
+	color: var(--xr-muted-foreground);
+}
+.dash-chart-value {
+	color: var(--xr-foreground);
+	font-variant-numeric: tabular-nums;
+}
+.dash-chart svg {
+	display: block;
+	width: 100%;
+	height: 80px;
+	cursor: crosshair;
+	border-bottom: 1px solid var(--xr-border);
+}
+.dash-chart-line {
+	fill: none;
+	stroke: var(--dash-accent);
+	stroke-width: 2px;
+	stroke-linejoin: round;
+	vector-effect: non-scaling-stroke;
+}
+.dash-chart-cursor {
+	stroke: var(--xr-muted-foreground);
+	stroke-width: 1px;
+	stroke-dasharray: 3 3;
+	vector-effect: non-scaling-stroke;
+}
+.dash-chart-axis {
+	font-size: 0.75rem;
+	color: var(--xr-muted-foreground);
+}
+.dash-chart-tooltip {
+	position: absolute;
+	top: 24px;
+	transform: translateX(-50%);
+	padding: 2px 8px;
+	border-radius: var(--xr-radius-sm);
+	background: var(--xr-foreground);
+	color: var(--xr-background);
+	font-size: 0.75rem;
+	white-space: nowrap;
+	pointer-events: none;
+}
+
+@media (max-width: 900px) {
+	.dash {
+		position: static;
+		grid-template-columns: minmax(0, 1fr);
+		grid-template-rows: auto 55vh auto auto auto;
+		grid-template-areas: "header" "map" "timeline" "card" "events";
+		padding: var(--xr-gap) 16px;
+	}
+	.app-body:has(.dash) {
+		overflow: auto;
+	}
+	.dash-controls {
+		flex-wrap: wrap;
+	}
+	.dash-charts {
+		grid-template-columns: minmax(0, 1fr);
+	}
+}
