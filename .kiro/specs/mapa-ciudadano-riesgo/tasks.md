@@ -18,8 +18,8 @@
   - _Requirements: 3.1, 3.3, 3.4_
 
 - [x] 4. `citizenReports` router
-  - `create` (photo upload to B2, rules classification, insert), `list` (sorted, with plans) and `generatePlan` (Bedrock, upsert).
-  - Server env: `BEDROCK_REGION`, `BEDROCK_MODEL_ID`, B2 media keys, in the env schema, alchemy env and the deploy runbook.
+  - `create` (photo upload to S3, rules classification, insert), `list` (sorted, with plans) and `generatePlan` (Bedrock, upsert).
+  - Server env: `BEDROCK_REGION`, `BEDROCK_MODEL_ID`, `REPORT_PHOTOS_BUCKET`, `AWS_REGION` in the alchemy env map; no AWS keys (IAM role).
   - _Requirements: 1.1, 1.4, 2.1, 3.1, 3.2, 4.1_
 
 - [x] 5. Example reports in the demo seed

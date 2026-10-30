@@ -48,13 +48,13 @@ Priority decides the order of the board, so it must be instant, repeatable and e
 
 ## Data model (packages/db)
 
-- `citizen_report`: `id` varchar primary key, `description` text, `longitude`/`latitude` double, `photo_url` varchar nullable, `hazard_kind`, `priority` varchar, `is_example` boolean, `reporter_user_id` varchar nullable, `created_at` timestamp.
+- `citizen_report`: `id` varchar primary key, `description` text, `longitude`/`latitude` double, `photo_key` varchar nullable (the API returns `photoUrl`), `hazard_kind`, `priority` varchar, `is_example` boolean, `reporter_user_id` varchar nullable, `created_at` timestamp.
 - `contingency_plan`: `report_id` varchar primary key (one current plan per report), `plan` json, `source` varchar, `generated_at` timestamp.
 - No foreign keys. Migration generated with `pnpm db:generate --name citizen_report`.
 
 ## API
 
-- `citizenReports.create` (protected): validates input, uploads the photo to B2, classifies by rules against the existing reports, inserts, returns the stored report.
+- `citizenReports.create` (protected): validates input, uploads the photo to S3, classifies by rules against the existing reports, inserts, returns the stored report.
 - `citizenReports.list` (protected): every report with its plan, sorted by `compareReportsByPriority`.
 - `citizenReports.generatePlan` (protected, `{ reportId }`): loads the report and its 2 km neighbours, calls Bedrock, upserts the plan, returns it.
 
