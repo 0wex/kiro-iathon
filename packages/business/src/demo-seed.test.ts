@@ -17,6 +17,7 @@ import {
 	vi,
 } from "vitest";
 
+import { EXAMPLE_CITIZEN_REPORTS } from "./citizen-reports/examples";
 import { DEMO_TRIP_SCENARIOS } from "./constants";
 import { generateEncryptionKeyBase64 } from "./crypto/index";
 import { demoEntityId } from "./demo-fleet";
@@ -65,6 +66,7 @@ interface StoredTrip {
 const connectionIds = new Set<string>();
 const vehicleIds = new Set<string>();
 const storedTrips = new Map<string, StoredTrip>();
+const storedExampleReportIds = new Set<string>();
 const route = {
 	geometry: {
 		type: "LineString",
@@ -84,6 +86,7 @@ beforeEach(async () => {
 	connectionIds.clear();
 	vehicleIds.clear();
 	storedTrips.clear();
+	storedExampleReportIds.clear();
 	connection = {
 		id: await demoEntityId(organizationId, "connection"),
 		organizationId,
@@ -184,8 +187,20 @@ beforeEach(async () => {
 				Array.from(storedTrips.values(), ({ status }) => ({ status })),
 			),
 	);
+	vi.spyOn(database.query.citizenReport, "findMany").mockImplementation(
+		vi
+			.fn()
+			.mockImplementation(async () =>
+				Array.from(storedExampleReportIds, (id) => ({ id })),
+			),
+	);
 	query.mockImplementation(async (options, parameters) => {
 		const statement = typeof options === "string" ? options : options.sql;
+		if (statement.startsWith("insert into `iathon_kiro_citizen_report`")) {
+			for (const example of EXAMPLE_CITIZEN_REPORTS)
+				if (parameters.includes(example.id))
+					storedExampleReportIds.add(example.id);
+		}
 		if (statement.startsWith("insert into")) {
 			const id = parameters?.[0];
 			if (
@@ -421,6 +436,47 @@ describe("shared demo seeding", () => {
 		]);
 		for (const deletion of deletes)
 			expect(deletion.parameters).toContain(organizationId);
+	});
+});
+
+describe("example citizen reports", () => {
+	it("inserts the Piura example reports once, flagged as examples and classified by rules", async () => {
+		await prepareDemo(input);
+
+		const exampleInserts = query.mock.calls.filter(([options]) =>
+			options.sql.startsWith("insert into `iathon_kiro_citizen_report`"),
+		);
+		expect(exampleInserts).toHaveLength(1);
+		const [options, parameters] = exampleInserts[0] ?? [];
+		expect(options?.sql).toContain("on duplicate key update");
+		for (const example of EXAMPLE_CITIZEN_REPORTS) {
+			expect(parameters).toContain(example.id);
+			expect(parameters).toContain(example.description);
+		}
+		expect(parameters).toEqual(
+			expect.arrayContaining([
+				"example-catacaos",
+				"inundacion",
+				"critica",
+				"example-chulucanas-quebrada",
+				"huayco",
+				"alta",
+				"example-dren-sullana",
+				"colapso-drenaje",
+				"media",
+			]),
+		);
+		expect(
+			parameters?.filter((parameter) => parameter === true),
+		).toHaveLength(EXAMPLE_CITIZEN_REPORTS.length);
+
+		query.mockClear();
+		await prepareDemo(input);
+		expect(
+			query.mock.calls.filter(([options]) =>
+				options.sql.startsWith("insert into `iathon_kiro_citizen_report`"),
+			),
+		).toHaveLength(0);
 	});
 });
 

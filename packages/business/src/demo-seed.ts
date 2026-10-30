@@ -1,4 +1,5 @@
 import type { Database } from "@iathon-kiro/db";
+import { citizenReport } from "@iathon-kiro/db/schema/citizen-report";
 import { TEXT_LENGTH_CHARS } from "@iathon-kiro/db/schema/constants";
 import {
 	alert,
@@ -7,10 +8,17 @@ import {
 	vehicle,
 	vehiclePosition,
 } from "@iathon-kiro/db/schema/fleet";
-import { and, eq, inArray } from "drizzle-orm";
+import { and, eq, inArray, sql } from "drizzle-orm";
 import type { RequestLogger } from "evlog";
 
-import { DEMO_TRIP_SCENARIOS, FINISHED_TRIP_STATUSES } from "./constants";
+import { classifyByRules } from "./citizen-reports/classify";
+import { EXAMPLE_CITIZEN_REPORTS } from "./citizen-reports/examples";
+import type { CitizenReport } from "./citizen-reports/schemas";
+import {
+	DEMO_TRIP_SCENARIOS,
+	FINISHED_TRIP_STATUSES,
+	MS_PER_MINUTE,
+} from "./constants";
 import { DEMO_ACCOUNT_EMAIL } from "./demo-account";
 import { demoEntityId, ensureDemoConnection } from "./demo-fleet";
 import { createFleetTrip } from "./fleet/create-trip";
@@ -27,8 +35,44 @@ export interface PrepareDemoInput {
 	log: RequestLogger;
 }
 
+export async function ensureExampleCitizenReports(db: Database) {
+	const storedExamples = await db.query.citizenReport.findMany({
+		columns: { id: true },
+		where: { isExample: true },
+	});
+	if (storedExamples.length >= EXAMPLE_CITIZEN_REPORTS.length) return;
+	const now = Date.now();
+	const classifiedExamples: CitizenReport[] = [];
+	for (const example of EXAMPLE_CITIZEN_REPORTS) {
+		classifiedExamples.push({
+			...example,
+			...classifyByRules(example, classifiedExamples),
+			photoUrl: null,
+			isExample: true,
+			createdAt: new Date(now - example.minutesAgo * MS_PER_MINUTE),
+			plan: null,
+		});
+	}
+	await db
+		.insert(citizenReport)
+		.values(
+			classifiedExamples.map((example) => ({
+				id: example.id,
+				description: example.description,
+				longitude: example.location.lon,
+				latitude: example.location.lat,
+				hazardKind: example.hazardKind,
+				priority: example.priority,
+				isExample: true,
+				createdAt: example.createdAt,
+			})),
+		)
+		.onDuplicateKeyUpdate({ set: { id: sql`${citizenReport.id}` } });
+}
+
 export async function prepareDemo(input: PrepareDemoInput) {
 	const { db, organizationId, log } = input;
+	await ensureExampleCitizenReports(db);
 	const existingConnection = await db.query.gpsConnection.findFirst({
 		where: { organizationId, provider: "demo" },
 	});
