@@ -1,4 +1,4 @@
-# hack-the-andes-project
+# iathon kiro
 
 pnpm monorepo: Hono + oRPC API (`apps/server`), Vite dashboard (`apps/web`), Astro marketing site (`apps/illapa`), Expo app (`apps/native`), scraper and fleet-sync services, better-auth, Drizzle + MySQL 8.4, and evlog wide-event logging. Production and staging run on one AWS EC2 box with Dokploy: Node 24 services and nginx static sites.
 
