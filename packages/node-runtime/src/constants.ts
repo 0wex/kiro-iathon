@@ -13,3 +13,8 @@ export const HTTP_KEEP_ALIVE_TIMEOUT_MS = 95_000;
 export const SHUTDOWN_SIGNALS: NodeJS.Signals[] = ["SIGTERM", "SIGINT"];
 // Docker sends SIGKILL 10 s after SIGTERM by default; finish draining before.
 export const SHUTDOWN_TIMEOUT_MS = 8_000;
+
+// CloudFront sends the viewer as `ip:port`; the Lambda adapter strips the port
+// into its own header so better-auth rate limits per viewer, not per edge.
+export const CLOUDFRONT_VIEWER_ADDRESS_HEADER = "cloudfront-viewer-address";
+export const VIEWER_IP_HEADER = "x-viewer-ip";

@@ -6,6 +6,7 @@
 		"build": "tsc -b ../../packages/api && tsdown",
 		"build:node": "tsdown -c tsdown.node.config.ts",
 		"start:node": "node dist-node/node.mjs",
+		"build:lambda": "tsdown -c tsdown.lambda.config.ts",
 		"check-types": "tsc -b ../../packages/api && tsc --noEmit",
 		"test": "vitest run",
 		"dev": "pnpm --filter @iathon-kiro/infra dev",
