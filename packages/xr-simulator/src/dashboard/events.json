@@ -1,0 +1,46 @@
+[
+	{
+		"id": "huayco-chosica",
+		"kind": "huayco",
+		"name": "Huayco en la quebrada Quirio",
+		"place": "Chosica",
+		"region": "Lima",
+		"startedAt": "2026-03-15T14:20:00-05:00",
+		"rainfallMm": 38,
+		"center": { "lon": -76.7, "lat": -11.93 },
+		"release": { "lon": -76.708, "lat": -11.915 }
+	},
+	{
+		"id": "huayco-matucana",
+		"kind": "huayco",
+		"name": "Huayco sobre la Carretera Central",
+		"place": "Matucana",
+		"region": "Lima",
+		"startedAt": "2026-02-22T17:05:00-05:00",
+		"rainfallMm": 31,
+		"center": { "lon": -76.385, "lat": -11.845 },
+		"release": { "lon": -76.375, "lat": -11.833 }
+	},
+	{
+		"id": "inundacion-pisco",
+		"kind": "inundacion",
+		"name": "Desborde del río Pisco",
+		"place": "Pisco",
+		"region": "Ica",
+		"startedAt": "2026-03-08T03:40:00-05:00",
+		"rainfallMm": 52,
+		"center": { "lon": -76.19, "lat": -13.7 },
+		"release": { "lon": -76.17, "lat": -13.69 }
+	},
+	{
+		"id": "deslizamiento-san-mateo",
+		"kind": "deslizamiento",
+		"name": "Deslizamiento de ladera",
+		"place": "San Mateo",
+		"region": "Lima",
+		"startedAt": "2026-01-29T22:15:00-05:00",
+		"rainfallMm": 24,
+		"center": { "lon": -76.3, "lat": -11.76 },
+		"release": { "lon": -76.293, "lat": -11.752 }
+	}
+]
