@@ -15,7 +15,7 @@ Acceptance criteria:
 1. WHEN the user submits a description between 10 and 600 characters and a location inside the Piura region THEN the system SHALL store the report and show it at the top of the board result.
 2. WHEN the description is shorter than 10 or longer than 600 characters THEN the system SHALL reject the report with a validation error and keep the form filled.
 3. WHEN the location is outside the Piura region bounding box THEN the system SHALL reject the report with a validation error.
-4. WHEN the user attaches a photo THEN the browser SHALL compress it to a JPEG of at most 700 KB before sending it, and the system SHALL store it and show it in the report.
+4. WHEN the user attaches a photo THEN the browser SHALL compress it to a JPEG of at most 600 KB before sending it, and the system SHALL store it and show it in the report.
 5. WHEN the photo is not a JPEG, PNG or WebP image THEN the system SHALL reject it.
 
 ## Requirement 2: Priority by rules

@@ -1,6 +1,6 @@
 # Tasks: Mapa ciudadano de riesgo
 
-- [ ] 1. Shared contract in `packages/business/src/citizen-reports`
+- [x] 1. Shared contract in `packages/business/src/citizen-reports`
   - Hazard kinds, priorities, plan sources, Piura bounding box and length limits in constants.
   - Zod input, report and plan schemas; `classifyByRules`, `templatePlanFor`, `compareReportsByPriority`, `distanceInMeters`.
   - Unit tests for schema limits, rules table, 500 m bump, sorting and templates.

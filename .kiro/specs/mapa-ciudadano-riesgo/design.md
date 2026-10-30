@@ -24,7 +24,7 @@ Priority decides the order of the board, so it must be instant, repeatable and e
 - `HAZARD_KINDS`: inundacion, huayco, deslizamiento, colapso-drenaje, erosion-defensa, otro.
 - `REPORT_PRIORITIES`: critica, alta, media, baja, with a sort rank.
 - `PLAN_SOURCES`: bedrock, plantilla.
-- `createCitizenReportInputSchema` (zod): description 10–600 chars, location `{ lon, lat }` inside the Piura bounding box, optional photo `{ mediaType, base64 }` of at most 700 KB decoded.
+- `createCitizenReportInputSchema` (zod): description 10–600 chars, location `{ lon, lat }` inside the Piura bounding box, optional photo `{ mediaType, base64 }` of at most 600 KB decoded.
 - `citizenReportSchema`: id, description, location, photoUrl or null, hazardKind, priority, isExample, createdAt, plan or null.
 - `contingencyPlanSchema`: situation (≤ 400 chars), actions (3–6 ordered strings), resources (strings), responsibles (strings), populationMessage (≤ 280 chars), source, generatedAt.
 - `classifyByRules(description, nearbyReports)`: keyword table for hazard and priority, plus one level up when a same-hazard report lies within 500 m.
