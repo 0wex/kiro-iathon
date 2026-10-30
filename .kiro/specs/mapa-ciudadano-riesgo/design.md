@@ -2,18 +2,24 @@
 
 ## Architecture on AWS
 
+Everything is deployed with AWS SAM from `template.yaml` at the repository root, into one AWS account.
+
 ```
-Browser (apps/web, /dashboard/reportes)
-  │  oRPC over HTTPS (demo session cookie)
+Browser
+  │  HTTPS, one origin (no CORS, first-party session cookie)
   ▼
-apps/server (Hono + oRPC, Node 24 container on AWS EC2 via Dokploy)
-  ├── packages/api  citizenReports.create / list / generatePlan
-  ├── Amazon Bedrock Runtime  Converse API (text + image, tool-forced JSON plan)
-  ├── Backblaze B2 media bucket  report photos (public URL)
-  └── MySQL 8.4 on the same EC2 box  iathon_kiro_citizen_report, iathon_kiro_contingency_plan
+Amazon CloudFront
+  ├── /*            → S3 bucket with the built apps/web (SPA fallback to index.html)
+  └── /rpc/*, /api/* → API Gateway HTTP API
+                         ▼
+                       AWS Lambda (Node 24, apps/server bundled with tsdown, inside a VPC)
+                         ├── packages/api  citizenReports.create / list / generatePlan
+                         ├── Amazon Bedrock Runtime  Converse API (VPC interface endpoint)
+                         ├── Amazon S3  report photos (VPC gateway endpoint)
+                         └── Amazon RDS for MySQL 8.4 (private subnets)
 ```
 
-The server reaches Bedrock with the AWS SDK default credential chain: the EC2 instance role in production (needs `bedrock:InvokeModel`), or `AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` locally. `BEDROCK_REGION` and `BEDROCK_MODEL_ID` come from the server env.
+The Lambda reaches Bedrock and S3 through its IAM execution role (`bedrock:InvokeModel` on the configured model, `s3:PutObject`/`s3:GetObject` on the photos bucket); no AWS keys are stored. Database credentials and the auth secrets live in AWS Secrets Manager and reach the function as CloudFormation dynamic references. Pending migrations run on cold start before the first request is served.
 
 ## Why rules for priority and AI for the plan
 
