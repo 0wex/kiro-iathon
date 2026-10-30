@@ -1,4 +1,4 @@
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
 import {
 	Table,
 	TableBody,
@@ -7,7 +7,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@hack-the-andes-project/ui/components/table";
+} from "@iathon-kiro/ui/components/table";
 import { useEffect, useRef, useState } from "react";
 import { m } from "@/paraglide/messages";
 import { LogoBlock } from "@/showcase/logo";

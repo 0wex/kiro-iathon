@@ -1,6 +1,6 @@
-import { PRIMITIVE_DEFAULTS } from "@hack-the-andes-project/business/structures/catalog";
-import { MAX_STRUCTURE_EXTENT_M } from "@hack-the-andes-project/business/structures/constants";
-import { createDefaultStructureTemplate } from "@hack-the-andes-project/business/structures/placement";
+import { PRIMITIVE_DEFAULTS } from "@iathon-kiro/business/structures/catalog";
+import { MAX_STRUCTURE_EXTENT_M } from "@iathon-kiro/business/structures/constants";
+import { createDefaultStructureTemplate } from "@iathon-kiro/business/structures/placement";
 import type {
 	PlacedStructure,
 	PlacementTool,

@@ -1,4 +1,4 @@
-import { ThemeSwitch } from "@hack-the-andes-project/ui/components/theme-switch";
+import { ThemeSwitch } from "@iathon-kiro/ui/components/theme-switch";
 import { useLayoutEffect, useState } from "react";
 
 import { ILLAPA_THEME_STORAGE_KEY } from "@/constants";

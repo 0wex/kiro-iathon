@@ -6,7 +6,7 @@ import {
 	TransformNode,
 	Vector3,
 } from "@babylonjs/core";
-import { MAX_BYPASS_POINTS } from "@hack-the-andes-project/business/structures/constants";
+import { MAX_BYPASS_POINTS } from "@iathon-kiro/business/structures/constants";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { SceneCamera } from "../camera";
 import { SceneEditing } from "../editing";

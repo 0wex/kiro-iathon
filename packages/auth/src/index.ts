@@ -1,12 +1,12 @@
 import { drizzleAdapter } from "@better-auth/drizzle-adapter/relations-v2";
 import { expo } from "@better-auth/expo";
-import { MIN_PASSWORD_LENGTH_CHARS } from "@hack-the-andes-project/business/constants";
+import { MIN_PASSWORD_LENGTH_CHARS } from "@iathon-kiro/business/constants";
 import {
 	DEMO_SIGN_IN_AUTH_PATH,
 	isDemoAccountEmail,
-} from "@hack-the-andes-project/business/demo-account";
-import type { Database } from "@hack-the-andes-project/db";
-import * as schema from "@hack-the-andes-project/db/schema/auth";
+} from "@iathon-kiro/business/demo-account";
+import type { Database } from "@iathon-kiro/db";
+import * as schema from "@iathon-kiro/db/schema/auth";
 import { betterAuth } from "better-auth";
 import { APIError } from "better-auth/api";
 import { organization } from "better-auth/plugins";

@@ -4,11 +4,11 @@ import {
 	DialogDescription,
 	DialogHeader,
 	DialogTitle,
-} from "@hack-the-andes-project/ui/components/dialog";
+} from "@iathon-kiro/ui/components/dialog";
 import {
 	InputGroup,
 	InputGroupAddon,
-} from "@hack-the-andes-project/ui/components/input-group";
+} from "@iathon-kiro/ui/components/input-group";
 import { Command as CommandPrimitive } from "cmdk";
 import { cn } from "cn";
 import { CheckIcon, SearchIcon } from "lucide-react";

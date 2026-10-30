@@ -16,7 +16,7 @@ import {
 	DropdownMenuSubContent,
 	DropdownMenuSubTrigger,
 	DropdownMenuTrigger,
-} from "@hack-the-andes-project/ui/components/dropdown-menu";
+} from "@iathon-kiro/ui/components/dropdown-menu";
 import { cn } from "cn";
 import { CheckIcon } from "lucide-react";
 import type * as React from "react";

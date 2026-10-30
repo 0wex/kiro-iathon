@@ -1,23 +1,23 @@
-import { METERS_PER_KM } from "@hack-the-andes-project/business/constants";
+import { METERS_PER_KM } from "@iathon-kiro/business/constants";
 import {
 	TILES_API_PATH,
 	WEATHER_API_PATH,
-} from "@hack-the-andes-project/business/simulators";
-import { STRUCTURE_EXPOSURE_RADIUS_M } from "@hack-the-andes-project/business/structures/constants";
+} from "@iathon-kiro/business/simulators";
+import { STRUCTURE_EXPOSURE_RADIUS_M } from "@iathon-kiro/business/structures/constants";
 import {
 	structureExposure,
 	structureExposureBounds,
-} from "@hack-the-andes-project/business/structures/exposure";
+} from "@iathon-kiro/business/structures/exposure";
 import {
 	PE22_LANDMARKS,
 	PE22_TERRAIN_ORIGIN,
-} from "@hack-the-andes-project/business/structures/landmarks";
+} from "@iathon-kiro/business/structures/landmarks";
 import {
 	nextStructureName,
 	structureElementName,
-} from "@hack-the-andes-project/business/structures/naming";
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { SidebarTrigger } from "@hack-the-andes-project/ui/components/sidebar";
+} from "@iathon-kiro/business/structures/naming";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { SidebarTrigger } from "@iathon-kiro/ui/components/sidebar";
 import {
 	StructureEditorAttribution,
 	StructureEditorBanner,
@@ -25,23 +25,23 @@ import {
 	StructureEditorHeader,
 	StructureEditorNotice,
 	StructureEditorPhoneNotice,
-} from "@hack-the-andes-project/ui/components/structure-editor-chrome";
+} from "@iathon-kiro/ui/components/structure-editor-chrome";
 import {
 	StructureEditorConfirmDialog,
 	StructureEditorShortcutsDialog,
-} from "@hack-the-andes-project/ui/components/structure-editor-dialogs";
-import { StructureEditorExposure } from "@hack-the-andes-project/ui/components/structure-editor-exposure";
-import { StructureEditorList } from "@hack-the-andes-project/ui/components/structure-editor-list";
+} from "@iathon-kiro/ui/components/structure-editor-dialogs";
+import { StructureEditorExposure } from "@iathon-kiro/ui/components/structure-editor-exposure";
+import { StructureEditorList } from "@iathon-kiro/ui/components/structure-editor-list";
 import {
 	StructureEditorPalette,
 	type StructurePaletteItem,
-} from "@hack-the-andes-project/ui/components/structure-editor-palette";
-import { StructureEditorParameters } from "@hack-the-andes-project/ui/components/structure-editor-parameters";
+} from "@iathon-kiro/ui/components/structure-editor-palette";
+import { StructureEditorParameters } from "@iathon-kiro/ui/components/structure-editor-parameters";
 import {
 	STRUCTURES_MODE_ID,
 	XrViewer,
-} from "@hack-the-andes-project/ui/components/xr-viewer";
-import { INCIDENT_SOURCE_LABELS } from "@hack-the-andes-project/ui/lib/incident-constants";
+} from "@iathon-kiro/ui/components/xr-viewer";
+import { INCIDENT_SOURCE_LABELS } from "@iathon-kiro/ui/lib/incident-constants";
 import type {
 	PlacementTool,
 	PrimitiveTarget,
@@ -51,7 +51,7 @@ import type {
 	SceneXrRequest,
 	TerrainStatus,
 	TransformMode,
-} from "@hack-the-andes-project/ui/lib/structure-scene";
+} from "@iathon-kiro/ui/lib/structure-scene";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "@tanstack/react-router";
 import { MapIcon } from "lucide-react";

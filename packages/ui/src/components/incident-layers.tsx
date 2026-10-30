@@ -1,6 +1,6 @@
-import { useTokenColors } from "@hack-the-andes-project/ui/hooks/use-token-colors";
-import type { Incident } from "@hack-the-andes-project/ui/lib/incident";
-import { INCIDENT_SEVERITY_TOKENS } from "@hack-the-andes-project/ui/lib/incident-constants";
+import { useTokenColors } from "@iathon-kiro/ui/hooks/use-token-colors";
+import type { Incident } from "@iathon-kiro/ui/lib/incident";
+import { INCIDENT_SEVERITY_TOKENS } from "@iathon-kiro/ui/lib/incident-constants";
 import type { FeatureCollection, Geometry } from "geojson";
 import type { ExpressionSpecification } from "maplibre-gl";
 import { useMemo } from "react";

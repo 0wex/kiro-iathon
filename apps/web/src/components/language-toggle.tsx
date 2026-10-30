@@ -1,17 +1,17 @@
-import { Button } from "@hack-the-andes-project/ui/components/button";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from "@hack-the-andes-project/ui/components/dropdown-menu";
+} from "@iathon-kiro/ui/components/dropdown-menu";
 
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
-} from "@hack-the-andes-project/ui/components/tooltip";
+} from "@iathon-kiro/ui/components/tooltip";
 
 import { m } from "@/paraglide/messages";
 import { getLocale, locales, setLocale } from "@/paraglide/runtime";

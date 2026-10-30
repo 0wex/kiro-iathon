@@ -1,30 +1,30 @@
-import { PUBLIC_PROCEDURE_PATHS } from "@hack-the-andes-project/api/constants";
-import type { Context as ApiContext } from "@hack-the-andes-project/api/context";
-import { handleDemoRequest } from "@hack-the-andes-project/api/demo-request";
-import { resetDemo } from "@hack-the-andes-project/api/demo-reset";
-import { appRouter } from "@hack-the-andes-project/api/routers/index";
-import { proxySimulatorRequest } from "@hack-the-andes-project/api/simulator-proxy";
+import { PUBLIC_PROCEDURE_PATHS } from "@iathon-kiro/api/constants";
+import type { Context as ApiContext } from "@iathon-kiro/api/context";
+import { handleDemoRequest } from "@iathon-kiro/api/demo-request";
+import { resetDemo } from "@iathon-kiro/api/demo-reset";
+import { appRouter } from "@iathon-kiro/api/routers/index";
+import { proxySimulatorRequest } from "@iathon-kiro/api/simulator-proxy";
 import {
 	type Auth,
 	createAuth,
 	createOriginMatcher,
 	parseAllowedOrigins,
 	type Session,
-} from "@hack-the-andes-project/auth";
-import { verifySecret } from "@hack-the-andes-project/business/crypto/index";
+} from "@iathon-kiro/auth";
+import { verifySecret } from "@iathon-kiro/business/crypto/index";
 import {
 	DEMO_RESET_PATH,
 	DEMO_RESET_SECRET_HEADER,
-} from "@hack-the-andes-project/business/demo-account";
-import { DEMO_REQUESTS_PATH } from "@hack-the-andes-project/business/demo-request";
+} from "@iathon-kiro/business/demo-account";
+import { DEMO_REQUESTS_PATH } from "@iathon-kiro/business/demo-request";
 import {
 	TILE_METADATA_HEADERS,
 	TILES_API_PATH,
 	TILES_API_UPSTREAM_PATHS,
 	WEATHER_API_PATH,
 	WEATHER_API_UPSTREAM_PATHS,
-} from "@hack-the-andes-project/business/simulators";
-import { createDb, type Database } from "@hack-the-andes-project/db";
+} from "@iathon-kiro/business/simulators";
+import { createDb, type Database } from "@iathon-kiro/db";
 import { onError } from "@orpc/server";
 import { RPCHandler } from "@orpc/server/fetch";
 import { BatchHandlerPlugin } from "@orpc/server/plugins";
@@ -241,7 +241,7 @@ const rpcHandler = new RPCHandler(appRouter, {
 	interceptors: [
 		onError(() => {
 			// Errors are already captured on the wide event by the withLogger
-			// middleware in @hack-the-andes-project/api; oRPC still renders them.
+			// middleware in @iathon-kiro/api; oRPC still renders them.
 		}),
 	],
 });

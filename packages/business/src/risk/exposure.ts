@@ -1,7 +1,7 @@
 import {
 	INCIDENT_SEVERITIES,
 	type IncidentSeverity,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { bbox } from "@turf/bbox";
 import { booleanPointInPolygon } from "@turf/boolean-point-in-polygon";
 import { distance } from "@turf/distance";

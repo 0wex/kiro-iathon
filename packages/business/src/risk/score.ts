@@ -1,7 +1,7 @@
 import type {
 	RiskComponents,
 	RiskLevel,
-} from "@hack-the-andes-project/db/schema/risk";
+} from "@iathon-kiro/db/schema/risk";
 
 import {
 	ANTECEDENT_RAIN_SATURATION_MM,

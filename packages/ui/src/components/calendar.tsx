@@ -3,7 +3,7 @@
 import {
 	Button,
 	buttonVariants,
-} from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/button";
 import { cn } from "cn";
 import {
 	ChevronDownIcon,

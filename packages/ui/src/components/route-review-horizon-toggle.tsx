@@ -1,4 +1,4 @@
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
 import type { RouteReviewLabels } from "../lib/route-review";
 import { ToggleGroup, ToggleGroupItem } from "./toggle-group";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./tooltip";

@@ -7,7 +7,7 @@ import {
 	ToastTitle,
 	ToastViewport,
 	useToastManager,
-} from "@hack-the-andes-project/ui/components/toast";
+} from "@iathon-kiro/ui/components/toast";
 
 interface ShowcaseToastViewportProps {
 	closeLabel: string;

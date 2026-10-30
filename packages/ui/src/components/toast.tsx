@@ -1,7 +1,7 @@
 "use client";
 
 import { Toast as ToastPrimitive } from "@base-ui/react/toast";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+import { Button } from "@iathon-kiro/ui/components/button";
 import { cn } from "cn";
 import {
 	CircleCheckIcon,

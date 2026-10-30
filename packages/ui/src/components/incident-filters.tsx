@@ -1,13 +1,13 @@
 import type {
 	Incident,
 	IncidentTimePreset,
-} from "@hack-the-andes-project/ui/lib/incident";
+} from "@iathon-kiro/ui/lib/incident";
 import {
 	INCIDENT_CATEGORY_LABELS,
 	INCIDENT_CATEGORY_OPTIONS,
 	INCIDENT_SEVERITY_LABELS,
 	INCIDENT_SEVERITY_OPTIONS,
-} from "@hack-the-andes-project/ui/lib/incident-constants";
+} from "@iathon-kiro/ui/lib/incident-constants";
 
 import { Badge } from "./badge";
 import { Button } from "./button";

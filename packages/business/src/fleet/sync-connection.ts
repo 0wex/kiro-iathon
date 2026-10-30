@@ -1,11 +1,11 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { ID_LENGTH_CHARS } from "@hack-the-andes-project/db/schema/constants";
+import type { Database } from "@iathon-kiro/db";
+import { ID_LENGTH_CHARS } from "@iathon-kiro/db/schema/constants";
 import {
 	gpsConnection,
 	trip,
 	vehicle,
 	vehiclePosition,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { and, eq, inArray, sql } from "drizzle-orm";
 import type { RequestLogger } from "evlog";
 

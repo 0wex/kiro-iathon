@@ -12,8 +12,8 @@ import {
 	Vector3,
 	VertexData,
 } from "@babylonjs/core";
-import type { StructureMaterial } from "@hack-the-andes-project/business/structures/catalog";
-import { bypassWidthM } from "@hack-the-andes-project/business/structures/geometry";
+import type { StructureMaterial } from "@iathon-kiro/business/structures/catalog";
+import { bypassWidthM } from "@iathon-kiro/business/structures/geometry";
 import type {
 	PlacedStructure,
 	StructurePoint,

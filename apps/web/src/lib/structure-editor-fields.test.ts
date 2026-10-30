@@ -1,4 +1,4 @@
-import type { SceneStructure } from "@hack-the-andes-project/ui/lib/structure-scene";
+import type { SceneStructure } from "@iathon-kiro/ui/lib/structure-scene";
 import { describe, expect, it, vi } from "vitest";
 import { structureEditorFields } from "./structure-editor-fields";
 import { structureEditorLabels } from "./structure-editor-labels";

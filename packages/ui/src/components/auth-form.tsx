@@ -1,4 +1,4 @@
-import { MIN_PASSWORD_LENGTH_CHARS } from "@hack-the-andes-project/business/constants";
+import { MIN_PASSWORD_LENGTH_CHARS } from "@iathon-kiro/business/constants";
 import { useState } from "react";
 import { z } from "zod";
 

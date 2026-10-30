@@ -1,8 +1,8 @@
-import type { UserRole } from "@hack-the-andes-project/api/structure-schemas";
-import { isDemoAccountEmail } from "@hack-the-andes-project/business/demo-account";
-import { TruckIcon } from "@hack-the-andes-project/ui/components/icons";
-import { RolePicker } from "@hack-the-andes-project/ui/components/role-picker";
-import { StructureArt } from "@hack-the-andes-project/ui/components/structure-art";
+import type { UserRole } from "@iathon-kiro/api/structure-schemas";
+import { isDemoAccountEmail } from "@iathon-kiro/business/demo-account";
+import { TruckIcon } from "@iathon-kiro/ui/components/icons";
+import { RolePicker } from "@iathon-kiro/ui/components/role-picker";
+import { StructureArt } from "@iathon-kiro/ui/components/structure-art";
 import {
 	createFileRoute,
 	Link,

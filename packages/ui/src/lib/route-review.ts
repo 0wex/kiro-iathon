@@ -1,4 +1,4 @@
-import type { RouteReviewPlaceId } from "@hack-the-andes-project/business/route-review/places";
+import type { RouteReviewPlaceId } from "@iathon-kiro/business/route-review/places";
 import type {
 	RouteCandidateSource,
 	RouteRecommendation,
@@ -6,11 +6,11 @@ import type {
 	RouteRiskHorizon,
 	RouteRiskLevel,
 	RouteSignalKind,
-} from "@hack-the-andes-project/business/route-review/risk";
+} from "@iathon-kiro/business/route-review/risk";
 import {
 	VEHICLE_TYPES,
 	type VehicleTypeId,
-} from "@hack-the-andes-project/business/route-review/vehicle-types";
+} from "@iathon-kiro/business/route-review/vehicle-types";
 import type { Geometry, LineString } from "geojson";
 import type { Incident } from "./incident";
 

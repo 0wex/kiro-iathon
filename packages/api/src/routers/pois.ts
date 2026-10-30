@@ -1,4 +1,4 @@
-import { POI_KINDS, poi } from "@hack-the-andes-project/db/schema/scraper";
+import { POI_KINDS, poi } from "@iathon-kiro/db/schema/scraper";
 import { and, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 

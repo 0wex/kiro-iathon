@@ -1,4 +1,4 @@
-import type { AppRouterClient } from "@hack-the-andes-project/api/routers/index";
+import type { AppRouterClient } from "@iathon-kiro/api/routers/index";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { createTanstackQueryUtils } from "@orpc/tanstack-query";

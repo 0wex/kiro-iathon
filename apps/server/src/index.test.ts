@@ -9,7 +9,7 @@ import {
 import app from "./index";
 
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 const { DrizzleQueryError } = databaseRequire("drizzle-orm");
 
@@ -28,9 +28,9 @@ vi.mock("./env.server", () => ({
 		HYPERDRIVE: {},
 	},
 }));
-vi.mock("@hack-the-andes-project/db", () => ({ createDb: mocks.createDb }));
-vi.mock("@hack-the-andes-project/auth", async (importOriginal) => ({
-	...(await importOriginal<typeof import("@hack-the-andes-project/auth")>()),
+vi.mock("@iathon-kiro/db", () => ({ createDb: mocks.createDb }));
+vi.mock("@iathon-kiro/auth", async (importOriginal) => ({
+	...(await importOriginal<typeof import("@iathon-kiro/auth")>()),
 	createAuth: () => ({
 		api: { getSession: mocks.getSession },
 		handler: mocks.authHandler,

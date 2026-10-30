@@ -1,4 +1,4 @@
-import { tripWindowRiskAssessment } from "@hack-the-andes-project/business/route-review/ranking";
+import { tripWindowRiskAssessment } from "@iathon-kiro/business/route-review/ranking";
 import { BanIcon, PlayIcon, RefreshCwIcon } from "lucide-react";
 import type { ReactNode } from "react";
 import type { RouteReviewLabels, RouteReviewTrip } from "../lib/route-review";

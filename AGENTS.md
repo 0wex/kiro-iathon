@@ -43,5 +43,5 @@ When working with drizzle, change the schema folder, then run `pnpm db:generate 
 - Trusted origins (CORS + better-auth) come from the comma-separated `ALLOWED_ORIGINS`.
 - db, auth and session are built once per request in the guard middleware and shared via `c.set`/oRPC context. Never create a db connection or auth instance in module scope.
 - Logging is evlog: one wide event per request. Use `context.log.set({ <domain>: {...} })` in procedures and `c.get("log")` in Hono routes; never `console.log`.
-- The MySQL 8.4 on the Dokploy server holds `illapa` (production) and `illapa_staging`. Every table goes through `mysqlTable` from `packages/db/src/schema/_table.ts` (`hack_the_andes_` prefix) and has no FOREIGN KEY constraints.
+- The MySQL 8.4 on the Dokploy server holds `illapa` (production) and `illapa_staging`. Every table goes through `mysqlTable` from `packages/db/src/schema/_table.ts` (`iathon_kiro_` prefix) and has no FOREIGN KEY constraints.
 - mysql2 batching shares one connection per request: never use `db.transaction()` in app code.

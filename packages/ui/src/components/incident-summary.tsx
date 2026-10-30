@@ -1,8 +1,8 @@
-import type { IncidentSeverityCount } from "@hack-the-andes-project/ui/lib/incident";
+import type { IncidentSeverityCount } from "@iathon-kiro/ui/lib/incident";
 import {
 	INCIDENT_SEVERITY_LABELS,
 	INCIDENT_SEVERITY_OPTIONS,
-} from "@hack-the-andes-project/ui/lib/incident-constants";
+} from "@iathon-kiro/ui/lib/incident-constants";
 
 import { SeverityDot } from "./severity";
 import { Skeleton } from "./skeleton";

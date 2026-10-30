@@ -1,8 +1,8 @@
 import {
 	MAX_VEHICLE_AXLE_COUNT,
 	MIN_VEHICLE_AXLE_COUNT,
-} from "@hack-the-andes-project/business/constants";
-import { ROUTE_REVIEW_PLACE_IDS } from "@hack-the-andes-project/business/route-review/places";
+} from "@iathon-kiro/business/constants";
+import { ROUTE_REVIEW_PLACE_IDS } from "@iathon-kiro/business/route-review/places";
 import {
 	routeCandidateSchema as businessRouteCandidateSchema,
 	routeReviewSchema as businessRouteReviewSchema,
@@ -11,9 +11,9 @@ import {
 	routeRecommendationSchema,
 	routeRiskAssessmentSchema,
 	routeSegmentSchema,
-} from "@hack-the-andes-project/business/route-review/schemas";
-import { VEHICLE_TYPE_IDS } from "@hack-the-andes-project/business/route-review/vehicle-types";
-import { VEHICLE_PLATE_LENGTH_CHARS } from "@hack-the-andes-project/db/schema/constants";
+} from "@iathon-kiro/business/route-review/schemas";
+import { VEHICLE_TYPE_IDS } from "@iathon-kiro/business/route-review/vehicle-types";
+import { VEHICLE_PLATE_LENGTH_CHARS } from "@iathon-kiro/db/schema/constants";
 import type { Geometry } from "geojson";
 import { z } from "zod";
 

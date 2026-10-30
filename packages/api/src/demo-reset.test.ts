@@ -1,4 +1,4 @@
-import { verifySecret } from "@hack-the-andes-project/business/crypto/index";
+import { verifySecret } from "@iathon-kiro/business/crypto/index";
 import { describe, expect, it } from "vitest";
 
 const secret = "demo-reset-test-secret-long-enough-for-auth";

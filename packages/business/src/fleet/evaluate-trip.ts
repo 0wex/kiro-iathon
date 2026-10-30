@@ -1,9 +1,9 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	alert,
 	trip as tripTable,
 	type vehicle as vehicleTable,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { distance } from "@turf/distance";
 import { and, eq, inArray, notInArray, sql } from "drizzle-orm";
 import type { RequestLogger } from "evlog";

@@ -1,11 +1,11 @@
 import { createRequire } from "node:module";
-import { TEXT_LENGTH_CHARS } from "@hack-the-andes-project/db/schema/constants";
+import { TEXT_LENGTH_CHARS } from "@iathon-kiro/db/schema/constants";
 import type {
 	gpsConnection,
 	TripStatus,
 	trip,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { createRequestLogger } from "evlog";
 import {
 	afterAll,
@@ -41,14 +41,14 @@ const query = vi.hoisted(() =>
 	>(),
 );
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	default: {
 		createConnection: vi.fn(async () => ({ config: {}, query, end: vi.fn() })),
 	},
 }));
-const { createDb } = await import("@hack-the-andes-project/db");
+const { createDb } = await import("@iathon-kiro/db");
 const database = await createDb({
 	host: "mock",
 	port: Number.NaN,
@@ -190,24 +190,24 @@ beforeEach(async () => {
 			const id = parameters?.[0];
 			if (
 				typeof id === "string" &&
-				statement.includes("`hack_the_andes_gps_connection`")
+				statement.includes("`iathon_kiro_gps_connection`")
 			)
 				connectionIds.add(id);
-			if (statement.includes("`hack_the_andes_vehicle`")) {
+			if (statement.includes("`iathon_kiro_vehicle`")) {
 				for (const storedVehicle of vehicles)
 					if (parameters?.includes(storedVehicle.id))
 						vehicleIds.add(storedVehicle.id);
 			}
 			if (
 				typeof id === "string" &&
-				statement.includes("`hack_the_andes_trip`")
+				statement.includes("`iathon_kiro_trip`")
 			) {
 				const vehicleId = parameters?.[2];
 				if (typeof vehicleId === "string" && !storedTrips.has(id))
 					storedTrips.set(id, { vehicleId, status: "active" });
 			}
 		}
-		if (statement.startsWith("delete from `hack_the_andes_trip`")) {
+		if (statement.startsWith("delete from `iathon_kiro_trip`")) {
 			const deletedStatuses = statement.includes("`status` in")
 				? parameters.slice(1)
 				: null;
@@ -219,15 +219,15 @@ beforeEach(async () => {
 			}
 			return [{ affectedRows }, []];
 		}
-		if (statement.startsWith("delete from `hack_the_andes_vehicle`"))
+		if (statement.startsWith("delete from `iathon_kiro_vehicle`"))
 			vehicleIds.clear();
-		if (statement.startsWith("delete from `hack_the_andes_gps_connection`"))
+		if (statement.startsWith("delete from `iathon_kiro_gps_connection`"))
 			connectionIds.clear();
 		if (statement.startsWith("select count"))
 			return [
 				[
 					[
-						statement.includes("`hack_the_andes_vehicle`")
+						statement.includes("`iathon_kiro_vehicle`")
 							? vehicleIds.size
 							: storedTrips.size,
 					],
@@ -295,7 +295,7 @@ describe("shared demo seeding", () => {
 		});
 		await expect(prepareDemo(input)).resolves.toMatchObject({ tripCount: 2 });
 		const tripInsert = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_trip`"),
+			options.sql.startsWith("insert into `iathon_kiro_trip`"),
 		);
 		expect(tripInsert?.[1]).toContain(
 			incident.title.slice(0, TEXT_LENGTH_CHARS),
@@ -386,7 +386,7 @@ describe("shared demo seeding", () => {
 
 		expect(fleetSync.syncConnection).not.toHaveBeenCalled();
 		const fleetWrites = query.mock.calls.filter(([options]) =>
-			/^insert into `hack_the_andes_(gps_connection|vehicle)`/.test(
+			/^insert into `iathon_kiro_(gps_connection|vehicle)`/.test(
 				options.sql,
 			),
 		);
@@ -413,11 +413,11 @@ describe("shared demo seeding", () => {
 		await wipeDemoFleet(database, organizationId);
 		const deletes = deleteStatements();
 		expect(deletes.map(({ table }) => table)).toEqual([
-			"hack_the_andes_alert",
-			"hack_the_andes_trip",
-			"hack_the_andes_vehicle_position",
-			"hack_the_andes_vehicle",
-			"hack_the_andes_gps_connection",
+			"iathon_kiro_alert",
+			"iathon_kiro_trip",
+			"iathon_kiro_vehicle_position",
+			"iathon_kiro_vehicle",
+			"iathon_kiro_gps_connection",
 		]);
 		for (const deletion of deletes)
 			expect(deletion.parameters).toContain(organizationId);
@@ -440,13 +440,13 @@ describe("finished demo restart", () => {
 
 		const deletes = deleteStatements();
 		expect(deletes.map(({ table }) => table)).toEqual([
-			"hack_the_andes_alert",
-			"hack_the_andes_trip",
-			"hack_the_andes_alert",
-			"hack_the_andes_trip",
-			"hack_the_andes_vehicle_position",
-			"hack_the_andes_vehicle",
-			"hack_the_andes_gps_connection",
+			"iathon_kiro_alert",
+			"iathon_kiro_trip",
+			"iathon_kiro_alert",
+			"iathon_kiro_trip",
+			"iathon_kiro_vehicle_position",
+			"iathon_kiro_vehicle",
+			"iathon_kiro_gps_connection",
 		]);
 		for (const deletion of deletes)
 			expect(deletion.parameters).toContain(organizationId);
@@ -514,7 +514,7 @@ describe("finished demo restart", () => {
 		);
 		expect(
 			deleteStatements().filter(
-				({ table }) => table === "hack_the_andes_gps_connection",
+				({ table }) => table === "iathon_kiro_gps_connection",
 			),
 		).toHaveLength(1);
 		expect(demoPlanning.planDemoTrip).toHaveBeenCalledTimes(
@@ -538,8 +538,8 @@ describe("finished demo restart", () => {
 		await expect(restartFinishedDemo(input)).resolves.toBeNull();
 
 		expect(deleteStatements().map(({ table }) => table)).toEqual([
-			"hack_the_andes_alert",
-			"hack_the_andes_trip",
+			"iathon_kiro_alert",
+			"iathon_kiro_trip",
 		]);
 		expect(demoPlanning.planDemoTrip).not.toHaveBeenCalled();
 		expect(connectionIds.size).toBe(1);

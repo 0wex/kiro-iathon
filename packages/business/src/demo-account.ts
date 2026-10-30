@@ -1,4 +1,4 @@
-import type { UserRole } from "@hack-the-andes-project/db/schema/auth";
+import type { UserRole } from "@iathon-kiro/db/schema/auth";
 
 export const DEMO_ACCOUNT_EMAIL = "demo@illapa.app";
 export const DEMO_ACCOUNT_ROLE: UserRole = "fleet";

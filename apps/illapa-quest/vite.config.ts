@@ -1,4 +1,4 @@
-import { QUEST_DEV_PORT } from "@hack-the-andes-project/ui/lib/route-review-3d/constants";
+import { QUEST_DEV_PORT } from "@iathon-kiro/ui/lib/route-review-3d/constants";
 import basicSsl from "@vitejs/plugin-basic-ssl";
 import { defineConfig } from "vite";
 

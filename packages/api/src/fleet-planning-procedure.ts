@@ -1,4 +1,4 @@
-import { FleetPlanningError } from "@hack-the-andes-project/business/fleet/review-trips";
+import { FleetPlanningError } from "@iathon-kiro/business/fleet/review-trips";
 import { ORPCError } from "@orpc/server";
 import { organizationProcedure } from "./index";
 

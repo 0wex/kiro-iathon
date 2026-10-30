@@ -1,4 +1,4 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	type RiskHorizonHours,
 	riskPipelineRun,
@@ -6,8 +6,8 @@ import {
 	roadNode,
 	roadSegment,
 	segmentRiskAssessment,
-} from "@hack-the-andes-project/db/schema/risk";
-import { incident, poi } from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/risk";
+import { incident, poi } from "@iathon-kiro/db/schema/scraper";
 import { nearestPointOnLine } from "@turf/nearest-point-on-line";
 import { and, desc, eq, gt, gte, inArray, lte } from "drizzle-orm";
 import type { MySqlColumn } from "drizzle-orm/mysql-core";

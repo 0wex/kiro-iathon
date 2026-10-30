@@ -1,11 +1,11 @@
-import { compareRiskAwareRoutes } from "@hack-the-andes-project/business/risk/compare-routes";
+import { compareRiskAwareRoutes } from "@iathon-kiro/business/risk/compare-routes";
 import {
 	RISK_HORIZONS_HOURS,
 	RISK_LEVELS,
 	RISK_METHODS,
 	roadSegment,
 	segmentRiskAssessment,
-} from "@hack-the-andes-project/db/schema/risk";
+} from "@iathon-kiro/db/schema/risk";
 import { and, desc, eq, gte } from "drizzle-orm";
 import { z } from "zod";
 

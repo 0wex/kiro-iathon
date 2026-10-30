@@ -1,5 +1,5 @@
-import { evaluateVehicleReview } from "@hack-the-andes-project/business/fleet/review-trips";
-import { isDepartureInReviewWindow } from "@hack-the-andes-project/business/route-review/trips";
+import { evaluateVehicleReview } from "@iathon-kiro/business/fleet/review-trips";
+import { isDepartureInReviewWindow } from "@iathon-kiro/business/route-review/trips";
 import { ORPCError } from "@orpc/server";
 import { ROUTE_REVIEW_DEPARTURE_INVALID_MESSAGE } from "../constants";
 import { fleetPlanningProcedure } from "../fleet-planning-procedure";

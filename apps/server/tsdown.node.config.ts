@@ -1,4 +1,4 @@
-import { NODE_BUNDLE_ALIASES } from "@hack-the-andes-project/node-runtime/bundle-aliases";
+import { NODE_BUNDLE_ALIASES } from "@iathon-kiro/node-runtime/bundle-aliases";
 import { defineConfig } from "tsdown";
 
 export default defineConfig({

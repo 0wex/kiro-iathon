@@ -1,5 +1,5 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { vehiclePosition } from "@hack-the-andes-project/db/schema/fleet";
+import type { Database } from "@iathon-kiro/db";
+import { vehiclePosition } from "@iathon-kiro/db/schema/fleet";
 import { lt } from "drizzle-orm";
 
 import {

@@ -1,9 +1,9 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	roadSegment,
 	segmentRiskAssessment,
-} from "@hack-the-andes-project/db/schema/risk";
-import { incident, poi } from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/risk";
+import { incident, poi } from "@iathon-kiro/db/schema/scraper";
 import { bbox } from "@turf/bbox";
 import { simplify } from "@turf/simplify";
 import { and, eq, gt, inArray, isNotNull, isNull, lt, or } from "drizzle-orm";

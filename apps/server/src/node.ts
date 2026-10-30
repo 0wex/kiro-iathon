@@ -1,6 +1,6 @@
 import { join } from "node:path";
-import { migrateDatabase } from "@hack-the-andes-project/db/migrate";
-import { serveWorker } from "@hack-the-andes-project/node-runtime/serve";
+import { migrateDatabase } from "@iathon-kiro/db/migrate";
+import { serveWorker } from "@iathon-kiro/node-runtime/serve";
 
 import { ENV } from "./env.server";
 import worker from "./index";

@@ -1,4 +1,4 @@
-import type { ScraperEnv } from "@hack-the-andes-project/infra/alchemy.run";
+import type { ScraperEnv } from "@iathon-kiro/infra/alchemy.run";
 
 // This file infers types for the cloudflare:workers environment from your Alchemy Worker.
 // @see https://alchemy.run/cloudflare/compute/workers

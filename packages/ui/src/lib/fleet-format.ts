@@ -1,7 +1,7 @@
 import {
 	METERS_PER_KM,
 	SECONDS_PER_MINUTE,
-} from "@hack-the-andes-project/business/constants";
+} from "@iathon-kiro/business/constants";
 
 import {
 	FLEET_DISTANCE_FRACTION_DIGITS,

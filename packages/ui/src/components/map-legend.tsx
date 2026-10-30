@@ -1,8 +1,8 @@
 import {
 	INCIDENT_SEVERITY_LABELS,
 	INCIDENT_SEVERITY_OPTIONS,
-} from "@hack-the-andes-project/ui/lib/incident-constants";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+} from "@iathon-kiro/ui/lib/incident-constants";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 
 import { SeverityDot } from "./severity";
 

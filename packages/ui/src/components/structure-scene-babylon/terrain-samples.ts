@@ -1,4 +1,4 @@
-import { bypassWidthM } from "@hack-the-andes-project/business/structures/geometry";
+import { bypassWidthM } from "@iathon-kiro/business/structures/geometry";
 import type { SceneStructure } from "../../lib/structure-scene";
 import type { StructureTerrain } from "../../lib/structure-terrain";
 import {

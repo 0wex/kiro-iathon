@@ -2,7 +2,7 @@ import {
 	INCIDENT_CATEGORIES,
 	INCIDENT_SEVERITIES,
 	newsArticle,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { desc, eq } from "drizzle-orm";
 import { z } from "zod";
 

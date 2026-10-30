@@ -4,8 +4,8 @@ import type {
 	StructurePrimitiveKind,
 	StructureStatus,
 	TunnelSectionShape,
-} from "@hack-the-andes-project/business/structures/catalog";
-import type { CorridorLandmark } from "@hack-the-andes-project/business/structures/landmarks";
+} from "@iathon-kiro/business/structures/catalog";
+import type { CorridorLandmark } from "@iathon-kiro/business/structures/landmarks";
 import type { Incident } from "./incident";
 import type { GeoPoint } from "./structure-terrain";
 

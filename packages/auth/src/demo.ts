@@ -4,7 +4,7 @@ import {
 	DEMO_PROFILES,
 	DEMO_SIGN_IN_AUTH_PATH,
 	isDemoAccountEmail,
-} from "@hack-the-andes-project/business/demo-account";
+} from "@iathon-kiro/business/demo-account";
 import type { BetterAuthPlugin } from "better-auth";
 import {
 	APIError,

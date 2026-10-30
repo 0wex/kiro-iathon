@@ -8,14 +8,14 @@ import {
 	restartFinishedDemo,
 	type SyncConnectionResult,
 	syncConnection,
-} from "@hack-the-andes-project/business";
-import { verifySecret } from "@hack-the-andes-project/business/crypto/index";
-import { createDb } from "@hack-the-andes-project/db";
+} from "@iathon-kiro/business";
+import { verifySecret } from "@iathon-kiro/business/crypto/index";
+import { createDb } from "@iathon-kiro/db";
 import {
 	gpsConnection,
 	trip,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { and, eq } from "drizzle-orm";
 import { createLogger } from "evlog";
 import { initWorkersLogger } from "evlog/workers";

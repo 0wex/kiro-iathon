@@ -1,29 +1,29 @@
-import { TRIP_NOT_FOUND_MESSAGE } from "@hack-the-andes-project/api/constants";
-import type { PlannedTrip } from "@hack-the-andes-project/api/route-review-schemas";
-import { MS_PER_MINUTE } from "@hack-the-andes-project/business/constants";
-import { ROUTE_REVIEW_PLACES } from "@hack-the-andes-project/business/route-review/places";
-import { tripWindowRiskAssessment } from "@hack-the-andes-project/business/route-review/ranking";
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
+import { TRIP_NOT_FOUND_MESSAGE } from "@iathon-kiro/api/constants";
+import type { PlannedTrip } from "@iathon-kiro/api/route-review-schemas";
+import { MS_PER_MINUTE } from "@iathon-kiro/business/constants";
+import { ROUTE_REVIEW_PLACES } from "@iathon-kiro/business/route-review/places";
+import { tripWindowRiskAssessment } from "@iathon-kiro/business/route-review/ranking";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
 import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Empty,
 	EmptyHeader,
 	EmptyTitle,
-} from "@hack-the-andes-project/ui/components/empty";
-import { FleetConfirmationDialog } from "@hack-the-andes-project/ui/components/fleet-confirmation-dialog";
-import { FleetQueryFeedback } from "@hack-the-andes-project/ui/components/fleet-query-feedback";
-import { RouteReviewCandidateSkeleton } from "@hack-the-andes-project/ui/components/route-review-candidate-card";
-import { RouteReviewCandidateList } from "@hack-the-andes-project/ui/components/route-review-candidate-list";
-import { RouteReviewHorizonToggle } from "@hack-the-andes-project/ui/components/route-review-horizon-toggle";
-import { RouteReviewMap } from "@hack-the-andes-project/ui/components/route-review-map";
-import { RouteReviewTripHeader } from "@hack-the-andes-project/ui/components/route-review-trip-header";
-import { Skeleton } from "@hack-the-andes-project/ui/components/skeleton";
-import { Spinner } from "@hack-the-andes-project/ui/components/spinner";
+} from "@iathon-kiro/ui/components/empty";
+import { FleetConfirmationDialog } from "@iathon-kiro/ui/components/fleet-confirmation-dialog";
+import { FleetQueryFeedback } from "@iathon-kiro/ui/components/fleet-query-feedback";
+import { RouteReviewCandidateSkeleton } from "@iathon-kiro/ui/components/route-review-candidate-card";
+import { RouteReviewCandidateList } from "@iathon-kiro/ui/components/route-review-candidate-list";
+import { RouteReviewHorizonToggle } from "@iathon-kiro/ui/components/route-review-horizon-toggle";
+import { RouteReviewMap } from "@iathon-kiro/ui/components/route-review-map";
+import { RouteReviewTripHeader } from "@iathon-kiro/ui/components/route-review-trip-header";
+import { Skeleton } from "@iathon-kiro/ui/components/skeleton";
+import { Spinner } from "@iathon-kiro/ui/components/spinner";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";

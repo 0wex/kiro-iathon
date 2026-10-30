@@ -4,7 +4,7 @@ import type { MarkerOptions, PopupOptions } from "maplibre-gl";
 import * as MapLibreGL from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 import type * as GeoJSON from "geojson";
 import { Loader2, Locate, Maximize, Minus, Plus, X } from "lucide-react";
 import {

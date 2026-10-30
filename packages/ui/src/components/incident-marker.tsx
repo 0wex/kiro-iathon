@@ -1,11 +1,11 @@
-import type { Incident } from "@hack-the-andes-project/ui/lib/incident";
+import type { Incident } from "@iathon-kiro/ui/lib/incident";
 import {
 	INCIDENT_CATEGORY_LABELS,
 	INCIDENT_SEVERITY_LABELS,
 	INCIDENT_SEVERITY_TEXT_CLASSES,
 	INCIDENT_SEVERITY_TONES,
-} from "@hack-the-andes-project/ui/lib/incident-constants";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+} from "@iathon-kiro/ui/lib/incident-constants";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale/es";
 

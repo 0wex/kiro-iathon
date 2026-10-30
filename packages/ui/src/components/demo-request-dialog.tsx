@@ -3,12 +3,12 @@ import {
 	DEMO_EMAIL_MAX_LENGTH_CHARS,
 	DEMO_NAME_MAX_LENGTH_CHARS,
 	DEMO_PHONE_MAX_LENGTH_CHARS,
-} from "@hack-the-andes-project/business/constants";
+} from "@iathon-kiro/business/constants";
 import {
 	type DemoRequest,
 	demoRequestSchema,
-} from "@hack-the-andes-project/business/demo-request";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/business/demo-request";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Dialog,
 	DialogClose,
@@ -17,15 +17,15 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@hack-the-andes-project/ui/components/dialog";
+} from "@iathon-kiro/ui/components/dialog";
 import {
 	Field,
 	FieldDescription,
 	FieldError,
 	FieldGroup,
 	FieldLabel,
-} from "@hack-the-andes-project/ui/components/field";
-import { Input } from "@hack-the-andes-project/ui/components/input";
+} from "@iathon-kiro/ui/components/field";
+import { Input } from "@iathon-kiro/ui/components/input";
 import { type ComponentProps, useId, useRef, useState } from "react";
 
 interface DemoRequestDialogProps {

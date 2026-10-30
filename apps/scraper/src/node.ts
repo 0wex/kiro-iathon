@@ -2,11 +2,11 @@ import {
 	SCRAPER_DAILY_CRON,
 	SCRAPER_FREQUENT_CRON,
 	SCRAPER_HOURLY_CRON,
-} from "@hack-the-andes-project/infra/constants";
+} from "@iathon-kiro/infra/constants";
 import {
 	scheduleWorker,
 	serveWorker,
-} from "@hack-the-andes-project/node-runtime/serve";
+} from "@iathon-kiro/node-runtime/serve";
 
 import worker from "./index";
 

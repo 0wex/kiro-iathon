@@ -1,5 +1,5 @@
 {
-	"extends": "@hack-the-andes-project/config/tsconfig.base.json",
+	"extends": "@iathon-kiro/config/tsconfig.base.json",
 	"references": [{ "path": "../../packages/api" }],
 	"compilerOptions": {
 		"noEmit": true,

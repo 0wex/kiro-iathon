@@ -1,6 +1,6 @@
-import { demoRequestSchema } from "@hack-the-andes-project/business/demo-request";
-import type { Database } from "@hack-the-andes-project/db";
-import { demoRequest } from "@hack-the-andes-project/db/schema/demo-request";
+import { demoRequestSchema } from "@iathon-kiro/business/demo-request";
+import type { Database } from "@iathon-kiro/db";
+import { demoRequest } from "@iathon-kiro/db/schema/demo-request";
 
 import { HTTP_STATUS_BAD_REQUEST, HTTP_STATUS_CREATED } from "./constants";
 import type { Context } from "./context";

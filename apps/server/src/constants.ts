@@ -1,7 +1,7 @@
-import { DEMO_RESET_PATH } from "@hack-the-andes-project/business/demo-account";
-import { DEMO_REQUESTS_PATH } from "@hack-the-andes-project/business/demo-request";
+import { DEMO_RESET_PATH } from "@iathon-kiro/business/demo-account";
+import { DEMO_REQUESTS_PATH } from "@iathon-kiro/business/demo-request";
 
-export const SERVICE_NAME = "hack-the-andes-server";
+export const SERVICE_NAME = "iathon-kiro-server";
 
 // Browsers cap Access-Control-Max-Age; ask for the 24h upper bound so
 // preflights are reused as long as each browser allows.

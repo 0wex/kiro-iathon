@@ -4,9 +4,9 @@ import {
 	CardDescription,
 	CardHeader,
 	CardTitle,
-} from "@hack-the-andes-project/ui/components/card";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+} from "@iathon-kiro/ui/components/card";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 import { SHOWCASE_RADIUS_SCALE, SPACING_SCALE } from "@/constants";
 import { m } from "@/paraglide/messages";
 

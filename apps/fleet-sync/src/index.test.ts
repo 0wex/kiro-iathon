@@ -21,8 +21,8 @@ vi.mock("./env.server", () => ({
 		HYPERDRIVE: {},
 	},
 }));
-vi.mock("@hack-the-andes-project/db", () => ({ createDb: mocks.createDb }));
-vi.mock("@hack-the-andes-project/business", () => mocks);
+vi.mock("@iathon-kiro/db", () => ({ createDb: mocks.createDb }));
+vi.mock("@iathon-kiro/business", () => mocks);
 vi.mock("evlog/workers", () => ({ initWorkersLogger: vi.fn() }));
 vi.mock("evlog", () => ({
 	createLogger: () => ({ set: vi.fn(), setLevel: vi.fn(), emit: vi.fn() }),

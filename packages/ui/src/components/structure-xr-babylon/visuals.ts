@@ -20,7 +20,7 @@ import {
 	vrMetresOf,
 	vrTextCard,
 	vrTexturePx,
-} from "@hack-the-andes-project/xr-simulator/viewer";
+} from "@iathon-kiro/xr-simulator/viewer";
 import type { StructureXrLabels } from "../../lib/structure-xr-babylon";
 import {
 	DEFAULT_RING_COLOR,

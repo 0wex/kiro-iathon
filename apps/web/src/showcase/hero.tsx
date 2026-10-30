@@ -1,7 +1,7 @@
 import {
 	RainStreaks,
 	StarRiver,
-} from "@hack-the-andes-project/ui/components/mayu-art";
+} from "@iathon-kiro/ui/components/mayu-art";
 import { LanguageToggle } from "@/components/language-toggle";
 import { ThemeSwitchControl } from "@/components/theme-switch-control";
 import { SHOWCASE_SECTIONS } from "@/constants";

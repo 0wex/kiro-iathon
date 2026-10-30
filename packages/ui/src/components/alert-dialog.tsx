@@ -1,5 +1,5 @@
 import { AlertDialog as AlertDialogPrimitive } from "@base-ui/react/alert-dialog";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+import { Button } from "@iathon-kiro/ui/components/button";
 import { cn } from "cn";
 import type * as React from "react";
 

@@ -3,15 +3,15 @@ import {
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
-} from "@hack-the-andes-project/ui/components/accordion";
-import { AspectRatio } from "@hack-the-andes-project/ui/components/aspect-ratio";
+} from "@iathon-kiro/ui/components/accordion";
+import { AspectRatio } from "@iathon-kiro/ui/components/aspect-ratio";
 import {
 	Avatar,
 	AvatarFallback,
 	AvatarGroup,
-} from "@hack-the-andes-project/ui/components/avatar";
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/avatar";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Card,
 	CardContent,
@@ -19,26 +19,26 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@hack-the-andes-project/ui/components/card";
+} from "@iathon-kiro/ui/components/card";
 import {
 	Carousel,
 	CarouselContent,
 	CarouselItem,
 	CarouselNext,
 	CarouselPrevious,
-} from "@hack-the-andes-project/ui/components/carousel";
+} from "@iathon-kiro/ui/components/carousel";
 import {
 	CodeBlock,
 	CodeBlockContent,
 	CodeBlockHeader,
 	CodeBlockTitle,
-} from "@hack-the-andes-project/ui/components/code-block";
+} from "@iathon-kiro/ui/components/code-block";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from "@hack-the-andes-project/ui/components/collapsible";
-import { TopoBackground } from "@hack-the-andes-project/ui/components/contour-art";
+} from "@iathon-kiro/ui/components/collapsible";
+import { TopoBackground } from "@iathon-kiro/ui/components/contour-art";
 import {
 	Item,
 	ItemActions,
@@ -46,15 +46,15 @@ import {
 	ItemDescription,
 	ItemGroup,
 	ItemTitle,
-} from "@hack-the-andes-project/ui/components/item";
+} from "@iathon-kiro/ui/components/item";
 import {
 	ResizableHandle,
 	ResizablePanel,
 	ResizablePanelGroup,
-} from "@hack-the-andes-project/ui/components/resizable";
-import { ScrollArea } from "@hack-the-andes-project/ui/components/scroll-area";
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
+} from "@iathon-kiro/ui/components/resizable";
+import { ScrollArea } from "@iathon-kiro/ui/components/scroll-area";
+import { Separator } from "@iathon-kiro/ui/components/separator";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
 import { toast } from "sonner";
 import {
 	ROUTE_EXAMPLES,

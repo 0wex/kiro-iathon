@@ -1,4 +1,4 @@
-import { createDb } from "@hack-the-andes-project/db";
+import { createDb } from "@iathon-kiro/db";
 import { createRequestLogger } from "evlog";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { evaluateRouteReview } from "./evaluate";

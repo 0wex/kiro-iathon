@@ -1,9 +1,9 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	routeReview,
 	trip,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { and, eq, isNotNull, lt, notExists } from "drizzle-orm";
 import type { RequestLogger } from "evlog";
 import { MS_PER_SECOND, ROUTE_REVIEW_RETENTION_MS } from "../constants";

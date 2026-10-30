@@ -1,4 +1,4 @@
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
 import type { LineString } from "geojson";
 import * as THREE from "three";
 

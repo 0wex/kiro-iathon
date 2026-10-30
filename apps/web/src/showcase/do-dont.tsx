@@ -1,6 +1,6 @@
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
 import { m } from "@/paraglide/messages";
 
 export function DoDontSection() {

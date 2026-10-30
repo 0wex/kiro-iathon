@@ -5,95 +5,95 @@
 	"prevIds": ["1bd99eff-bfb2-4a98-967e-0ce242b46398"],
 	"ddl": [
 		{
-			"name": "hack_the_andes_account",
+			"name": "iathon_kiro_account",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_invitation",
+			"name": "iathon_kiro_invitation",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_member",
+			"name": "iathon_kiro_member",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_organization",
+			"name": "iathon_kiro_organization",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_rate_limit",
+			"name": "iathon_kiro_rate_limit",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_session",
+			"name": "iathon_kiro_session",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_user",
+			"name": "iathon_kiro_user",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_verification",
+			"name": "iathon_kiro_verification",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_demo_request",
+			"name": "iathon_kiro_demo_request",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_alert",
+			"name": "iathon_kiro_alert",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_gps_connection",
+			"name": "iathon_kiro_gps_connection",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_trip",
+			"name": "iathon_kiro_trip",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_vehicle",
+			"name": "iathon_kiro_vehicle",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_vehicle_position",
+			"name": "iathon_kiro_vehicle_position",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_risk_pipeline_run",
+			"name": "iathon_kiro_risk_pipeline_run",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_road_edge",
+			"name": "iathon_kiro_road_edge",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_road_node",
+			"name": "iathon_kiro_road_node",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_road_segment",
+			"name": "iathon_kiro_road_segment",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_segment_risk_assessment",
+			"name": "iathon_kiro_segment_risk_assessment",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_incident",
+			"name": "iathon_kiro_incident",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_news_article",
+			"name": "iathon_kiro_news_article",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_poi",
+			"name": "iathon_kiro_poi",
 			"entityType": "tables"
 		},
 		{
-			"name": "hack_the_andes_scrape_run",
+			"name": "iathon_kiro_scrape_run",
 			"entityType": "tables"
 		},
 		{
@@ -108,7 +108,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -122,7 +122,7 @@
 			"generated": null,
 			"name": "account_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -136,7 +136,7 @@
 			"generated": null,
 			"name": "provider_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "varchar(36)",
@@ -150,7 +150,7 @@
 			"generated": null,
 			"name": "user_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -164,7 +164,7 @@
 			"generated": null,
 			"name": "access_token",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -178,7 +178,7 @@
 			"generated": null,
 			"name": "refresh_token",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -192,7 +192,7 @@
 			"generated": null,
 			"name": "id_token",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "timestamp(3)",
@@ -206,7 +206,7 @@
 			"generated": null,
 			"name": "access_token_expires_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "timestamp(3)",
@@ -220,7 +220,7 @@
 			"generated": null,
 			"name": "refresh_token_expires_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -234,7 +234,7 @@
 			"generated": null,
 			"name": "scope",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "text",
@@ -248,7 +248,7 @@
 			"generated": null,
 			"name": "password",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "timestamp(3)",
@@ -262,7 +262,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "timestamp(3)",
@@ -276,7 +276,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"type": "varchar(36)",
@@ -290,7 +290,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(36)",
@@ -304,7 +304,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(255)",
@@ -318,7 +318,7 @@
 			"generated": null,
 			"name": "email",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(255)",
@@ -332,7 +332,7 @@
 			"generated": null,
 			"name": "role",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(32)",
@@ -346,7 +346,7 @@
 			"generated": null,
 			"name": "status",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "timestamp(3)",
@@ -360,7 +360,7 @@
 			"generated": null,
 			"name": "expires_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "timestamp(3)",
@@ -374,7 +374,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(36)",
@@ -388,7 +388,7 @@
 			"generated": null,
 			"name": "inviter_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"type": "varchar(36)",
@@ -402,7 +402,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"type": "varchar(36)",
@@ -416,7 +416,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"type": "varchar(36)",
@@ -430,7 +430,7 @@
 			"generated": null,
 			"name": "user_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"type": "varchar(255)",
@@ -444,7 +444,7 @@
 			"generated": null,
 			"name": "role",
 			"entityType": "columns",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"type": "timestamp(3)",
@@ -458,7 +458,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"type": "varchar(36)",
@@ -472,7 +472,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "varchar(255)",
@@ -486,7 +486,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "varchar(255)",
@@ -500,7 +500,7 @@
 			"generated": null,
 			"name": "slug",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "text",
@@ -514,7 +514,7 @@
 			"generated": null,
 			"name": "logo",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "text",
@@ -528,7 +528,7 @@
 			"generated": null,
 			"name": "metadata",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "timestamp(3)",
@@ -542,7 +542,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_organization"
+			"table": "iathon_kiro_organization"
 		},
 		{
 			"type": "varchar(36)",
@@ -556,7 +556,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_rate_limit"
+			"table": "iathon_kiro_rate_limit"
 		},
 		{
 			"type": "varchar(255)",
@@ -570,7 +570,7 @@
 			"generated": null,
 			"name": "key",
 			"entityType": "columns",
-			"table": "hack_the_andes_rate_limit"
+			"table": "iathon_kiro_rate_limit"
 		},
 		{
 			"type": "int",
@@ -584,7 +584,7 @@
 			"generated": null,
 			"name": "count",
 			"entityType": "columns",
-			"table": "hack_the_andes_rate_limit"
+			"table": "iathon_kiro_rate_limit"
 		},
 		{
 			"type": "bigint",
@@ -598,7 +598,7 @@
 			"generated": null,
 			"name": "last_request",
 			"entityType": "columns",
-			"table": "hack_the_andes_rate_limit"
+			"table": "iathon_kiro_rate_limit"
 		},
 		{
 			"type": "varchar(36)",
@@ -612,7 +612,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "timestamp(3)",
@@ -626,7 +626,7 @@
 			"generated": null,
 			"name": "expires_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "varchar(255)",
@@ -640,7 +640,7 @@
 			"generated": null,
 			"name": "token",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "timestamp(3)",
@@ -654,7 +654,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "timestamp(3)",
@@ -668,7 +668,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "text",
@@ -682,7 +682,7 @@
 			"generated": null,
 			"name": "ip_address",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "text",
@@ -696,7 +696,7 @@
 			"generated": null,
 			"name": "user_agent",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "varchar(36)",
@@ -710,7 +710,7 @@
 			"generated": null,
 			"name": "user_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "varchar(36)",
@@ -724,7 +724,7 @@
 			"generated": null,
 			"name": "active_organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"type": "varchar(36)",
@@ -738,7 +738,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "varchar(255)",
@@ -752,7 +752,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "varchar(255)",
@@ -766,7 +766,7 @@
 			"generated": null,
 			"name": "email",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "boolean",
@@ -780,7 +780,7 @@
 			"generated": null,
 			"name": "email_verified",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "text",
@@ -794,7 +794,7 @@
 			"generated": null,
 			"name": "image",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "varchar(32)",
@@ -808,7 +808,7 @@
 			"generated": null,
 			"name": "role",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "timestamp(3)",
@@ -822,7 +822,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "timestamp(3)",
@@ -836,7 +836,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_user"
+			"table": "iathon_kiro_user"
 		},
 		{
 			"type": "varchar(36)",
@@ -850,7 +850,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "varchar(255)",
@@ -864,7 +864,7 @@
 			"generated": null,
 			"name": "identifier",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "text",
@@ -878,7 +878,7 @@
 			"generated": null,
 			"name": "value",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "timestamp(3)",
@@ -892,7 +892,7 @@
 			"generated": null,
 			"name": "expires_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "timestamp(3)",
@@ -906,7 +906,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "timestamp(3)",
@@ -920,7 +920,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"type": "varchar(36)",
@@ -934,7 +934,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "varchar(120)",
@@ -948,7 +948,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "varchar(160)",
@@ -962,7 +962,7 @@
 			"generated": null,
 			"name": "company",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "varchar(40)",
@@ -976,7 +976,7 @@
 			"generated": null,
 			"name": "phone",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "varchar(254)",
@@ -990,7 +990,7 @@
 			"generated": null,
 			"name": "email",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1004,7 +1004,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_demo_request"
+			"table": "iathon_kiro_demo_request"
 		},
 		{
 			"type": "varchar(36)",
@@ -1018,7 +1018,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(36)",
@@ -1032,7 +1032,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(36)",
@@ -1046,7 +1046,7 @@
 			"generated": null,
 			"name": "trip_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(36)",
@@ -1060,7 +1060,7 @@
 			"generated": null,
 			"name": "vehicle_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(36)",
@@ -1074,7 +1074,7 @@
 			"generated": null,
 			"name": "incident_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(32)",
@@ -1088,7 +1088,7 @@
 			"generated": null,
 			"name": "kind",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(16)",
@@ -1102,7 +1102,7 @@
 			"generated": null,
 			"name": "severity",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(512)",
@@ -1116,7 +1116,7 @@
 			"generated": null,
 			"name": "title",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "text",
@@ -1130,7 +1130,7 @@
 			"generated": null,
 			"name": "message",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "double",
@@ -1144,7 +1144,7 @@
 			"generated": null,
 			"name": "distance_ahead_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1158,7 +1158,7 @@
 			"generated": null,
 			"name": "eta_to_hazard_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "json",
@@ -1172,7 +1172,7 @@
 			"generated": null,
 			"name": "alternative_route",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(32)",
@@ -1186,7 +1186,7 @@
 			"generated": null,
 			"name": "status",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1200,7 +1200,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1214,7 +1214,7 @@
 			"generated": null,
 			"name": "acknowledged_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1228,7 +1228,7 @@
 			"generated": null,
 			"name": "resolved_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"type": "varchar(36)",
@@ -1242,7 +1242,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "varchar(36)",
@@ -1256,7 +1256,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "varchar(32)",
@@ -1270,7 +1270,7 @@
 			"generated": null,
 			"name": "provider",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "varchar(255)",
@@ -1284,7 +1284,7 @@
 			"generated": null,
 			"name": "label",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "text",
@@ -1298,7 +1298,7 @@
 			"generated": null,
 			"name": "encrypted_credentials",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "varchar(32)",
@@ -1312,7 +1312,7 @@
 			"generated": null,
 			"name": "status",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1326,7 +1326,7 @@
 			"generated": null,
 			"name": "last_sync_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "text",
@@ -1340,7 +1340,7 @@
 			"generated": null,
 			"name": "last_error",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1354,7 +1354,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1368,7 +1368,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"type": "varchar(36)",
@@ -1382,7 +1382,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(36)",
@@ -1396,7 +1396,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(36)",
@@ -1410,7 +1410,7 @@
 			"generated": null,
 			"name": "vehicle_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(255)",
@@ -1424,7 +1424,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1438,7 +1438,7 @@
 			"generated": null,
 			"name": "origin_lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1452,7 +1452,7 @@
 			"generated": null,
 			"name": "origin_lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1466,7 +1466,7 @@
 			"generated": null,
 			"name": "destination_lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1480,7 +1480,7 @@
 			"generated": null,
 			"name": "destination_lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(255)",
@@ -1494,7 +1494,7 @@
 			"generated": null,
 			"name": "destination_name",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "json",
@@ -1508,7 +1508,7 @@
 			"generated": null,
 			"name": "route_geometry",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1522,7 +1522,7 @@
 			"generated": null,
 			"name": "route_distance_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "double",
@@ -1536,7 +1536,7 @@
 			"generated": null,
 			"name": "route_duration_s",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(32)",
@@ -1550,7 +1550,7 @@
 			"generated": null,
 			"name": "status",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1564,7 +1564,7 @@
 			"generated": null,
 			"name": "eta_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1578,7 +1578,7 @@
 			"generated": null,
 			"name": "last_evaluated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1592,7 +1592,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1606,7 +1606,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"type": "varchar(36)",
@@ -1620,7 +1620,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(36)",
@@ -1634,7 +1634,7 @@
 			"generated": null,
 			"name": "organization_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(36)",
@@ -1648,7 +1648,7 @@
 			"generated": null,
 			"name": "connection_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(255)",
@@ -1662,7 +1662,7 @@
 			"generated": null,
 			"name": "external_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(255)",
@@ -1676,7 +1676,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(32)",
@@ -1690,7 +1690,7 @@
 			"generated": null,
 			"name": "plate",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "double",
@@ -1704,7 +1704,7 @@
 			"generated": null,
 			"name": "last_lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "double",
@@ -1718,7 +1718,7 @@
 			"generated": null,
 			"name": "last_lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "double",
@@ -1732,7 +1732,7 @@
 			"generated": null,
 			"name": "last_heading",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "double",
@@ -1746,7 +1746,7 @@
 			"generated": null,
 			"name": "last_speed_kmh",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1760,7 +1760,7 @@
 			"generated": null,
 			"name": "last_position_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "boolean",
@@ -1774,7 +1774,7 @@
 			"generated": null,
 			"name": "active",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1788,7 +1788,7 @@
 			"generated": null,
 			"name": "created_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1802,7 +1802,7 @@
 			"generated": null,
 			"name": "updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"type": "varchar(36)",
@@ -1816,7 +1816,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "varchar(36)",
@@ -1830,7 +1830,7 @@
 			"generated": null,
 			"name": "vehicle_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "double",
@@ -1844,7 +1844,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "double",
@@ -1858,7 +1858,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "double",
@@ -1872,7 +1872,7 @@
 			"generated": null,
 			"name": "speed_kmh",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "double",
@@ -1886,7 +1886,7 @@
 			"generated": null,
 			"name": "heading",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1900,7 +1900,7 @@
 			"generated": null,
 			"name": "recorded_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"type": "varchar(36)",
@@ -1914,7 +1914,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "varchar(255)",
@@ -1928,7 +1928,7 @@
 			"generated": null,
 			"name": "area",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "int",
@@ -1942,7 +1942,7 @@
 			"generated": null,
 			"name": "segments",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "int",
@@ -1956,7 +1956,7 @@
 			"generated": null,
 			"name": "nodes",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "int",
@@ -1970,7 +1970,7 @@
 			"generated": null,
 			"name": "edges",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "json",
@@ -1984,7 +1984,7 @@
 			"generated": null,
 			"name": "sources",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "timestamp(3)",
@@ -1998,7 +1998,7 @@
 			"generated": null,
 			"name": "finished_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_risk_pipeline_run"
+			"table": "iathon_kiro_risk_pipeline_run"
 		},
 		{
 			"type": "varchar(64)",
@@ -2012,7 +2012,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "bigint",
@@ -2026,7 +2026,7 @@
 			"generated": null,
 			"name": "from_node_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "bigint",
@@ -2040,7 +2040,7 @@
 			"generated": null,
 			"name": "to_node_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "varchar(64)",
@@ -2054,7 +2054,7 @@
 			"generated": null,
 			"name": "segment_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "varchar(32)",
@@ -2068,7 +2068,7 @@
 			"generated": null,
 			"name": "road_code",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "varchar(255)",
@@ -2082,7 +2082,7 @@
 			"generated": null,
 			"name": "road_name",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "varchar(32)",
@@ -2096,7 +2096,7 @@
 			"generated": null,
 			"name": "highway",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "double",
@@ -2110,7 +2110,7 @@
 			"generated": null,
 			"name": "length_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "double",
@@ -2124,7 +2124,7 @@
 			"generated": null,
 			"name": "travel_time_s",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "json",
@@ -2138,7 +2138,7 @@
 			"generated": null,
 			"name": "geometry",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "double",
@@ -2152,7 +2152,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "double",
@@ -2166,7 +2166,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"type": "bigint",
@@ -2180,7 +2180,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_node"
+			"table": "iathon_kiro_road_node"
 		},
 		{
 			"type": "double",
@@ -2194,7 +2194,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_node"
+			"table": "iathon_kiro_road_node"
 		},
 		{
 			"type": "double",
@@ -2208,7 +2208,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_node"
+			"table": "iathon_kiro_road_node"
 		},
 		{
 			"type": "varchar(64)",
@@ -2222,7 +2222,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "varchar(32)",
@@ -2236,7 +2236,7 @@
 			"generated": null,
 			"name": "road_code",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "varchar(255)",
@@ -2250,7 +2250,7 @@
 			"generated": null,
 			"name": "road_name",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "json",
@@ -2264,7 +2264,7 @@
 			"generated": null,
 			"name": "geometry",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2278,7 +2278,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2292,7 +2292,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2306,7 +2306,7 @@
 			"generated": null,
 			"name": "length_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2320,7 +2320,7 @@
 			"generated": null,
 			"name": "elevation_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2334,7 +2334,7 @@
 			"generated": null,
 			"name": "terrain_slope_deg",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "int",
@@ -2348,7 +2348,7 @@
 			"generated": null,
 			"name": "mass_movement_susceptibility",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "int",
@@ -2362,7 +2362,7 @@
 			"generated": null,
 			"name": "flood_susceptibility",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "double",
@@ -2376,7 +2376,7 @@
 			"generated": null,
 			"name": "water_distance_m",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "varchar(36)",
@@ -2390,7 +2390,7 @@
 			"generated": null,
 			"name": "pipeline_run_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2404,7 +2404,7 @@
 			"generated": null,
 			"name": "built_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"type": "varchar(36)",
@@ -2418,7 +2418,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "varchar(64)",
@@ -2432,7 +2432,7 @@
 			"generated": null,
 			"name": "segment_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "int",
@@ -2446,7 +2446,7 @@
 			"generated": null,
 			"name": "horizon_hours",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "double",
@@ -2460,7 +2460,7 @@
 			"generated": null,
 			"name": "score",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "varchar(16)",
@@ -2474,7 +2474,7 @@
 			"generated": null,
 			"name": "level",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "varchar(16)",
@@ -2488,7 +2488,7 @@
 			"generated": null,
 			"name": "method",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "varchar(64)",
@@ -2502,7 +2502,7 @@
 			"generated": null,
 			"name": "model_version",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "json",
@@ -2516,7 +2516,7 @@
 			"generated": null,
 			"name": "components",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "double",
@@ -2530,7 +2530,7 @@
 			"generated": null,
 			"name": "forecast_precipitation_mm",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "double",
@@ -2544,7 +2544,7 @@
 			"generated": null,
 			"name": "antecedent_precipitation_mm",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2558,7 +2558,7 @@
 			"generated": null,
 			"name": "weather_fetched_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2572,7 +2572,7 @@
 			"generated": null,
 			"name": "valid_from",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2586,7 +2586,7 @@
 			"generated": null,
 			"name": "valid_until",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2600,7 +2600,7 @@
 			"generated": null,
 			"name": "assessed_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"type": "varchar(36)",
@@ -2614,7 +2614,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(64)",
@@ -2628,7 +2628,7 @@
 			"generated": null,
 			"name": "source",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(128)",
@@ -2642,7 +2642,7 @@
 			"generated": null,
 			"name": "source_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(32)",
@@ -2656,7 +2656,7 @@
 			"generated": null,
 			"name": "category",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(16)",
@@ -2670,7 +2670,7 @@
 			"generated": null,
 			"name": "severity",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(512)",
@@ -2684,7 +2684,7 @@
 			"generated": null,
 			"name": "title",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "text",
@@ -2698,7 +2698,7 @@
 			"generated": null,
 			"name": "description",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(1024)",
@@ -2712,7 +2712,7 @@
 			"generated": null,
 			"name": "image_url",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(64)",
@@ -2726,7 +2726,7 @@
 			"generated": null,
 			"name": "status",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(32)",
@@ -2740,7 +2740,7 @@
 			"generated": null,
 			"name": "road_status",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(32)",
@@ -2754,7 +2754,7 @@
 			"generated": null,
 			"name": "road_code",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(255)",
@@ -2768,7 +2768,7 @@
 			"generated": null,
 			"name": "road_name",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(64)",
@@ -2782,7 +2782,7 @@
 			"generated": null,
 			"name": "road_km",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "double",
@@ -2796,7 +2796,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "double",
@@ -2810,7 +2810,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "json",
@@ -2824,7 +2824,7 @@
 			"generated": null,
 			"name": "geometry",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(128)",
@@ -2838,7 +2838,7 @@
 			"generated": null,
 			"name": "region",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(128)",
@@ -2852,7 +2852,7 @@
 			"generated": null,
 			"name": "provincia",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(128)",
@@ -2866,7 +2866,7 @@
 			"generated": null,
 			"name": "distrito",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2880,7 +2880,7 @@
 			"generated": null,
 			"name": "occurred_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2894,7 +2894,7 @@
 			"generated": null,
 			"name": "source_updated_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2908,7 +2908,7 @@
 			"generated": null,
 			"name": "valid_from",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2922,7 +2922,7 @@
 			"generated": null,
 			"name": "valid_until",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "json",
@@ -2936,7 +2936,7 @@
 			"generated": null,
 			"name": "attributes",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(64)",
@@ -2950,7 +2950,7 @@
 			"generated": null,
 			"name": "content_hash",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "boolean",
@@ -2964,7 +2964,7 @@
 			"generated": null,
 			"name": "active",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2978,7 +2978,7 @@
 			"generated": null,
 			"name": "first_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -2992,7 +2992,7 @@
 			"generated": null,
 			"name": "last_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3006,7 +3006,7 @@
 			"generated": null,
 			"name": "last_changed_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"type": "varchar(36)",
@@ -3020,7 +3020,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(64)",
@@ -3034,7 +3034,7 @@
 			"generated": null,
 			"name": "source",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(128)",
@@ -3048,7 +3048,7 @@
 			"generated": null,
 			"name": "source_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(1024)",
@@ -3062,7 +3062,7 @@
 			"generated": null,
 			"name": "url",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(512)",
@@ -3076,7 +3076,7 @@
 			"generated": null,
 			"name": "title",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "text",
@@ -3090,7 +3090,7 @@
 			"generated": null,
 			"name": "excerpt",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(128)",
@@ -3104,7 +3104,7 @@
 			"generated": null,
 			"name": "section",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(255)",
@@ -3118,7 +3118,7 @@
 			"generated": null,
 			"name": "author",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3132,7 +3132,7 @@
 			"generated": null,
 			"name": "published_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "boolean",
@@ -3146,7 +3146,7 @@
 			"generated": null,
 			"name": "relevant",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "double",
@@ -3160,7 +3160,7 @@
 			"generated": null,
 			"name": "relevance",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(32)",
@@ -3174,7 +3174,7 @@
 			"generated": null,
 			"name": "category",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(16)",
@@ -3188,7 +3188,7 @@
 			"generated": null,
 			"name": "severity",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(128)",
@@ -3202,7 +3202,7 @@
 			"generated": null,
 			"name": "region",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "json",
@@ -3216,7 +3216,7 @@
 			"generated": null,
 			"name": "classification",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(64)",
@@ -3230,7 +3230,7 @@
 			"generated": null,
 			"name": "content_hash",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "boolean",
@@ -3244,7 +3244,7 @@
 			"generated": null,
 			"name": "active",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3258,7 +3258,7 @@
 			"generated": null,
 			"name": "first_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3272,7 +3272,7 @@
 			"generated": null,
 			"name": "last_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3286,7 +3286,7 @@
 			"generated": null,
 			"name": "last_changed_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"type": "varchar(36)",
@@ -3300,7 +3300,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(64)",
@@ -3314,7 +3314,7 @@
 			"generated": null,
 			"name": "source",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(128)",
@@ -3328,7 +3328,7 @@
 			"generated": null,
 			"name": "source_id",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(32)",
@@ -3342,7 +3342,7 @@
 			"generated": null,
 			"name": "kind",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(512)",
@@ -3356,7 +3356,7 @@
 			"generated": null,
 			"name": "name",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "double",
@@ -3370,7 +3370,7 @@
 			"generated": null,
 			"name": "lat",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "double",
@@ -3384,7 +3384,7 @@
 			"generated": null,
 			"name": "lng",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "json",
@@ -3398,7 +3398,7 @@
 			"generated": null,
 			"name": "geometry",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(128)",
@@ -3412,7 +3412,7 @@
 			"generated": null,
 			"name": "region",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(128)",
@@ -3426,7 +3426,7 @@
 			"generated": null,
 			"name": "provincia",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(128)",
@@ -3440,7 +3440,7 @@
 			"generated": null,
 			"name": "distrito",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "json",
@@ -3454,7 +3454,7 @@
 			"generated": null,
 			"name": "road_codes",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "json",
@@ -3468,7 +3468,7 @@
 			"generated": null,
 			"name": "attributes",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(64)",
@@ -3482,7 +3482,7 @@
 			"generated": null,
 			"name": "content_hash",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "boolean",
@@ -3496,7 +3496,7 @@
 			"generated": null,
 			"name": "active",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3510,7 +3510,7 @@
 			"generated": null,
 			"name": "first_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3524,7 +3524,7 @@
 			"generated": null,
 			"name": "last_seen_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3538,7 +3538,7 @@
 			"generated": null,
 			"name": "last_changed_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"type": "varchar(36)",
@@ -3552,7 +3552,7 @@
 			"generated": null,
 			"name": "id",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "varchar(64)",
@@ -3566,7 +3566,7 @@
 			"generated": null,
 			"name": "source",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3580,7 +3580,7 @@
 			"generated": null,
 			"name": "started_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "timestamp(3)",
@@ -3594,7 +3594,7 @@
 			"generated": null,
 			"name": "finished_at",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "boolean",
@@ -3608,7 +3608,7 @@
 			"generated": null,
 			"name": "ok",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "int",
@@ -3622,7 +3622,7 @@
 			"generated": null,
 			"name": "fetched",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "int",
@@ -3636,7 +3636,7 @@
 			"generated": null,
 			"name": "inserted",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "int",
@@ -3650,7 +3650,7 @@
 			"generated": null,
 			"name": "updated",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "int",
@@ -3664,7 +3664,7 @@
 			"generated": null,
 			"name": "deactivated",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"type": "text",
@@ -3678,144 +3678,144 @@
 			"generated": null,
 			"name": "error_message",
 			"entityType": "columns",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_account",
+			"table": "iathon_kiro_account",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_invitation",
+			"table": "iathon_kiro_invitation",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_member",
+			"table": "iathon_kiro_member",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_organization",
+			"table": "iathon_kiro_organization",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_rate_limit",
+			"table": "iathon_kiro_rate_limit",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_session",
+			"table": "iathon_kiro_session",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_user",
+			"table": "iathon_kiro_user",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_verification",
+			"table": "iathon_kiro_verification",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_demo_request",
+			"table": "iathon_kiro_demo_request",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_alert",
+			"table": "iathon_kiro_alert",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_gps_connection",
+			"table": "iathon_kiro_gps_connection",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_trip",
+			"table": "iathon_kiro_trip",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_vehicle",
+			"table": "iathon_kiro_vehicle",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_vehicle_position",
+			"table": "iathon_kiro_vehicle_position",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_risk_pipeline_run",
+			"table": "iathon_kiro_risk_pipeline_run",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_road_edge",
+			"table": "iathon_kiro_road_edge",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_road_node",
+			"table": "iathon_kiro_road_node",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_road_segment",
+			"table": "iathon_kiro_road_segment",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_segment_risk_assessment",
+			"table": "iathon_kiro_segment_risk_assessment",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_incident",
+			"table": "iathon_kiro_incident",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_news_article",
+			"table": "iathon_kiro_news_article",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_poi",
+			"table": "iathon_kiro_poi",
 			"entityType": "pks"
 		},
 		{
 			"columns": ["id"],
 			"name": "PRIMARY",
-			"table": "hack_the_andes_scrape_run",
+			"table": "iathon_kiro_scrape_run",
 			"entityType": "pks"
 		},
 		{
@@ -3831,7 +3831,7 @@
 			"lock": null,
 			"nameExplicit": false,
 			"name": "slug_unique",
-			"table": "hack_the_andes_organization",
+			"table": "iathon_kiro_organization",
 			"entityType": "indexes"
 		},
 		{
@@ -3847,7 +3847,7 @@
 			"lock": null,
 			"nameExplicit": false,
 			"name": "key_unique",
-			"table": "hack_the_andes_rate_limit",
+			"table": "iathon_kiro_rate_limit",
 			"entityType": "indexes"
 		},
 		{
@@ -3863,7 +3863,7 @@
 			"lock": null,
 			"nameExplicit": false,
 			"name": "token_unique",
-			"table": "hack_the_andes_session",
+			"table": "iathon_kiro_session",
 			"entityType": "indexes"
 		},
 		{
@@ -3879,7 +3879,7 @@
 			"lock": null,
 			"nameExplicit": false,
 			"name": "email_unique",
-			"table": "hack_the_andes_user",
+			"table": "iathon_kiro_user",
 			"entityType": "indexes"
 		},
 		{
@@ -3896,7 +3896,7 @@
 			"nameExplicit": true,
 			"name": "account_userId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_account"
+			"table": "iathon_kiro_account"
 		},
 		{
 			"columns": [
@@ -3912,7 +3912,7 @@
 			"nameExplicit": true,
 			"name": "invitation_organizationId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"columns": [
@@ -3928,7 +3928,7 @@
 			"nameExplicit": true,
 			"name": "invitation_email_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"columns": [
@@ -3944,7 +3944,7 @@
 			"nameExplicit": true,
 			"name": "invitation_inviterId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_invitation"
+			"table": "iathon_kiro_invitation"
 		},
 		{
 			"columns": [
@@ -3964,7 +3964,7 @@
 			"nameExplicit": true,
 			"name": "member_organizationId_userId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"columns": [
@@ -3980,7 +3980,7 @@
 			"nameExplicit": true,
 			"name": "member_userId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_member"
+			"table": "iathon_kiro_member"
 		},
 		{
 			"columns": [
@@ -3996,7 +3996,7 @@
 			"nameExplicit": true,
 			"name": "session_userId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"columns": [
@@ -4012,7 +4012,7 @@
 			"nameExplicit": true,
 			"name": "session_activeOrganizationId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_session"
+			"table": "iathon_kiro_session"
 		},
 		{
 			"columns": [
@@ -4028,7 +4028,7 @@
 			"nameExplicit": true,
 			"name": "verification_identifier_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_verification"
+			"table": "iathon_kiro_verification"
 		},
 		{
 			"columns": [
@@ -4048,7 +4048,7 @@
 			"nameExplicit": true,
 			"name": "alert_tripId_incidentId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"columns": [
@@ -4068,7 +4068,7 @@
 			"nameExplicit": true,
 			"name": "alert_organizationId_status_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"columns": [
@@ -4084,7 +4084,7 @@
 			"nameExplicit": true,
 			"name": "alert_vehicleId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"columns": [
@@ -4100,7 +4100,7 @@
 			"nameExplicit": true,
 			"name": "alert_incidentId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_alert"
+			"table": "iathon_kiro_alert"
 		},
 		{
 			"columns": [
@@ -4116,7 +4116,7 @@
 			"nameExplicit": true,
 			"name": "gpsConnection_organizationId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_gps_connection"
+			"table": "iathon_kiro_gps_connection"
 		},
 		{
 			"columns": [
@@ -4136,7 +4136,7 @@
 			"nameExplicit": true,
 			"name": "trip_organizationId_status_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"columns": [
@@ -4152,7 +4152,7 @@
 			"nameExplicit": true,
 			"name": "trip_vehicleId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_trip"
+			"table": "iathon_kiro_trip"
 		},
 		{
 			"columns": [
@@ -4172,7 +4172,7 @@
 			"nameExplicit": true,
 			"name": "vehicle_connectionId_externalId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"columns": [
@@ -4188,7 +4188,7 @@
 			"nameExplicit": true,
 			"name": "vehicle_organizationId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_vehicle"
+			"table": "iathon_kiro_vehicle"
 		},
 		{
 			"columns": [
@@ -4204,7 +4204,7 @@
 			"nameExplicit": true,
 			"name": "vehiclePosition_recordedAt_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"columns": [
@@ -4224,7 +4224,7 @@
 			"nameExplicit": true,
 			"name": "vehiclePosition_vehicleId_recordedAt_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_vehicle_position"
+			"table": "iathon_kiro_vehicle_position"
 		},
 		{
 			"columns": [
@@ -4244,7 +4244,7 @@
 			"nameExplicit": true,
 			"name": "roadEdge_lat_lng_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"columns": [
@@ -4260,7 +4260,7 @@
 			"nameExplicit": true,
 			"name": "roadEdge_segmentId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_road_edge"
+			"table": "iathon_kiro_road_edge"
 		},
 		{
 			"columns": [
@@ -4280,7 +4280,7 @@
 			"nameExplicit": true,
 			"name": "roadNode_lat_lng_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_road_node"
+			"table": "iathon_kiro_road_node"
 		},
 		{
 			"columns": [
@@ -4300,7 +4300,7 @@
 			"nameExplicit": true,
 			"name": "roadSegment_lat_lng_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"columns": [
@@ -4316,7 +4316,7 @@
 			"nameExplicit": true,
 			"name": "roadSegment_roadCode_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_road_segment"
+			"table": "iathon_kiro_road_segment"
 		},
 		{
 			"columns": [
@@ -4336,7 +4336,7 @@
 			"nameExplicit": true,
 			"name": "segmentRiskAssessment_segment_horizon_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"columns": [
@@ -4356,7 +4356,7 @@
 			"nameExplicit": true,
 			"name": "segmentRiskAssessment_horizon_score_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_segment_risk_assessment"
+			"table": "iathon_kiro_segment_risk_assessment"
 		},
 		{
 			"columns": [
@@ -4376,7 +4376,7 @@
 			"nameExplicit": true,
 			"name": "incident_source_sourceId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"columns": [
@@ -4396,7 +4396,7 @@
 			"nameExplicit": true,
 			"name": "incident_active_lastChangedAt_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"columns": [
@@ -4412,7 +4412,7 @@
 			"nameExplicit": true,
 			"name": "incident_category_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"columns": [
@@ -4432,7 +4432,7 @@
 			"nameExplicit": true,
 			"name": "incident_lat_lng_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_incident"
+			"table": "iathon_kiro_incident"
 		},
 		{
 			"columns": [
@@ -4452,7 +4452,7 @@
 			"nameExplicit": true,
 			"name": "newsArticle_source_sourceId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"columns": [
@@ -4472,7 +4472,7 @@
 			"nameExplicit": true,
 			"name": "newsArticle_relevant_publishedAt_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_news_article"
+			"table": "iathon_kiro_news_article"
 		},
 		{
 			"columns": [
@@ -4492,7 +4492,7 @@
 			"nameExplicit": true,
 			"name": "poi_source_sourceId_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"columns": [
@@ -4508,7 +4508,7 @@
 			"nameExplicit": true,
 			"name": "poi_kind_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"columns": [
@@ -4528,7 +4528,7 @@
 			"nameExplicit": true,
 			"name": "poi_lat_lng_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_poi"
+			"table": "iathon_kiro_poi"
 		},
 		{
 			"columns": [
@@ -4548,7 +4548,7 @@
 			"nameExplicit": true,
 			"name": "scrapeRun_source_startedAt_idx",
 			"entityType": "indexes",
-			"table": "hack_the_andes_scrape_run"
+			"table": "iathon_kiro_scrape_run"
 		}
 	],
 	"renames": []

@@ -1,5 +1,5 @@
-import { createDb } from "@hack-the-andes-project/db";
-import type { trip, vehicle } from "@hack-the-andes-project/db/schema/fleet";
+import { createDb } from "@iathon-kiro/db";
+import type { trip, vehicle } from "@iathon-kiro/db/schema/fleet";
 import { createRequestLogger } from "evlog";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { MS_PER_SECOND, ROUTE_REVIEW_RETENTION_MS } from "../constants";
@@ -265,7 +265,7 @@ describe("review trip persistence", () => {
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
 				sql: expect.stringContaining(
-					"insert into `hack_the_andes_route_review`",
+					"insert into `iathon_kiro_route_review`",
 				),
 			}),
 			expect.arrayContaining(["organization", "vehicle"]),
@@ -278,17 +278,17 @@ describe("review trip persistence", () => {
 			vi.setSystemTime(now);
 			await evaluateVehicleReview(context, review);
 			const reviewDeletion = query.mock.calls.find(([options]) =>
-				options.sql.startsWith("delete from `hack_the_andes_route_review`"),
+				options.sql.startsWith("delete from `iathon_kiro_route_review`"),
 			);
 			expect(reviewDeletion?.[0].sql).toContain(
-				"`hack_the_andes_route_review`.`organization_id` = ?",
+				"`iathon_kiro_route_review`.`organization_id` = ?",
 			);
 			expect(reviewDeletion?.[0].sql).toContain(
-				"`hack_the_andes_route_review`.`created_at` < ?",
+				"`iathon_kiro_route_review`.`created_at` < ?",
 			);
 			expect(reviewDeletion?.[0].sql).toContain("not exists (select");
 			expect(reviewDeletion?.[0].sql).toContain(
-				"`hack_the_andes_trip`.`review_id` = `hack_the_andes_route_review`.`id`",
+				"`iathon_kiro_trip`.`review_id` = `iathon_kiro_route_review`.`id`",
 			);
 			expect(reviewDeletion?.[1]).toEqual([
 				context.organizationId,
@@ -331,7 +331,7 @@ describe("review trip persistence", () => {
 		});
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("insert into `hack_the_andes_trip`"),
+				sql: expect.stringContaining("insert into `iathon_kiro_trip`"),
 			}),
 			expect.arrayContaining(["planned", "review"]),
 		);
@@ -387,7 +387,7 @@ describe("review trip persistence", () => {
 		]);
 		const listQuery = query.mock.calls[0];
 		expect(listQuery?.[0].sql).toContain("`chosen_candidate`");
-		expect(listQuery?.[0].sql).not.toContain("hack_the_andes_route_review");
+		expect(listQuery?.[0].sql).not.toContain("iathon_kiro_route_review");
 		expect(listQuery?.[0].sql).not.toContain("route_geometry");
 		expect(listQuery?.[1]).toEqual(
 			expect.arrayContaining([context.organizationId]),
@@ -433,7 +433,7 @@ describe("review trip persistence", () => {
 		await expect(reevaluateReviewTrip(context, "trip")).resolves.toBeDefined();
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("update `hack_the_andes_route_review`"),
+				sql: expect.stringContaining("update `iathon_kiro_route_review`"),
 			}),
 			expect.arrayContaining([expect.stringContaining('"eligible":false')]),
 		);

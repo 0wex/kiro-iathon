@@ -1,4 +1,4 @@
-import { loadHighlighter } from "@hack-the-andes-project/ui/lib/highlighter";
+import { loadHighlighter } from "@iathon-kiro/ui/lib/highlighter";
 import * as React from "react";
 
 export function useHighlightedCode(value: string, language: string) {

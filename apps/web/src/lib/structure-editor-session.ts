@@ -1,8 +1,8 @@
 import {
 	type Structure,
 	structureInputSchema,
-} from "@hack-the-andes-project/api/structure-schemas";
-import type { SceneStructure } from "@hack-the-andes-project/ui/lib/structure-scene";
+} from "@iathon-kiro/api/structure-schemas";
+import type { SceneStructure } from "@iathon-kiro/ui/lib/structure-scene";
 import { z } from "zod";
 import { ENGINEERING_PENDING_STORAGE_PREFIX } from "../constants";
 import {

@@ -1,8 +1,8 @@
-import { KG_PER_TONNE } from "@hack-the-andes-project/business/constants";
-import { GPS_PROVIDER_LABELS } from "@hack-the-andes-project/business/providers/index";
-import { ROUTE_REVIEW_PLACES } from "@hack-the-andes-project/business/route-review/places";
-import { tripWindowRiskAssessment } from "@hack-the-andes-project/business/route-review/ranking";
-import { isUpcomingTrip } from "@hack-the-andes-project/business/route-review/trips";
+import { KG_PER_TONNE } from "@iathon-kiro/business/constants";
+import { GPS_PROVIDER_LABELS } from "@iathon-kiro/business/providers/index";
+import { ROUTE_REVIEW_PLACES } from "@iathon-kiro/business/route-review/places";
+import { tripWindowRiskAssessment } from "@iathon-kiro/business/route-review/ranking";
+import { isUpcomingTrip } from "@iathon-kiro/business/route-review/trips";
 import { type ReactElement, useId } from "react";
 import type {
 	FleetPlannedTrip,

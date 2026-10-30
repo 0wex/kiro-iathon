@@ -1,4 +1,4 @@
-import type { RouteSignalKind } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteSignalKind } from "@iathon-kiro/business/route-review/risk";
 import { SignalBaseline, SignalConfirmed, SignalForecast } from "./icons";
 
 interface RouteReviewSignalTagProps {

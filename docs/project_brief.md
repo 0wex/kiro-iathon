@@ -1,6 +1,6 @@
 # ILLAPA project brief
 
-*Hack the Andes 2026 · Track 1 Clima y Territorio · illapa.app · Draft for team review*
+*Iathon Kiro 2026 · Track 1 Clima y Territorio · illapa.app · Draft for team review*
 
 ## In one line
 

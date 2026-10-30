@@ -14,8 +14,8 @@
 	"rtl": false,
 	"aliases": {
 		"components": "@/components",
-		"utils": "@hack-the-andes-project/ui/lib/utils",
-		"ui": "@hack-the-andes-project/ui/components",
+		"utils": "@iathon-kiro/ui/lib/utils",
+		"ui": "@iathon-kiro/ui/components",
 		"lib": "@/lib",
 		"hooks": "@/hooks"
 	},

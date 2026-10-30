@@ -1,7 +1,7 @@
 # Low-poly objects on the Peru map (phase 1)
 
 Objective: populate the xr-simulator Peru overview with procedural low-poly houses (inside INEI city blocks) and vegetation (from MINAM land cover), phase 1 scoped to the Carretera Central corridor (Lima–Huancayo).
-Branch: `feat/low-poly-objects`. Delivery: `ask-on-risk`, work-unit commits on the branch; push/PR left to the user. Tests: vitest (`pnpm --filter @hack-the-andes-project/xr-simulator test`), `pnpm check-types`, `pnpm format:write`.
+Branch: `feat/low-poly-objects`. Delivery: `ask-on-risk`, work-unit commits on the branch; push/PR left to the user. Tests: vitest (`pnpm --filter @iathon-kiro/xr-simulator test`), `pnpm check-types`, `pnpm format:write`.
 
 ## Specs
 

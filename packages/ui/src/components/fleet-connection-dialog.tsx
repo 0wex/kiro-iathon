@@ -3,7 +3,7 @@ import {
 	GPS_PROVIDER_LABELS,
 	GPS_PROVIDERS,
 	gpsCredentialsSchema,
-} from "@hack-the-andes-project/business/providers/index";
+} from "@iathon-kiro/business/providers/index";
 import { useState } from "react";
 
 import type { FleetConnectionInput } from "../lib/fleet";

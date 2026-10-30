@@ -3,8 +3,8 @@ import {
 	alert,
 	trip,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
-import { incident } from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/fleet";
+import { incident } from "@iathon-kiro/db/schema/scraper";
 import { ORPCError } from "@orpc/server";
 import { and, desc, eq, getColumns } from "drizzle-orm";
 import { z } from "zod";

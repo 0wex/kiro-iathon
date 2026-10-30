@@ -2,8 +2,8 @@ import type {
 	NumericRange,
 	StructureKind,
 	StructurePrimitiveKind,
-} from "@hack-the-andes-project/business/structures/catalog";
-import { parseStructureNumber } from "@hack-the-andes-project/business/structures/parameters";
+} from "@iathon-kiro/business/structures/catalog";
+import { parseStructureNumber } from "@iathon-kiro/business/structures/parameters";
 import { MinusIcon, PlusIcon, Trash2Icon, XIcon } from "lucide-react";
 import { type ReactNode, useEffect, useId, useRef, useState } from "react";
 import type { TransformMode } from "../lib/structure-scene";

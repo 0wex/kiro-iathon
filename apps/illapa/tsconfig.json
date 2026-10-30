@@ -9,7 +9,7 @@
 		"noUnusedParameters": true,
 		"paths": {
 			"@/*": ["./src/*"],
-			"@hack-the-andes-project/ui/*": ["../../packages/ui/src/*"]
+			"@iathon-kiro/ui/*": ["../../packages/ui/src/*"]
 		}
 	},
 	"include": [".astro/types.d.ts", "src/**/*", "astro.config.mjs"],

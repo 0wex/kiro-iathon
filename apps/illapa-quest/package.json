@@ -12,11 +12,11 @@
 	"dependencies": {
 		"@fontsource-variable/archivo": "^5.3.0",
 		"@fontsource-variable/jetbrains-mono": "^5.3.0",
-		"@hack-the-andes-project/ui": "workspace:*",
+		"@iathon-kiro/ui": "workspace:*",
 		"three": "^0.180.0"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@types/three": "^0.180.0",
 		"@vitejs/plugin-basic-ssl": "^1.2.0",
 		"typescript": "^6.0.3",

@@ -13,7 +13,7 @@ import {
 import type { Session } from "./index";
 
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	default: {
@@ -25,7 +25,7 @@ vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	},
 }));
 
-const { createDb } = await import("@hack-the-andes-project/db");
+const { createDb } = await import("@iathon-kiro/db");
 const { createAuth } = await import("./index");
 const database = await createDb({
 	host: "mock",
@@ -89,7 +89,7 @@ describe("organization database hooks", () => {
 		expect(database.$client.query).toHaveBeenCalledWith(
 			expect.objectContaining({
 				sql: expect.stringMatching(
-					/insert into `hack_the_andes_organization`.*on duplicate key update/,
+					/insert into `iathon_kiro_organization`.*on duplicate key update/,
 				),
 			}),
 			expect.arrayContaining([
@@ -101,7 +101,7 @@ describe("organization database hooks", () => {
 		expect(database.$client.query).toHaveBeenCalledWith(
 			expect.objectContaining({
 				sql: expect.stringMatching(
-					/insert into `hack_the_andes_member`.*on duplicate key update/,
+					/insert into `iathon_kiro_member`.*on duplicate key update/,
 				),
 			}),
 			expect.arrayContaining([user.id, "owner"]),

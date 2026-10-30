@@ -1,8 +1,8 @@
-import { TRIP_STATUSES } from "@hack-the-andes-project/db/schema/fleet";
+import { TRIP_STATUSES } from "@iathon-kiro/db/schema/fleet";
 import {
 	INCIDENT_CATEGORIES,
 	ROAD_STATUSES,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { z } from "zod";
 import { MAX_ROUTE_RISK_SCORE, MIN_ROUTE_RISK_SCORE } from "../constants";
 import { geometrySchema, lineStringSchema } from "../geojson-schemas";

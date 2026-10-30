@@ -3,7 +3,7 @@ import {
 	type PrepareDemoInput,
 	prepareDemo,
 	wipeDemoFleet,
-} from "@hack-the-andes-project/business/demo-seed";
+} from "@iathon-kiro/business/demo-seed";
 
 export interface ResetDemoInput
 	extends Omit<PrepareDemoInput, "organizationId"> {}

@@ -4,7 +4,7 @@ import { Color3 } from "@babylonjs/core";
 import {
 	createXrViewer,
 	type ViewerScreen,
-} from "@hack-the-andes-project/xr-simulator/viewer";
+} from "@iathon-kiro/xr-simulator/viewer";
 import { useEffect, useRef, useState } from "react";
 import { useTokenColors } from "../hooks/use-token-colors";
 import { STRUCTURE_COLOR_TOKENS } from "../lib/structure-colors";

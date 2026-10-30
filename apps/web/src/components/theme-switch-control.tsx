@@ -1,4 +1,4 @@
-import { ThemeSwitch } from "@hack-the-andes-project/ui/components/theme-switch";
+import { ThemeSwitch } from "@iathon-kiro/ui/components/theme-switch";
 import { useTheme } from "@/components/theme-provider";
 import { m } from "@/paraglide/messages";
 

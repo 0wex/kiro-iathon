@@ -2,9 +2,9 @@ import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Card,
 	CardContent,
@@ -12,13 +12,13 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@hack-the-andes-project/ui/components/card";
-import { TopoBackground } from "@hack-the-andes-project/ui/components/contour-art";
+} from "@iathon-kiro/ui/components/card";
+import { TopoBackground } from "@iathon-kiro/ui/components/contour-art";
 import {
 	ArrowRightIcon,
 	BellIcon,
-} from "@hack-the-andes-project/ui/components/showcase/icons";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
+} from "@iathon-kiro/ui/components/showcase/icons";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
 import {
 	Table,
 	TableBody,
@@ -27,7 +27,7 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@hack-the-andes-project/ui/components/table";
+} from "@iathon-kiro/ui/components/table";
 import { useState } from "react";
 import { toast } from "sonner";
 import { ROUTE_EXAMPLES } from "@/constants";

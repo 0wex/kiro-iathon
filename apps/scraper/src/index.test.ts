@@ -13,8 +13,8 @@ vi.mock("./env.server", () => ({
 		},
 	},
 }));
-vi.mock("@hack-the-andes-project/db", () => ({ createDb: mocks.createDb }));
-vi.mock("@hack-the-andes-project/business/risk/assess", () => ({
+vi.mock("@iathon-kiro/db", () => ({ createDb: mocks.createDb }));
+vi.mock("@iathon-kiro/business/risk/assess", () => ({
 	assessRoadRisk: vi.fn(),
 }));
 vi.mock("./sources", () => ({

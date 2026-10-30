@@ -2,7 +2,7 @@ import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
-} from "@hack-the-andes-project/ui/components/collapsible";
+} from "@iathon-kiro/ui/components/collapsible";
 import { cn } from "cn";
 import { ChevronRightIcon } from "lucide-react";
 import type * as React from "react";

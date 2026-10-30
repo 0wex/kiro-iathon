@@ -163,7 +163,7 @@ importers:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 5.20261016.1
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:packages/config
       '@types/node':
@@ -178,13 +178,13 @@ importers:
 
   apps/fleet-sync:
     dependencies:
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../../packages/business
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@hack-the-andes-project/node-runtime':
+      '@iathon-kiro/node-runtime':
         specifier: workspace:*
         version: link:../../packages/node-runtime
       drizzle-orm:
@@ -197,10 +197,10 @@ importers:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 5.20261016.1
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
-      '@hack-the-andes-project/infra':
+      '@iathon-kiro/infra':
         specifier: workspace:*
         version: link:../../packages/infra
       '@types/node':
@@ -224,10 +224,10 @@ importers:
       '@astrojs/react':
         specifier: ^7.1.0
         version: 7.1.0(@types/node@26.6.5)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(babel-plugin-react-compiler@1.0.0)(jiti@2.7.0)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(terser@5.51.2)(yaml@2.9.1)
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../../packages/business
-      '@hack-the-andes-project/ui':
+      '@iathon-kiro/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@tailwindcss/vite':
@@ -255,7 +255,7 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.10
         version: 0.9.10(@emnapi/runtime@1.11.3)(prettier@3.9.10)(typescript@6.0.3)
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@types/react':
@@ -276,14 +276,14 @@ importers:
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.3.0
         version: 5.3.0
-      '@hack-the-andes-project/ui':
+      '@iathon-kiro/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       three:
         specifier: 0.186.1
         version: 0.186.1
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@types/three':
@@ -310,7 +310,7 @@ importers:
       '@expo/vector-icons':
         specifier: ^15.0.2
         version: 15.1.1(expo-font@57.0.4)(react-native@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(@react-native/metro-config@0.86.3(@babel/core@7.29.7(supports-color@8.1.1))(supports-color@8.1.1))(@types/react@19.2.18)(react@19.2.3)(supports-color@8.1.1))(react@19.2.3)
-      '@hack-the-andes-project/api':
+      '@iathon-kiro/api':
         specifier: workspace:*
         version: link:../../packages/api
       '@orpc/client':
@@ -401,7 +401,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@types/react':
@@ -422,13 +422,13 @@ importers:
       '@ai-sdk/typesafe-ai':
         specifier: 'catalog:'
         version: 3.0.21(zod@4.6.7)
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../../packages/business
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@hack-the-andes-project/node-runtime':
+      '@iathon-kiro/node-runtime':
         specifier: workspace:*
         version: link:../../packages/node-runtime
       '@turf/centroid':
@@ -456,10 +456,10 @@ importers:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 5.20261016.1
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
-      '@hack-the-andes-project/infra':
+      '@iathon-kiro/infra':
         specifier: workspace:*
         version: link:../../packages/infra
       '@types/geojson':
@@ -483,19 +483,19 @@ importers:
 
   apps/server:
     dependencies:
-      '@hack-the-andes-project/api':
+      '@iathon-kiro/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@hack-the-andes-project/auth':
+      '@iathon-kiro/auth':
         specifier: workspace:*
         version: link:../../packages/auth
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../../packages/business
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../../packages/db
-      '@hack-the-andes-project/node-runtime':
+      '@iathon-kiro/node-runtime':
         specifier: workspace:*
         version: link:../../packages/node-runtime
       '@orpc/server':
@@ -517,10 +517,10 @@ importers:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 5.20261016.1
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
-      '@hack-the-andes-project/infra':
+      '@iathon-kiro/infra':
         specifier: workspace:*
         version: link:../../packages/infra
       '@types/node':
@@ -541,13 +541,13 @@ importers:
 
   apps/web:
     dependencies:
-      '@hack-the-andes-project/api':
+      '@iathon-kiro/api':
         specifier: workspace:*
         version: link:../../packages/api
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../../packages/business
-      '@hack-the-andes-project/ui':
+      '@iathon-kiro/ui':
         specifier: workspace:*
         version: link:../../packages/ui
       '@orpc/client':
@@ -596,7 +596,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../../packages/config
       '@inlang/paraglide-js':
@@ -641,13 +641,13 @@ importers:
 
   packages/api:
     dependencies:
-      '@hack-the-andes-project/auth':
+      '@iathon-kiro/auth':
         specifier: workspace:*
         version: link:../auth
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../business
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../db
       '@orpc/client':
@@ -672,7 +672,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       '@types/geojson':
@@ -696,10 +696,10 @@ importers:
       '@better-auth/expo':
         specifier: 'catalog:'
         version: 1.7.7(6ebfb0c68399dd15b4a6b7ef598a2a9d)
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../business
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../db
       better-auth:
@@ -712,7 +712,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       typescript:
@@ -724,7 +724,7 @@ importers:
 
   packages/business:
     dependencies:
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../db
       '@turf/along':
@@ -779,7 +779,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       '@types/geojson':
@@ -809,7 +809,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       '@types/geojson':
@@ -833,7 +833,7 @@ importers:
       '@effect/platform-node':
         specifier: 4.0.5
         version: 4.0.5(effect@4.0.5)(redis@6.3.0(@opentelemetry/api@1.9.1))
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       alchemy:
@@ -851,7 +851,7 @@ importers:
 
   packages/node-runtime:
     dependencies:
-      '@hack-the-andes-project/db':
+      '@iathon-kiro/db':
         specifier: workspace:*
         version: link:../db
       '@hono/node-server':
@@ -867,7 +867,7 @@ importers:
       '@cloudflare/workers-types':
         specifier: 'catalog:'
         version: 5.20261016.1
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       '@types/node':
@@ -899,10 +899,10 @@ importers:
       '@fontsource-variable/jetbrains-mono':
         specifier: ^5.3.0
         version: 5.3.0
-      '@hack-the-andes-project/business':
+      '@iathon-kiro/business':
         specifier: workspace:*
         version: link:../business
-      '@hack-the-andes-project/xr-simulator':
+      '@iathon-kiro/xr-simulator':
         specifier: workspace:*
         version: link:../xr-simulator
       '@iwer/devui':
@@ -984,7 +984,7 @@ importers:
         specifier: 'catalog:'
         version: 4.6.7
     devDependencies:
-      '@hack-the-andes-project/config':
+      '@iathon-kiro/config':
         specifier: workspace:*
         version: link:../config
       '@tailwindcss/postcss':
@@ -1020,7 +1020,7 @@ importers:
       '@babylonjs/gui':
         specifier: 'catalog:'
         version: 9.29.0(@babylonjs/core@9.29.0)
-      '@hack-the-andes-project/tiles-schema':
+      '@iathon-kiro/tiles-schema':
         specifier: workspace:*
         version: link:../tiles-schema
       fast-png:

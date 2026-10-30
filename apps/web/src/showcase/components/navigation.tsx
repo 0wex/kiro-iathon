@@ -1,4 +1,4 @@
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
+import { Badge } from "@iathon-kiro/ui/components/badge";
 import {
 	Breadcrumb,
 	BreadcrumbItem,
@@ -6,12 +6,12 @@ import {
 	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@hack-the-andes-project/ui/components/breadcrumb";
-import { DirectionProvider } from "@hack-the-andes-project/ui/components/direction";
+} from "@iathon-kiro/ui/components/breadcrumb";
+import { DirectionProvider } from "@iathon-kiro/ui/components/direction";
 import {
 	CloudLightningIcon,
 	MapPinIcon,
-} from "@hack-the-andes-project/ui/components/icons";
+} from "@iathon-kiro/ui/components/icons";
 import {
 	Menubar,
 	MenubarContent,
@@ -19,7 +19,7 @@ import {
 	MenubarItem,
 	MenubarMenu,
 	MenubarTrigger,
-} from "@hack-the-andes-project/ui/components/menubar";
+} from "@iathon-kiro/ui/components/menubar";
 import {
 	NavigationMenu,
 	NavigationMenuContent,
@@ -27,7 +27,7 @@ import {
 	NavigationMenuLink,
 	NavigationMenuList,
 	NavigationMenuTrigger,
-} from "@hack-the-andes-project/ui/components/navigation-menu";
+} from "@iathon-kiro/ui/components/navigation-menu";
 import {
 	Pagination,
 	PaginationContent,
@@ -35,12 +35,12 @@ import {
 	PaginationLink,
 	PaginationNext,
 	PaginationPrevious,
-} from "@hack-the-andes-project/ui/components/pagination";
+} from "@iathon-kiro/ui/components/pagination";
 import {
 	previewState,
 	StateMatrix,
-} from "@hack-the-andes-project/ui/components/showcase/state-matrix";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
+} from "@iathon-kiro/ui/components/showcase/state-matrix";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
 import {
 	Sidebar,
 	SidebarContent,
@@ -55,7 +55,7 @@ import {
 	SidebarProvider,
 	SidebarRail,
 	SidebarTrigger,
-} from "@hack-the-andes-project/ui/components/sidebar";
+} from "@iathon-kiro/ui/components/sidebar";
 import {
 	Table,
 	TableBody,
@@ -64,13 +64,13 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@hack-the-andes-project/ui/components/table";
+} from "@iathon-kiro/ui/components/table";
 import {
 	Tabs,
 	TabsContent,
 	TabsList,
 	TabsTrigger,
-} from "@hack-the-andes-project/ui/components/tabs";
+} from "@iathon-kiro/ui/components/tabs";
 import { toast } from "sonner";
 import { getShowcaseStateLabels, SHOWCASE_SECTIONS } from "@/constants";
 import { m } from "@/paraglide/messages";

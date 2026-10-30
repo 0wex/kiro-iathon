@@ -11,7 +11,7 @@ const mocks = vi.hoisted(() => {
 	};
 });
 vi.mock("evlog", () => ({ createLogger: mocks.createLogger }));
-vi.mock("@hack-the-andes-project/db/index", () => ({
+vi.mock("@iathon-kiro/db/index", () => ({
 	createDb: mocks.openDatabase,
 }));
 

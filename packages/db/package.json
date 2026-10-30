@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/db",
+	"name": "@iathon-kiro/db",
 	"type": "module",
 	"exports": {
 		".": "./src/index.ts",
@@ -20,7 +20,7 @@
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@types/geojson": "catalog:",
 		"drizzle-kit": "catalog:",
 		"typescript": "^6.0.3",

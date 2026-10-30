@@ -20,7 +20,7 @@ import {
 	formatStructureLength,
 	structureGradePercent,
 	structureLengthM,
-} from "@hack-the-andes-project/business/structures/geometry";
+} from "@iathon-kiro/business/structures/geometry";
 import type {
 	SceneStructure,
 	StructureSceneProps,

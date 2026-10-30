@@ -1,4 +1,4 @@
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
+import { Separator } from "@iathon-kiro/ui/components/separator";
 import { createFileRoute } from "@tanstack/react-router";
 import { m } from "@/paraglide/messages";
 import { ColorSection } from "@/showcase/color";

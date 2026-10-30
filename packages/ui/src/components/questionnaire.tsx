@@ -3,7 +3,7 @@
 import {
 	type Button,
 	buttonVariants,
-} from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/button";
 import { Questionnaire as QuestionnairePrimitive } from "@shadcn/react/questionnaire";
 import { cn } from "cn";
 import { CheckIcon } from "lucide-react";

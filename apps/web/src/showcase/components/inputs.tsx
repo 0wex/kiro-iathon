@@ -1,5 +1,5 @@
-import { Calendar } from "@hack-the-andes-project/ui/components/calendar";
-import { Checkbox } from "@hack-the-andes-project/ui/components/checkbox";
+import { Calendar } from "@iathon-kiro/ui/components/calendar";
+import { Checkbox } from "@iathon-kiro/ui/components/checkbox";
 import {
 	Combobox,
 	ComboboxContent,
@@ -7,7 +7,7 @@ import {
 	ComboboxInput,
 	ComboboxItem,
 	ComboboxList,
-} from "@hack-the-andes-project/ui/components/combobox";
+} from "@iathon-kiro/ui/components/combobox";
 import {
 	Field,
 	FieldDescription,
@@ -16,28 +16,28 @@ import {
 	FieldLabel,
 	FieldLegend,
 	FieldSet,
-} from "@hack-the-andes-project/ui/components/field";
-import { Input } from "@hack-the-andes-project/ui/components/input";
+} from "@iathon-kiro/ui/components/field";
+import { Input } from "@iathon-kiro/ui/components/input";
 import {
 	InputGroup,
 	InputGroupAddon,
 	InputGroupInput,
 	InputGroupText,
-} from "@hack-the-andes-project/ui/components/input-group";
+} from "@iathon-kiro/ui/components/input-group";
 import {
 	InputOTP,
 	InputOTPGroup,
 	InputOTPSlot,
-} from "@hack-the-andes-project/ui/components/input-otp";
-import { Label } from "@hack-the-andes-project/ui/components/label";
+} from "@iathon-kiro/ui/components/input-otp";
+import { Label } from "@iathon-kiro/ui/components/label";
 import {
 	NativeSelect,
 	NativeSelectOption,
-} from "@hack-the-andes-project/ui/components/native-select";
+} from "@iathon-kiro/ui/components/native-select";
 import {
 	RadioGroup,
 	RadioGroupItem,
-} from "@hack-the-andes-project/ui/components/radio-group";
+} from "@iathon-kiro/ui/components/radio-group";
 import {
 	Select,
 	SelectContent,
@@ -45,20 +45,20 @@ import {
 	SelectItem,
 	SelectTrigger,
 	SelectValue,
-} from "@hack-the-andes-project/ui/components/select";
+} from "@iathon-kiro/ui/components/select";
 import {
 	enUS,
 	es,
-} from "@hack-the-andes-project/ui/components/showcase/calendar-locales";
-import { SearchIcon } from "@hack-the-andes-project/ui/components/showcase/icons";
+} from "@iathon-kiro/ui/components/showcase/calendar-locales";
+import { SearchIcon } from "@iathon-kiro/ui/components/showcase/icons";
 import {
 	previewState,
 	StateMatrix,
-} from "@hack-the-andes-project/ui/components/showcase/state-matrix";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
-import { Slider } from "@hack-the-andes-project/ui/components/slider";
-import { Switch } from "@hack-the-andes-project/ui/components/switch";
-import { Textarea } from "@hack-the-andes-project/ui/components/textarea";
+} from "@iathon-kiro/ui/components/showcase/state-matrix";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
+import { Slider } from "@iathon-kiro/ui/components/slider";
+import { Switch } from "@iathon-kiro/ui/components/switch";
+import { Textarea } from "@iathon-kiro/ui/components/textarea";
 import { useState } from "react";
 import { ThemeSwitchControl } from "@/components/theme-switch-control";
 import {

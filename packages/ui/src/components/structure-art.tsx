@@ -2,7 +2,7 @@ import {
 	STRUCTURE_PRIMITIVE_KINDS,
 	type StructureKind,
 	type StructurePrimitiveKind,
-} from "@hack-the-andes-project/business/structures/catalog";
+} from "@iathon-kiro/business/structures/catalog";
 import { cn } from "cn";
 import {
 	STRUCTURE_ART_PRIMITIVE_STROKE_WIDTH_PX,

@@ -1,5 +1,5 @@
 /**
- * Public types of the viewer entry (`@hack-the-andes-project/xr-simulator/viewer`). Host apps
+ * Public types of the viewer entry (`@iathon-kiro/xr-simulator/viewer`). Host apps
  * type-check against this file only, never against the simulator sources and their compiler
  * settings; tests/viewer/publicApi.test.ts keeps it in line with src/viewer/api.ts.
  */

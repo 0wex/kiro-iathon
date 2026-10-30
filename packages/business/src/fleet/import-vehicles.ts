@@ -1,8 +1,8 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	type gpsConnection,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 
 import { sql } from "drizzle-orm";
 import { FLEET_WRITE_BATCH_SIZE_ROWS } from "../constants";

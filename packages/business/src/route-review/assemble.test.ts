@@ -1,4 +1,4 @@
-import type { RiskComponents } from "@hack-the-andes-project/db/schema/risk";
+import type { RiskComponents } from "@iathon-kiro/db/schema/risk";
 import { describe, expect, it } from "vitest";
 
 import {

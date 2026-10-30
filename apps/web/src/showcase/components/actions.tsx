@@ -1,23 +1,23 @@
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { ButtonGroup } from "@hack-the-andes-project/ui/components/button-group";
-import { Kbd, KbdGroup } from "@hack-the-andes-project/ui/components/kbd";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { ButtonGroup } from "@iathon-kiro/ui/components/button-group";
+import { Kbd, KbdGroup } from "@iathon-kiro/ui/components/kbd";
 import {
 	ArrowRightIcon,
 	BellIcon,
 	SearchIcon,
-} from "@hack-the-andes-project/ui/components/showcase/icons";
+} from "@iathon-kiro/ui/components/showcase/icons";
 import {
 	previewState,
 	StateMatrix,
-} from "@hack-the-andes-project/ui/components/showcase/state-matrix";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
-import { Spinner } from "@hack-the-andes-project/ui/components/spinner";
-import { Toggle } from "@hack-the-andes-project/ui/components/toggle";
+} from "@iathon-kiro/ui/components/showcase/state-matrix";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
+import { Spinner } from "@iathon-kiro/ui/components/spinner";
+import { Toggle } from "@iathon-kiro/ui/components/toggle";
 import {
 	ToggleGroup,
 	ToggleGroupItem,
-} from "@hack-the-andes-project/ui/components/toggle-group";
+} from "@iathon-kiro/ui/components/toggle-group";
 import type { ComponentProps } from "react";
 import { getShowcaseStateLabels } from "@/constants";
 import { m } from "@/paraglide/messages";

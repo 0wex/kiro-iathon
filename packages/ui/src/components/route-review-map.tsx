@@ -1,4 +1,4 @@
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
 import { cn } from "cn";
 import type { FeatureCollection, LineString } from "geojson";
 import { BoxIcon, MapIcon, Maximize2Icon, Minimize2Icon } from "lucide-react";

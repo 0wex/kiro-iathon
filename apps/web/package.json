@@ -13,9 +13,9 @@
 		"test": "vitest run"
 	},
 	"dependencies": {
-		"@hack-the-andes-project/api": "workspace:*",
-		"@hack-the-andes-project/business": "workspace:*",
-		"@hack-the-andes-project/ui": "workspace:*",
+		"@iathon-kiro/api": "workspace:*",
+		"@iathon-kiro/business": "workspace:*",
+		"@iathon-kiro/ui": "workspace:*",
 		"@orpc/client": "catalog:",
 		"@orpc/server": "catalog:",
 		"@orpc/tanstack-query": "catalog:",
@@ -33,7 +33,7 @@
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@inlang/paraglide-js": "2.29.0",
 		"@tanstack/react-query-devtools": "^5.104.2",
 		"@tanstack/react-router-devtools": "^1.167.2",

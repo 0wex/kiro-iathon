@@ -1,4 +1,4 @@
-import type { FleetSyncEnv } from "@hack-the-andes-project/infra/alchemy.run";
+import type { FleetSyncEnv } from "@iathon-kiro/infra/alchemy.run";
 
 export interface CloudflareEnv extends FleetSyncEnv {}
 

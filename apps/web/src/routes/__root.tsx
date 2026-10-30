@@ -1,4 +1,4 @@
-import { Toaster } from "@hack-the-andes-project/ui/components/sonner";
+import { Toaster } from "@iathon-kiro/ui/components/sonner";
 import type { QueryClient } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import {

@@ -1,13 +1,13 @@
-import { isDemoAccountEmail } from "@hack-the-andes-project/business/demo-account";
-import { canUseSimulators } from "@hack-the-andes-project/business/simulators";
-import { DashboardSidebar } from "@hack-the-andes-project/ui/components/dashboard-sidebar";
-import { DemoBanner } from "@hack-the-andes-project/ui/components/demo-banner";
+import { isDemoAccountEmail } from "@iathon-kiro/business/demo-account";
+import { canUseSimulators } from "@iathon-kiro/business/simulators";
+import { DashboardSidebar } from "@iathon-kiro/ui/components/dashboard-sidebar";
+import { DemoBanner } from "@iathon-kiro/ui/components/demo-banner";
 import {
 	SidebarInset,
 	SidebarProvider,
-} from "@hack-the-andes-project/ui/components/sidebar";
-import { StructureEditorNavigationIcon } from "@hack-the-andes-project/ui/components/structure-editor-chrome";
-import { useSidebarPreference } from "@hack-the-andes-project/ui/hooks/use-sidebar-preference";
+} from "@iathon-kiro/ui/components/sidebar";
+import { StructureEditorNavigationIcon } from "@iathon-kiro/ui/components/structure-editor-chrome";
+import { useSidebarPreference } from "@iathon-kiro/ui/hooks/use-sidebar-preference";
 import {
 	createFileRoute,
 	Link,

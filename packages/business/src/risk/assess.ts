@@ -1,10 +1,10 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	RISK_HORIZONS_HOURS,
 	roadSegment,
 	segmentRiskAssessment,
-} from "@hack-the-andes-project/db/schema/risk";
-import { incident } from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/risk";
+import { incident } from "@iathon-kiro/db/schema/scraper";
 import {
 	and,
 	eq,

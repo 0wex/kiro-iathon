@@ -1,4 +1,4 @@
-import type { UserRole } from "@hack-the-andes-project/db/schema/auth";
+import type { UserRole } from "@iathon-kiro/db/schema/auth";
 
 // The civil engineer / public servant role: the only one allowed into the
 // huayco and structures simulators and their tiles and weather backends.

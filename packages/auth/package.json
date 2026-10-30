@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/auth",
+	"name": "@iathon-kiro/auth",
 	"type": "module",
 	"exports": {
 		".": "./src/index.ts",
@@ -14,14 +14,14 @@
 		"@better-auth/core": "1.7.7",
 		"@better-auth/drizzle-adapter": "1.7.7",
 		"@better-auth/expo": "catalog:",
-		"@hack-the-andes-project/business": "workspace:*",
-		"@hack-the-andes-project/db": "workspace:*",
+		"@iathon-kiro/business": "workspace:*",
+		"@iathon-kiro/db": "workspace:*",
 		"better-auth": "catalog:",
 		"drizzle-orm": "catalog:",
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"typescript": "^6.0.3",
 		"vitest": "catalog:"
 	}

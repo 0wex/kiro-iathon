@@ -1,8 +1,8 @@
 import {
 	IllapaLockup,
 	IllapaMark,
-} from "@hack-the-andes-project/ui/components/illapa-logo";
-import { ThemeSurface } from "@hack-the-andes-project/ui/components/showcase/theme-surface";
+} from "@iathon-kiro/ui/components/illapa-logo";
+import { ThemeSurface } from "@iathon-kiro/ui/components/showcase/theme-surface";
 import { SHOWCASE_APP_ICON_SIZES_PX } from "@/constants";
 import { m } from "@/paraglide/messages";
 

@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/api",
+	"name": "@iathon-kiro/api",
 	"type": "module",
 	"exports": {
 		".": "./src/index.ts",
@@ -11,9 +11,9 @@
 		"test": "vitest run"
 	},
 	"dependencies": {
-		"@hack-the-andes-project/auth": "workspace:*",
-		"@hack-the-andes-project/business": "workspace:*",
-		"@hack-the-andes-project/db": "workspace:*",
+		"@iathon-kiro/auth": "workspace:*",
+		"@iathon-kiro/business": "workspace:*",
+		"@iathon-kiro/db": "workspace:*",
 		"@orpc/client": "catalog:",
 		"@orpc/openapi": "catalog:",
 		"@orpc/server": "catalog:",
@@ -23,7 +23,7 @@
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@types/geojson": "catalog:",
 		"typescript": "^6.0.3",
 		"vitest": "catalog:"

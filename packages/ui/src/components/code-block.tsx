@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@hack-the-andes-project/ui/components/button";
+import { Button } from "@iathon-kiro/ui/components/button";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { CheckIcon, CopyIcon } from "lucide-react";

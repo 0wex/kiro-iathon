@@ -1,5 +1,5 @@
-import type { Structure } from "@hack-the-andes-project/api/structure-schemas";
-import type { SceneStructure } from "@hack-the-andes-project/ui/lib/structure-scene";
+import type { Structure } from "@iathon-kiro/api/structure-schemas";
+import type { SceneStructure } from "@iathon-kiro/ui/lib/structure-scene";
 import { ORPCError } from "@orpc/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import {

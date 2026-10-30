@@ -1,8 +1,8 @@
 import {
 	loadFleetVehicle,
 	vehicleProfile,
-} from "@hack-the-andes-project/business/fleet/review-trips";
-import { vehicle } from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/business/fleet/review-trips";
+import { vehicle } from "@iathon-kiro/db/schema/fleet";
 import { and, eq } from "drizzle-orm";
 import { z } from "zod";
 import { SINGLE_RESULT_LIMIT_ROWS, TRIP_STATUS_ACTIVE } from "../constants";

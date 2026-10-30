@@ -8,7 +8,7 @@ import {
 	STRUCTURE_STATUSES,
 	TUNNEL_PARAMETERS,
 	TUNNEL_SECTION_SHAPES,
-} from "@hack-the-andes-project/business/structures/catalog";
+} from "@iathon-kiro/business/structures/catalog";
 import {
 	MAX_BYPASS_POINTS,
 	MAX_ROTATION_DEG,
@@ -17,8 +17,8 @@ import {
 	MAX_STRUCTURE_EXTENT_M,
 	MAX_STRUCTURE_NOTES_LENGTH_CHARS,
 	MIN_STRUCTURE_ELEVATION_M,
-} from "@hack-the-andes-project/business/structures/constants";
-import { USER_ROLES } from "@hack-the-andes-project/db/schema/auth";
+} from "@iathon-kiro/business/structures/constants";
+import { USER_ROLES } from "@iathon-kiro/db/schema/auth";
 import { z } from "zod";
 
 import { fleetIdSchema, fleetNameSchema, latLngSchema } from "./schemas";

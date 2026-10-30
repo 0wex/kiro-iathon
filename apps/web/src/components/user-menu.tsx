@@ -1,12 +1,12 @@
-import { isDemoAccountEmail } from "@hack-the-andes-project/business/demo-account";
-import { AccountMenu } from "@hack-the-andes-project/ui/components/account-menu";
+import { isDemoAccountEmail } from "@iathon-kiro/business/demo-account";
+import { AccountMenu } from "@iathon-kiro/ui/components/account-menu";
 import {
 	Avatar,
 	AvatarFallback,
-} from "@hack-the-andes-project/ui/components/avatar";
-import { SidebarMenuButton } from "@hack-the-andes-project/ui/components/sidebar";
-import { Skeleton } from "@hack-the-andes-project/ui/components/skeleton";
-import { useFontSize } from "@hack-the-andes-project/ui/hooks/use-font-size";
+} from "@iathon-kiro/ui/components/avatar";
+import { SidebarMenuButton } from "@iathon-kiro/ui/components/sidebar";
+import { Skeleton } from "@iathon-kiro/ui/components/skeleton";
+import { useFontSize } from "@iathon-kiro/ui/hooks/use-font-size";
 import { Link, useNavigate } from "@tanstack/react-router";
 import { useTheme } from "next-themes";
 import { useState } from "react";

@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/ui",
+	"name": "@iathon-kiro/ui",
 	"version": "0.0.0",
 	"private": true,
 	"type": "module",
@@ -22,8 +22,8 @@
 		"@base-ui/react": "^1.8.0",
 		"@fontsource-variable/archivo": "^5.3.0",
 		"@fontsource-variable/jetbrains-mono": "^5.3.0",
-		"@hack-the-andes-project/business": "workspace:*",
-		"@hack-the-andes-project/xr-simulator": "workspace:*",
+		"@iathon-kiro/business": "workspace:*",
+		"@iathon-kiro/xr-simulator": "workspace:*",
 		"@iwer/devui": "catalog:",
 		"@iwer/sem": "catalog:",
 		"@shadcn/react": "^0.3.1",
@@ -52,7 +52,7 @@
 		"zod": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@tailwindcss/postcss": "^4.3.3",
 		"@types/geojson": "catalog:",
 		"@types/react": "^19.2.18",

@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/infra",
+	"name": "@iathon-kiro/infra",
 	"private": true,
 	"type": "module",
 	"scripts": {
@@ -11,7 +11,7 @@
 	"devDependencies": {
 		"@effect/platform-bun": "4.0.5",
 		"@effect/platform-node": "4.0.5",
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"alchemy": "2.0.0-beta.83",
 		"effect": "4.0.5",
 		"typescript": "^6.0.3",

@@ -1,8 +1,8 @@
-import { DEMO_ACCOUNT_EMAIL } from "@hack-the-andes-project/business/demo-account";
+import { DEMO_ACCOUNT_EMAIL } from "@iathon-kiro/business/demo-account";
 import {
 	prepareDemo,
 	restartFinishedDemo,
-} from "@hack-the-andes-project/business/demo-seed";
+} from "@iathon-kiro/business/demo-seed";
 import { ORPCError } from "@orpc/server";
 import { z } from "zod";
 

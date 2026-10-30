@@ -1,5 +1,5 @@
-import type { Auth, Session } from "@hack-the-andes-project/auth";
-import type { Database } from "@hack-the-andes-project/db";
+import type { Auth, Session } from "@iathon-kiro/auth";
+import type { Database } from "@iathon-kiro/db";
 import type { RequestLogger } from "evlog";
 
 export interface Context {

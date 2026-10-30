@@ -8,8 +8,8 @@ import {
 	AlertDialogHeader,
 	AlertDialogTitle,
 	AlertDialogTrigger,
-} from "@hack-the-andes-project/ui/components/alert-dialog";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert-dialog";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Command,
 	CommandEmpty,
@@ -17,14 +17,14 @@ import {
 	CommandInput,
 	CommandItem,
 	CommandList,
-} from "@hack-the-andes-project/ui/components/command";
+} from "@iathon-kiro/ui/components/command";
 import {
 	ContextMenu,
 	ContextMenuContent,
 	ContextMenuGroup,
 	ContextMenuItem,
 	ContextMenuTrigger,
-} from "@hack-the-andes-project/ui/components/context-menu";
+} from "@iathon-kiro/ui/components/context-menu";
 import {
 	Dialog,
 	DialogClose,
@@ -34,7 +34,7 @@ import {
 	DialogHeader,
 	DialogTitle,
 	DialogTrigger,
-} from "@hack-the-andes-project/ui/components/dialog";
+} from "@iathon-kiro/ui/components/dialog";
 import {
 	Drawer,
 	DrawerClose,
@@ -44,7 +44,7 @@ import {
 	DrawerHeader,
 	DrawerTitle,
 	DrawerTrigger,
-} from "@hack-the-andes-project/ui/components/drawer";
+} from "@iathon-kiro/ui/components/drawer";
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -53,12 +53,12 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
-} from "@hack-the-andes-project/ui/components/dropdown-menu";
+} from "@iathon-kiro/ui/components/dropdown-menu";
 import {
 	HoverCard,
 	HoverCardContent,
 	HoverCardTrigger,
-} from "@hack-the-andes-project/ui/components/hover-card";
+} from "@iathon-kiro/ui/components/hover-card";
 import {
 	Popover,
 	PopoverContent,
@@ -66,7 +66,7 @@ import {
 	PopoverHeader,
 	PopoverTitle,
 	PopoverTrigger,
-} from "@hack-the-andes-project/ui/components/popover";
+} from "@iathon-kiro/ui/components/popover";
 import {
 	Sheet,
 	SheetClose,
@@ -76,15 +76,15 @@ import {
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
-} from "@hack-the-andes-project/ui/components/sheet";
-import { ArrowDownIcon } from "@hack-the-andes-project/ui/components/showcase/icons";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
+} from "@iathon-kiro/ui/components/sheet";
+import { ArrowDownIcon } from "@iathon-kiro/ui/components/showcase/icons";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipProvider,
 	TooltipTrigger,
-} from "@hack-the-andes-project/ui/components/tooltip";
+} from "@iathon-kiro/ui/components/tooltip";
 import { useState } from "react";
 import { toast } from "sonner";
 import { ROUTE_EXAMPLES } from "@/constants";

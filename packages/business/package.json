@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/business",
+	"name": "@iathon-kiro/business",
 	"private": true,
 	"type": "module",
 	"exports": {
@@ -12,7 +12,7 @@
 		"test": "vitest run"
 	},
 	"dependencies": {
-		"@hack-the-andes-project/db": "workspace:*",
+		"@iathon-kiro/db": "workspace:*",
 		"@turf/along": "catalog:",
 		"@turf/bearing": "catalog:",
 		"@turf/destination": "catalog:",
@@ -32,7 +32,7 @@
 		"@turf/simplify": "catalog:"
 	},
 	"devDependencies": {
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@types/geojson": "catalog:",
 		"mysql2": "catalog:",
 		"typescript": "^6.0.3",

@@ -1,6 +1,6 @@
-import capas from "@hack-the-andes-project/tiles-schema/capas.schema.json";
-import openapi from "@hack-the-andes-project/tiles-schema/openapi.json";
-import tileMetadata from "@hack-the-andes-project/tiles-schema/tile-metadata.schema.json";
+import capas from "@iathon-kiro/tiles-schema/capas.schema.json";
+import openapi from "@iathon-kiro/tiles-schema/openapi.json";
+import tileMetadata from "@iathon-kiro/tiles-schema/tile-metadata.schema.json";
 import { describe, expect, it } from "vitest";
 import committed from "../../tiles-schema/types.ts?raw";
 import { generateTypes } from "../tools/tiles-types";

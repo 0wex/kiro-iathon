@@ -1,4 +1,4 @@
-import { createDb } from "@hack-the-andes-project/db";
+import { createDb } from "@iathon-kiro/db";
 import type { LineString } from "geojson";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 

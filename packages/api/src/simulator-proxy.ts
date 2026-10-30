@@ -1,4 +1,4 @@
-import { canUseSimulators } from "@hack-the-andes-project/business/simulators";
+import { canUseSimulators } from "@iathon-kiro/business/simulators";
 
 import {
 	HTTP_STATUS_BAD_GATEWAY,

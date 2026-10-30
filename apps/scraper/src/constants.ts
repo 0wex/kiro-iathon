@@ -1,4 +1,4 @@
-export const SERVICE_NAME = "hack-the-andes-scraper";
+export const SERVICE_NAME = "iathon-kiro-scraper";
 
 export const RUN_SECRET_HEADER = "x-scraper-secret";
 // Service-binding requests need a syntactically valid URL; the host is ignored.
@@ -6,7 +6,7 @@ export const SELF_RUN_ORIGIN = "https://scraper.internal";
 
 export const UPSTREAM_FETCH_TIMEOUT_MS = 20_000;
 export const UPSTREAM_USER_AGENT =
-	"hack-the-andes-scraper/1.0 (+https://github.com/Franz1241/hack-the-andes-project)";
+	"iathon-kiro-scraper/1.0 (+https://github.com/Franz1241/iathon-kiro)";
 export const DB_WRITE_CHUNK_SIZE = 200;
 export const ARCGIS_PAGE_SIZE = 1000;
 export const ARCGIS_MAX_PAGES = 10;

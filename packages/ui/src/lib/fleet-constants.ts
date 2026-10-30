@@ -1,5 +1,5 @@
-import { GEOTAB_DEFAULT_SERVER } from "@hack-the-andes-project/business/providers/constants";
-import type { GpsProviderKind } from "@hack-the-andes-project/business/providers/types";
+import { GEOTAB_DEFAULT_SERVER } from "@iathon-kiro/business/providers/constants";
+import type { GpsProviderKind } from "@iathon-kiro/business/providers/types";
 
 import type { FleetAlert, FleetTrip, FleetVehicle } from "./fleet";
 

@@ -1,8 +1,8 @@
 import type {
 	StructureKind,
 	StructurePrimitiveKind,
-} from "@hack-the-andes-project/business/structures/catalog";
-import type { PlacementTool } from "@hack-the-andes-project/ui/lib/structure-scene";
+} from "@iathon-kiro/business/structures/catalog";
+import type { PlacementTool } from "@iathon-kiro/ui/lib/structure-scene";
 
 interface StructurePaletteDefinition {
 	id: Exclude<StructureKind, "entity"> | StructurePrimitiveKind;

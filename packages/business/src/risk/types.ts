@@ -1,8 +1,8 @@
 import type {
 	RiskComponents,
 	RiskLevel,
-} from "@hack-the-andes-project/db/schema/risk";
-import type { IncidentSeverity } from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/risk";
+import type { IncidentSeverity } from "@iathon-kiro/db/schema/scraper";
 
 export interface SegmentStaticFeatures {
 	terrainSlopeDeg: number | null;

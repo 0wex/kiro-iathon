@@ -1,7 +1,7 @@
 import type {
 	IncidentSeverity,
 	RoadStatus,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { z } from "zod";
 
 import {

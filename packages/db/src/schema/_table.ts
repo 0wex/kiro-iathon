@@ -4,9 +4,9 @@ import { mysqlTableCreator } from "drizzle-orm/mysql-core";
 // Keep the table prefix so existing tables retain their names.
 // drizzle.config.ts scopes push/introspect to this prefix so foreign tables
 // are never treated as deleted.
-export const TABLE_PREFIX = "hack_the_andes_";
+export const TABLE_PREFIX = "iathon_kiro_";
 
-// Outside the `hack_the_andes_*` filter so push/generate never diff it as a
+// Outside the `iathon_kiro_*` filter so push/generate never diff it as a
 // schema table, yet namespaced so it cannot collide with another project's
 // drizzle history in a shared database.
 export const MIGRATIONS_TABLE = `__${TABLE_PREFIX}migrations`;

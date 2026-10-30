@@ -1,4 +1,4 @@
-import type { RouteReviewPlaceId } from "@hack-the-andes-project/business/route-review/places";
+import type { RouteReviewPlaceId } from "@iathon-kiro/business/route-review/places";
 import { cn } from "cn";
 import { ArrowLeftRightIcon } from "lucide-react";
 import { useId, useState } from "react";

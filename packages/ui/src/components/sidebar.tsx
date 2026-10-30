@@ -1,22 +1,22 @@
 import { mergeProps } from "@base-ui/react/merge-props";
 import { useRender } from "@base-ui/react/use-render";
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { Input } from "@hack-the-andes-project/ui/components/input";
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { Input } from "@iathon-kiro/ui/components/input";
+import { Separator } from "@iathon-kiro/ui/components/separator";
 import {
 	Sheet,
 	SheetContent,
 	SheetDescription,
 	SheetHeader,
 	SheetTitle,
-} from "@hack-the-andes-project/ui/components/sheet";
-import { Skeleton } from "@hack-the-andes-project/ui/components/skeleton";
+} from "@iathon-kiro/ui/components/sheet";
+import { Skeleton } from "@iathon-kiro/ui/components/skeleton";
 import {
 	Tooltip,
 	TooltipContent,
 	TooltipTrigger,
-} from "@hack-the-andes-project/ui/components/tooltip";
-import { useIsMobile } from "@hack-the-andes-project/ui/hooks/use-mobile";
+} from "@iathon-kiro/ui/components/tooltip";
+import { useIsMobile } from "@iathon-kiro/ui/hooks/use-mobile";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { PanelLeftIcon } from "lucide-react";

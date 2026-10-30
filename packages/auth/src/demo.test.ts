@@ -6,8 +6,8 @@ import {
 	ENGINEER_DEMO_ACCOUNT_EMAIL,
 	ENGINEER_DEMO_ACCOUNT_NAME,
 	ENGINEER_DEMO_ACCOUNT_ROLE,
-} from "@hack-the-andes-project/business/demo-account";
-import { SIMULATOR_ROLE } from "@hack-the-andes-project/business/simulators";
+} from "@iathon-kiro/business/demo-account";
+import { SIMULATOR_ROLE } from "@iathon-kiro/business/simulators";
 import { betterAuth } from "better-auth";
 import { afterAll, afterEach, describe, expect, it, vi } from "vitest";
 
@@ -21,7 +21,7 @@ import {
 import { demoAccess } from "./demo";
 
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	default: {
@@ -32,7 +32,7 @@ vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 		})),
 	},
 }));
-const { createDb } = await import("@hack-the-andes-project/db");
+const { createDb } = await import("@iathon-kiro/db");
 const { createAuth } = await import("./index");
 const database = await createDb({
 	host: "mock",
@@ -633,7 +633,7 @@ describe("demo access", () => {
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
 				sql: expect.stringContaining(
-					"insert into `hack_the_andes_organization`",
+					"insert into `iathon_kiro_organization`",
 				),
 			}),
 			expect.arrayContaining([user.id]),

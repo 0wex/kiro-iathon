@@ -1,11 +1,11 @@
-import type { TripStatus } from "@hack-the-andes-project/db/schema/fleet";
+import type { TripStatus } from "@iathon-kiro/db/schema/fleet";
 
 export {
 	DEMO_COMPANY_MAX_LENGTH_CHARS,
 	DEMO_EMAIL_MAX_LENGTH_CHARS,
 	DEMO_NAME_MAX_LENGTH_CHARS,
 	DEMO_PHONE_MAX_LENGTH_CHARS,
-} from "@hack-the-andes-project/db/schema/constants";
+} from "@iathon-kiro/db/schema/constants";
 
 export const HAZARD_BUFFER_M = 500;
 export const LOOKAHEAD_M = 150_000;
@@ -60,7 +60,7 @@ export const ROUTE_REVIEW_DEPARTURE_WINDOW_MS = HOURS_PER_DAY * MS_PER_HOUR;
 // Browser and server clocks can differ by minutes.
 export const ROUTE_REVIEW_DEPARTURE_CLOCK_SKEW_MS = 15 * MS_PER_MINUTE;
 export const ROUTE_REVIEW_RETENTION_MS = HOURS_PER_DAY * MS_PER_HOUR;
-export { VEHICLE_PLATE_LENGTH_CHARS } from "@hack-the-andes-project/db/schema/constants";
+export { VEHICLE_PLATE_LENGTH_CHARS } from "@iathon-kiro/db/schema/constants";
 // PRD step 3: each path is split into segments of about 5 km.
 export const ROUTE_REVIEW_SEGMENT_LENGTH_M = 5_000;
 // About 11 m: route lines lose vertices the map cannot show at route zoom.

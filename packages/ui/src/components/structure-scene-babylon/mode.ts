@@ -6,7 +6,7 @@ import type {
 	ModeXr,
 	SimulatorMode,
 	SiteTerrain,
-} from "@hack-the-andes-project/xr-simulator/viewer";
+} from "@iathon-kiro/xr-simulator/viewer";
 import type { StructureSceneProps } from "../../lib/structure-scene";
 import type { StructureXrController } from "../../lib/structure-xr-babylon";
 import { createStructureXr } from "../structure-xr-babylon";

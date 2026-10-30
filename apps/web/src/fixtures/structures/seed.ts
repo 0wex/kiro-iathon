@@ -1,4 +1,4 @@
-import type { Structure } from "@hack-the-andes-project/api/structure-schemas";
+import type { Structure } from "@iathon-kiro/api/structure-schemas";
 
 const seededAt = new Date("2026-10-18T00:00:00.000Z");
 

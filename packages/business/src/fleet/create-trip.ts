@@ -1,5 +1,5 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { trip } from "@hack-the-andes-project/db/schema/fleet";
+import type { Database } from "@iathon-kiro/db";
+import { trip } from "@iathon-kiro/db/schema/fleet";
 import { and, eq, sql } from "drizzle-orm";
 
 import { MS_PER_SECOND } from "../constants";

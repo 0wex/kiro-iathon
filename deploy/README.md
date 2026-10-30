@@ -1,6 +1,6 @@
 # Dokploy deployment
 
-One AWS EC2 box runs Dokploy and MySQL 8.4. Every app has a production deployment from `main` and a staging deployment from `develop`. Production uses the `illapa` database; staging uses `illapa_staging`. Both keep the `hack_the_andes_` table prefix.
+One AWS EC2 box runs Dokploy and MySQL 8.4. Every app has a production deployment from `main` and a staging deployment from `develop`. Production uses the `illapa` database; staging uses `illapa_staging`. Both keep the `iathon_kiro_` table prefix.
 
 ## Domains
 
@@ -34,7 +34,7 @@ The URLs are baked in at build time. Every listed build arg is required and must
 
 ## How the Node build works
 
-- `apps/<app>/src/node.ts` serves the Worker's default export through `@hack-the-andes-project/node-runtime`, using `@hono/node-server` for HTTP and `croner` for the cron triggers.
+- `apps/<app>/src/node.ts` serves the Worker's default export through `@iathon-kiro/node-runtime`, using `@hono/node-server` for HTTP and `croner` for the cron triggers.
 - `apps/<app>/tsdown.node.config.ts` bundles the app and all of its dependencies into `dist-node/`. The bundle swaps three Workers-only modules for Node versions (`packages/node-runtime/src/bundle-aliases.ts`):
   - `cloudflare:workers`: `env` is `process.env`. `HYPERDRIVE` is parsed from `DATABASE_URL`. The scraper's `SELF` binding calls back into the same process on `127.0.0.1:$PORT`.
   - `evlog/workers`: one JSON line per event on stdout.

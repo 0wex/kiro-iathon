@@ -1,15 +1,15 @@
 {
 	"expo": {
-		"name": "hack-the-andes-project",
-		"slug": "hack-the-andes-project",
+		"name": "iathon-kiro",
+		"slug": "iathon-kiro",
 		"version": "1.0.0",
 		"orientation": "portrait",
 		"icon": "./assets/images/icon.png",
-		"scheme": "hack-the-andes-project",
+		"scheme": "iathon-kiro",
 		"userInterfaceStyle": "automatic",
 		"ios": {
 			"supportsTablet": true,
-			"bundleIdentifier": "com.anonymous.hack-the-andes-project"
+			"bundleIdentifier": "com.anonymous.iathon-kiro"
 		},
 		"android": {
 			"adaptiveIcon": {
@@ -19,7 +19,7 @@
 				"monochromeImage": "./assets/images/android-icon-monochrome.png"
 			},
 			"predictiveBackGestureEnabled": false,
-			"package": "com.anonymous.hacktheandesproject"
+			"package": "com.anonymous.iathonkiro"
 		},
 		"web": {
 			"output": "static",

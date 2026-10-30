@@ -1,5 +1,5 @@
-import type { Incident } from "@hack-the-andes-project/ui/lib/incident";
-import { INCIDENT_CATEGORY_LABELS } from "@hack-the-andes-project/ui/lib/incident-constants";
+import type { Incident } from "@iathon-kiro/ui/lib/incident";
+import { INCIDENT_CATEGORY_LABELS } from "@iathon-kiro/ui/lib/incident-constants";
 import { ExternalLinkIcon } from "lucide-react";
 
 import { Badge } from "./badge";

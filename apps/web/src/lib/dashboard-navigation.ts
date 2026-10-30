@@ -5,7 +5,7 @@ import {
 	RouteIcon,
 	SettingsIcon,
 	TruckIcon,
-} from "@hack-the-andes-project/ui/components/icons";
+} from "@iathon-kiro/ui/components/icons";
 import type { LinkProps } from "@tanstack/react-router";
 import type { ComponentType } from "react";
 import { m } from "@/paraglide/messages";

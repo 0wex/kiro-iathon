@@ -1,5 +1,5 @@
 {
-	"name": "hack-the-andes-project",
+	"name": "iathon-kiro",
 	"private": true,
 	"workspaces": [
 		"apps/*",
@@ -7,9 +7,9 @@
 	],
 	"type": "module",
 	"scripts": {
-		"dev": "pnpm --filter @hack-the-andes-project/infra dev",
+		"dev": "pnpm --filter @iathon-kiro/infra dev",
 		"dev:web": "pnpm --filter web dev:bare",
-		"dev:illapa": "pnpm --filter @hack-the-andes-project/infra dev --include illapa",
+		"dev:illapa": "pnpm --filter @iathon-kiro/infra dev --include illapa",
 		"dev:quest": "pnpm --filter illapa-quest dev",
 		"dev:native": "pnpm --filter native dev",
 		"build": "pnpm -r --if-present build",
@@ -17,12 +17,12 @@
 		"test": "pnpm -r --if-present test",
 		"format:write": "biome check --write .",
 		"check": "biome check .",
-		"db:push": "pnpm --filter @hack-the-andes-project/db db:push",
-		"db:generate": "pnpm --filter @hack-the-andes-project/db db:generate",
-		"db:migrate": "pnpm --filter @hack-the-andes-project/db db:migrate",
-		"db:studio": "pnpm --filter @hack-the-andes-project/db db:studio",
-		"infra:login": "pnpm --filter @hack-the-andes-project/infra login",
-		"infra:refresh": "pnpm --filter @hack-the-andes-project/infra refresh",
+		"db:push": "pnpm --filter @iathon-kiro/db db:push",
+		"db:generate": "pnpm --filter @iathon-kiro/db db:generate",
+		"db:migrate": "pnpm --filter @iathon-kiro/db db:migrate",
+		"db:studio": "pnpm --filter @iathon-kiro/db db:studio",
+		"infra:login": "pnpm --filter @iathon-kiro/infra login",
+		"infra:refresh": "pnpm --filter @iathon-kiro/infra refresh",
 		"build:native:android": "pnpm --filter native build:android",
 		"build:native:ios": "pnpm --filter native build:ios",
 		"build:native:cloud:android": "pnpm --filter native build:android:cloud",
@@ -45,7 +45,7 @@
 	"devDependencies": {
 		"@biomejs/biome": "^2.5.15",
 		"@cloudflare/workers-types": "catalog:",
-		"@hack-the-andes-project/config": "workspace:*",
+		"@iathon-kiro/config": "workspace:*",
 		"@types/node": "^26.4.1",
 		"typescript": "^6.0.3",
 		"varlock": "catalog:"

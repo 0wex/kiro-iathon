@@ -1,11 +1,11 @@
 {
-	"extends": "@hack-the-andes-project/config/tsconfig.base.json",
+	"extends": "@iathon-kiro/config/tsconfig.base.json",
 	"compilerOptions": {
 		"jsx": "react-jsx",
 		"lib": ["ESNext", "DOM", "DOM.Iterable"],
 		"types": [],
 		"paths": {
-			"@hack-the-andes-project/ui/*": ["./src/*"]
+			"@iathon-kiro/ui/*": ["./src/*"]
 		}
 	},
 	"include": ["src/**/*.ts", "src/**/*.tsx"],

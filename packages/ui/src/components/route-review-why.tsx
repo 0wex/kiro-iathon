@@ -1,7 +1,7 @@
 import {
 	ROUTE_SIGNAL_KINDS,
 	type RouteRiskHorizon,
-} from "@hack-the-andes-project/business/route-review/risk";
+} from "@iathon-kiro/business/route-review/risk";
 import type {
 	RouteReviewCandidate,
 	RouteReviewLabels,

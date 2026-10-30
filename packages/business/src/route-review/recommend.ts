@@ -1,4 +1,4 @@
-import type { RoadStatus } from "@hack-the-andes-project/db/schema/scraper";
+import type { RoadStatus } from "@iathon-kiro/db/schema/scraper";
 
 import { riskLevelForScore } from "../risk/score";
 import type {

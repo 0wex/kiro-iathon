@@ -1,5 +1,5 @@
-import { INCIDENT_SEVERITY_LABELS } from "@hack-the-andes-project/ui/lib/incident-constants";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+import { INCIDENT_SEVERITY_LABELS } from "@iathon-kiro/ui/lib/incident-constants";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 
 import { Badge } from "./badge";
 

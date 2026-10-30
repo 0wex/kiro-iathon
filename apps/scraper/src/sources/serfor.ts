@@ -1,4 +1,4 @@
-import type { IncidentSeverity } from "@hack-the-andes-project/db/schema/scraper";
+import type { IncidentSeverity } from "@iathon-kiro/db/schema/scraper";
 
 import {
 	MS_PER_DAY,

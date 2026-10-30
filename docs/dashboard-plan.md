@@ -8,7 +8,7 @@ Fleet operators log in at their environment's dashboard URL, see Peru with the i
 
 - **Map**: MapLibre GL via `react-map-gl/maplibre`, OpenFreeMap tiles (no key). Map components live in `packages/ui`.
 - **Routing engine**: OSRM HTTP API (`OSRM_BASE_URL`, default public demo `https://router.project-osrm.org`). `alternatives=true` gives candidate routes; the hazard engine picks the one that avoids hazards.
-- **Business logic** lives in `packages/business` (`@hack-the-andes-project/business`): hazard engine, ETA, routing client, GPS provider adapters, credential encryption. Apps only orchestrate.
+- **Business logic** lives in `packages/business` (`@iathon-kiro/business`): hazard engine, ETA, routing client, GPS provider adapters, credential encryption. Apps only orchestrate.
 - **Tenancy**: better-auth `organization` plugin. A personal organization is auto-created on sign-up and set active. Every fleet row carries `organizationId`.
 - **Credentials at rest**: AES-GCM (WebCrypto) with `CREDENTIALS_ENCRYPTION_KEY` (base64, 32 bytes). Server encrypts on create; fleet-sync decrypts to poll.
 - **Fleet sync**: Node service `apps/fleet-sync` on a `*/2 * * * *` cron: pull positions from every active connection, then evaluate every active trip against active incidents, upserting `alert` rows. Alerts are in-app first (dashboard polls); email/push later.
@@ -43,7 +43,7 @@ Routes under `/_auth/dashboard`: map (incidents + fleet overlay), fleet (vehicle
 
 - One EC2 box runs Dokploy: production deploys from `main`, staging from `develop`.
 - Server, scraper and fleet-sync are Node 24 services. Dashboard and marketing are nginx static sites. URLs come from Dokploy env and build args; production runs on `dash.getillapa.com` and `api.getillapa.com` (issue #7).
-- MySQL 8.4 holds `illapa` and `illapa_staging`, with `hack_the_andes_` table prefixes. Fleet-sync reads `DATABASE_URL`, the shared encryption key, `OSRM_BASE_URL` and its run secret from Dokploy.
+- MySQL 8.4 holds `illapa` and `illapa_staging`, with `iathon_kiro_` table prefixes. Fleet-sync reads `DATABASE_URL`, the shared encryption key, `OSRM_BASE_URL` and its run secret from Dokploy.
 
 ## Work breakdown and model assignment
 

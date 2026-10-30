@@ -1,4 +1,4 @@
-import { ROUTE_RISK_LEVELS } from "@hack-the-andes-project/business/route-review/risk";
+import { ROUTE_RISK_LEVELS } from "@iathon-kiro/business/route-review/risk";
 import type { RouteReviewLabels } from "../lib/route-review";
 import { RouteReviewRiskBadge } from "./route-review-risk-badge";
 import { RouteReviewSignalTag } from "./route-review-signal-tag";

@@ -13,7 +13,7 @@
 		"rootDirs": ["."],
 		"paths": {
 			"@/*": ["./src/*"],
-			"@hack-the-andes-project/ui/*": ["../../packages/ui/src/*"]
+			"@iathon-kiro/ui/*": ["../../packages/ui/src/*"]
 		}
 	}
 }

@@ -1,9 +1,9 @@
-import type { Incident } from "@hack-the-andes-project/ui/lib/incident";
+import type { Incident } from "@iathon-kiro/ui/lib/incident";
 import {
 	INCIDENT_CATEGORY_LABELS,
 	INCIDENT_SOURCE_LABELS,
 	ROAD_STATUS_LABELS,
-} from "@hack-the-andes-project/ui/lib/incident-constants";
+} from "@iathon-kiro/ui/lib/incident-constants";
 import { formatDistanceToNowStrict } from "date-fns";
 import { es } from "date-fns/locale/es";
 import { Fragment } from "react";

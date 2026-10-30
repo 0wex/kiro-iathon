@@ -5,7 +5,7 @@ import type {
 	Fuente,
 	TileMetadata,
 	VersionCapa,
-} from "@hack-the-andes-project/tiles-schema/types";
+} from "@iathon-kiro/tiles-schema/types";
 import { decodeTerrarium } from "./terrarium";
 import { TILE_PX, type TileId } from "./tileMath";
 

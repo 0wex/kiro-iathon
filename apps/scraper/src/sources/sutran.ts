@@ -4,7 +4,7 @@ import {
 	type PoiKind,
 	ROAD_STATUSES,
 	type RoadStatus,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { z } from "zod";
 
 import { SUTRAN_ALT_ROUTES_GEOJSON_URL, SUTRAN_API_BASE } from "../constants";

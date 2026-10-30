@@ -4,21 +4,21 @@ import {
 	AttachmentDescription,
 	AttachmentMedia,
 	AttachmentTitle,
-} from "@hack-the-andes-project/ui/components/attachment";
+} from "@iathon-kiro/ui/components/attachment";
 import {
 	Bubble,
 	BubbleContent,
-} from "@hack-the-andes-project/ui/components/bubble";
+} from "@iathon-kiro/ui/components/bubble";
 import {
 	Marker,
 	MarkerContent,
-} from "@hack-the-andes-project/ui/components/marker";
+} from "@iathon-kiro/ui/components/marker";
 import {
 	Message,
 	MessageContent,
 	MessageFooter,
 	MessageHeader,
-} from "@hack-the-andes-project/ui/components/message";
+} from "@iathon-kiro/ui/components/message";
 import {
 	MessageScroller,
 	MessageScrollerButton,
@@ -26,7 +26,7 @@ import {
 	MessageScrollerItem,
 	MessageScrollerProvider,
 	MessageScrollerViewport,
-} from "@hack-the-andes-project/ui/components/message-scroller";
+} from "@iathon-kiro/ui/components/message-scroller";
 import {
 	Questionnaire,
 	QuestionnaireActions,
@@ -39,19 +39,19 @@ import {
 	QuestionnaireSkip,
 	QuestionnaireSubmit,
 	QuestionnaireTitle,
-} from "@hack-the-andes-project/ui/components/questionnaire";
+} from "@iathon-kiro/ui/components/questionnaire";
 import {
 	ArrowDownIcon,
 	FileTextIcon,
-} from "@hack-the-andes-project/ui/components/showcase/icons";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
+} from "@iathon-kiro/ui/components/showcase/icons";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
 import {
 	Trace,
 	TraceDescription,
 	TraceIcon,
 	TraceLine,
 	TraceTitle,
-} from "@hack-the-andes-project/ui/components/trace";
+} from "@iathon-kiro/ui/components/trace";
 import { toast } from "sonner";
 import { SHOWCASE_QUESTIONNAIRE_ITEMS } from "@/constants";
 import { m } from "@/paraglide/messages";

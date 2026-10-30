@@ -1,7 +1,7 @@
 import type {
 	IncidentCategory,
 	IncidentSeverity,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import type { Geometry, LineString } from "geojson";
 
 export interface LatLng {

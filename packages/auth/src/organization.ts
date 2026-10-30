@@ -1,5 +1,5 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { member, organization } from "@hack-the-andes-project/db/schema/auth";
+import type { Database } from "@iathon-kiro/db";
+import { member, organization } from "@iathon-kiro/db/schema/auth";
 
 interface PersonalOrganizationOwner {
 	id: string;

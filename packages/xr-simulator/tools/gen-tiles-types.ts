@@ -1,4 +1,4 @@
-// CLI of tools/tiles-types.ts: rewrites packages/tiles-schema/types.ts. Usage: pnpm --filter @hack-the-andes-project/xr-simulator schema:types
+// CLI of tools/tiles-types.ts: rewrites packages/tiles-schema/types.ts. Usage: pnpm --filter @iathon-kiro/xr-simulator schema:types
 import { readFile, writeFile } from "node:fs/promises";
 import {
 	generateTypes,

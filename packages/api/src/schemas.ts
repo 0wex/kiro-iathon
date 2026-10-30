@@ -1,22 +1,22 @@
 import {
 	geometrySchema as businessGeometrySchema,
 	lineStringSchema,
-} from "@hack-the-andes-project/business/geojson-schemas";
+} from "@iathon-kiro/business/geojson-schemas";
 import {
 	ID_LENGTH_CHARS,
 	TEXT_LENGTH_CHARS,
-} from "@hack-the-andes-project/db/schema/constants";
+} from "@iathon-kiro/db/schema/constants";
 import {
 	ALERT_KINDS,
 	ALERT_STATUSES,
 	CONNECTION_STATUSES,
 	GPS_PROVIDERS,
 	TRIP_STATUSES,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import {
 	INCIDENT_CATEGORIES,
 	INCIDENT_SEVERITIES,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import type { Geometry } from "geojson";
 import { z } from "zod";
 

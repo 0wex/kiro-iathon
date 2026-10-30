@@ -1,5 +1,5 @@
-import { ColorPair } from "@hack-the-andes-project/ui/components/showcase/color-pair";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
+import { ColorPair } from "@iathon-kiro/ui/components/showcase/color-pair";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
 import { m } from "@/paraglide/messages";
 
 const COLOR_PAIRS = [

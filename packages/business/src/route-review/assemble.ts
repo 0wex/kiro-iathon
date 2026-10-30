@@ -2,12 +2,12 @@ import {
 	RISK_HORIZONS_HOURS,
 	type RiskComponents,
 	type RiskHorizonHours,
-} from "@hack-the-andes-project/db/schema/risk";
+} from "@iathon-kiro/db/schema/risk";
 import type {
 	IncidentCategory,
 	IncidentSeverity,
 	RoadStatus,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { simplify } from "@turf/simplify";
 import type { Geometry, LineString, Position } from "geojson";
 

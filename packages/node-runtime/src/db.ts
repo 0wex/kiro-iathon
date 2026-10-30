@@ -1,11 +1,11 @@
 import {
 	type DatabaseConnectionConfig,
 	createDb as openDatabase,
-} from "@hack-the-andes-project/db/index";
+} from "@iathon-kiro/db/index";
 
 import { onInvocationFinished, reportFailure } from "./execution-context";
 
-export * from "@hack-the-andes-project/db/index";
+export * from "@iathon-kiro/db/index";
 
 // Replaces createDb in the Node bundles. workerd closes the sockets a request
 // opened when it ends; Node keeps them open, so the per-request connection is

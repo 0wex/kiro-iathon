@@ -1,26 +1,26 @@
 import { createRequire } from "node:module";
-import { generateEncryptionKeyBase64 } from "@hack-the-andes-project/business/crypto/index";
+import { generateEncryptionKeyBase64 } from "@iathon-kiro/business/crypto/index";
 import {
 	DEMO_ACCOUNT_EMAIL,
 	ENGINEER_DEMO_ACCOUNT_EMAIL,
-} from "@hack-the-andes-project/business/demo-account";
-import * as demoSeeding from "@hack-the-andes-project/business/demo-seed";
-import * as incidentLoading from "@hack-the-andes-project/business/fleet/load-alertable-incidents";
-import * as demoTripPlanning from "@hack-the-andes-project/business/fleet/plan-demo-trip";
-import * as fleetSync from "@hack-the-andes-project/business/fleet/sync-connection";
+} from "@iathon-kiro/business/demo-account";
+import * as demoSeeding from "@iathon-kiro/business/demo-seed";
+import * as incidentLoading from "@iathon-kiro/business/fleet/load-alertable-incidents";
+import * as demoTripPlanning from "@iathon-kiro/business/fleet/plan-demo-trip";
+import * as fleetSync from "@iathon-kiro/business/fleet/sync-connection";
 import type {
 	HazardIncident,
 	RouteCandidate,
-} from "@hack-the-andes-project/business/hazards/types";
+} from "@iathon-kiro/business/hazards/types";
 import {
 	DEMO_VEHICLES,
 	samsaraProvider,
-} from "@hack-the-andes-project/business/providers/index";
-import * as riskRoutes from "@hack-the-andes-project/business/risk/compare-routes";
-import * as routeReviewEvaluation from "@hack-the-andes-project/business/route-review/evaluate";
-import { ROUTE_REVIEW_PLACES } from "@hack-the-andes-project/business/route-review/places";
-import * as routing from "@hack-the-andes-project/business/routing/osrm";
-import type { vehicle } from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/business/providers/index";
+import * as riskRoutes from "@iathon-kiro/business/risk/compare-routes";
+import * as routeReviewEvaluation from "@iathon-kiro/business/route-review/evaluate";
+import { ROUTE_REVIEW_PLACES } from "@iathon-kiro/business/route-review/places";
+import * as routing from "@iathon-kiro/business/routing/osrm";
+import type { vehicle } from "@iathon-kiro/db/schema/fleet";
 import { call, createRouterClient } from "@orpc/server";
 import { createRequestLogger } from "evlog";
 import {
@@ -50,7 +50,7 @@ import type { VehicleCreateInput } from "./route-review-schemas";
 import { appRouter } from "./routers/index";
 
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	default: {
@@ -62,8 +62,8 @@ vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	},
 }));
 
-const { createDb } = await import("@hack-the-andes-project/db");
-const { createAuth } = await import("@hack-the-andes-project/auth");
+const { createDb } = await import("@iathon-kiro/db");
+const { createAuth } = await import("@iathon-kiro/auth");
 const database = await createDb({
 	host: "mock",
 	port: Number.NaN,
@@ -243,13 +243,13 @@ describe("fleet procedure boundaries", () => {
 			if (routerName === "alerts") {
 				expect(query).toHaveBeenCalledWith(
 					expect.objectContaining({
-						sql: expect.stringContaining("left join `hack_the_andes_incident`"),
+						sql: expect.stringContaining("left join `iathon_kiro_incident`"),
 					}),
 					expect.arrayContaining([ALERT_STATUS_OPEN]),
 				);
 				expect(query).not.toHaveBeenCalledWith(
 					expect.objectContaining({
-						sql: expect.stringContaining("`hack_the_andes_incident`.`active`"),
+						sql: expect.stringContaining("`iathon_kiro_incident`.`active`"),
 					}),
 					expect.anything(),
 				);
@@ -326,7 +326,7 @@ describe("fleet procedure boundaries", () => {
 		);
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("insert into `hack_the_andes_vehicle`"),
+				sql: expect.stringContaining("insert into `iathon_kiro_vehicle`"),
 			}),
 			expect.arrayContaining(DEMO_VEHICLES.map(({ plate }) => plate)),
 		);
@@ -517,7 +517,7 @@ describe("fleet procedure boundaries", () => {
 			const tripWrite = query.mock.calls.find(
 				([options]) =>
 					typeof options === "object" &&
-					options.sql.startsWith("insert into `hack_the_andes_trip`"),
+					options.sql.startsWith("insert into `iathon_kiro_trip`"),
 			);
 			const tripParameters = tripWrite?.[1];
 			if (!Array.isArray(tripParameters))
@@ -540,7 +540,7 @@ describe("fleet procedure boundaries", () => {
 			const alertWrite = query.mock.calls.find(
 				([options]) =>
 					typeof options === "object" &&
-					options.sql.startsWith("insert into `hack_the_andes_alert`"),
+					options.sql.startsWith("insert into `iathon_kiro_alert`"),
 			);
 			expect(alertWrite?.[1]).toEqual(
 				expect.arrayContaining([
@@ -555,7 +555,7 @@ describe("fleet procedure boundaries", () => {
 			expect(query).toHaveBeenCalledWith(
 				expect.objectContaining({
 					sql: expect.stringMatching(
-						/^update `hack_the_andes_trip` set .*`last_evaluated_at`/,
+						/^update `iathon_kiro_trip` set .*`last_evaluated_at`/,
 					),
 				}),
 				expect.arrayContaining([tripId, organizationId, createdAtParameter]),
@@ -761,7 +761,7 @@ describe("trip completion alert cleanup", () => {
 
 			expect(query).toHaveBeenCalledWith(
 				expect.objectContaining({
-					sql: expect.stringContaining("update `hack_the_andes_alert`"),
+					sql: expect.stringContaining("update `iathon_kiro_alert`"),
 				}),
 				expect.arrayContaining([
 					session.session.activeOrganizationId,
@@ -790,7 +790,7 @@ describe("shared demo account boundaries", () => {
 			password: "password",
 		},
 	] satisfies Array<
-		import("@hack-the-andes-project/business/providers/index").GpsCredentialsInput
+		import("@iathon-kiro/business/providers/index").GpsCredentialsInput
 	>)("forbids a demo user from connecting $provider", async (credentials) => {
 		const query = vi.spyOn(database.$client, "query");
 		const client = createRouterClient(appRouter, {
@@ -1136,7 +1136,7 @@ describe("route review procedures", () => {
 		});
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("insert into `hack_the_andes_vehicle`"),
+				sql: expect.stringContaining("insert into `iathon_kiro_vehicle`"),
 			}),
 			expect.arrayContaining([session.session.activeOrganizationId]),
 		);
@@ -1177,7 +1177,7 @@ describe("route review procedures", () => {
 		});
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("update `hack_the_andes_vehicle`"),
+				sql: expect.stringContaining("update `iathon_kiro_vehicle`"),
 			}),
 			expect.arrayContaining([
 				selectedVehicle.id,
@@ -1196,7 +1196,7 @@ describe("route review procedures", () => {
 		expect(await client.trips.listPlanned()).toEqual([]);
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("left join `hack_the_andes_vehicle`"),
+				sql: expect.stringContaining("left join `iathon_kiro_vehicle`"),
 			}),
 			expect.arrayContaining([session.session.activeOrganizationId]),
 		);
@@ -1249,7 +1249,7 @@ describe("route review procedures", () => {
 		expect(query).toHaveBeenCalledWith(
 			expect.objectContaining({
 				sql: expect.stringContaining(
-					"insert into `hack_the_andes_route_review`",
+					"insert into `iathon_kiro_route_review`",
 				),
 			}),
 			expect.any(Array),

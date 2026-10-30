@@ -1,6 +1,6 @@
 # Business logic
 
-`@hack-the-andes-project/business` contains the shared fleet and road-risk rules used by the API, the fleet-sync and scraper Node services. Import from the package root or a module path such as `@hack-the-andes-project/business/fleet/evaluate-trip`.
+`@iathon-kiro/business` contains the shared fleet and road-risk rules used by the API, the fleet-sync and scraper Node services. Import from the package root or a module path such as `@iathon-kiro/business/fleet/evaluate-trip`.
 
 ## Modules and entry points
 
@@ -52,8 +52,8 @@ Database operations receive a request-owned Drizzle connection. They do not star
 ## Verification
 
 ```sh
-pnpm --filter @hack-the-andes-project/business test
-pnpm --filter @hack-the-andes-project/business check-types
+pnpm --filter @iathon-kiro/business test
+pnpm --filter @iathon-kiro/business check-types
 ```
 
 Tests use provider fixtures and the real Drizzle SQL builder with a mocked driver. They do not contact GPS accounts or run writes against MySQL.

@@ -11,8 +11,8 @@ import {
 	TransformNode,
 	Vector3,
 } from "@babylonjs/core";
-import { MAX_STRUCTURE_ELEMENTS } from "@hack-the-andes-project/business/structures/constants";
-import { terrainGradient } from "@hack-the-andes-project/business/structures/placement";
+import { MAX_STRUCTURE_ELEMENTS } from "@iathon-kiro/business/structures/constants";
+import { terrainGradient } from "@iathon-kiro/business/structures/placement";
 import type {
 	SceneCursor,
 	SceneStructure,

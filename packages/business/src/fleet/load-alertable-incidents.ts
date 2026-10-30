@@ -1,5 +1,5 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { incident } from "@hack-the-andes-project/db/schema/scraper";
+import type { Database } from "@iathon-kiro/db";
+import { incident } from "@iathon-kiro/db/schema/scraper";
 import { eq } from "drizzle-orm";
 
 import { isAlertableIncident } from "../hazards/alertable";

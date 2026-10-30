@@ -1,9 +1,9 @@
 import {
 	Alert,
 	AlertDescription,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Card,
 	CardContent,
@@ -11,7 +11,7 @@ import {
 	CardFooter,
 	CardHeader,
 	CardTitle,
-} from "@hack-the-andes-project/ui/components/card";
+} from "@iathon-kiro/ui/components/card";
 import {
 	type ChartConfig,
 	ChartContainer,
@@ -19,7 +19,7 @@ import {
 	ChartLegendContent,
 	ChartTooltip,
 	ChartTooltipContent,
-} from "@hack-the-andes-project/ui/components/chart";
+} from "@iathon-kiro/ui/components/chart";
 import {
 	Map as MapCanvas,
 	MapControls,
@@ -28,8 +28,8 @@ import {
 	MapRoute,
 	MarkerContent,
 	MarkerTooltip,
-} from "@hack-the-andes-project/ui/components/map";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
+} from "@iathon-kiro/ui/components/map";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
 import {
 	Table,
 	TableBody,
@@ -38,8 +38,8 @@ import {
 	TableHead,
 	TableHeader,
 	TableRow,
-} from "@hack-the-andes-project/ui/components/table";
-import { useTokenColors } from "@hack-the-andes-project/ui/hooks/use-token-colors";
+} from "@iathon-kiro/ui/components/table";
+import { useTokenColors } from "@iathon-kiro/ui/hooks/use-token-colors";
 import { type ComponentRef, useEffect, useId, useRef, useState } from "react";
 import {
 	Bar,

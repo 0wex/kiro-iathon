@@ -1,7 +1,7 @@
 import type {
 	Structure,
 	StructureInput,
-} from "@hack-the-andes-project/api/structure-schemas";
+} from "@iathon-kiro/api/structure-schemas";
 
 import {
 	ISO_DATE_PATTERN,

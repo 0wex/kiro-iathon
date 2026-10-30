@@ -5,11 +5,11 @@ import {
 	MS_PER_MINUTE,
 	ROUTE_REVIEW_DEPARTURE_WINDOW_MS,
 	SECONDS_PER_MINUTE,
-} from "@hack-the-andes-project/business/constants";
+} from "@iathon-kiro/business/constants";
 import type {
 	RouteEnumLabels,
 	RouteReviewLabels,
-} from "@hack-the-andes-project/ui/lib/route-review";
+} from "@iathon-kiro/ui/lib/route-review";
 import { ROUTE_REVIEW_TIME_ZONE } from "@/constants";
 import { m } from "@/paraglide/messages";
 import { getLocale } from "@/paraglide/runtime";

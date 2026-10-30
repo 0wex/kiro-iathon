@@ -2,8 +2,8 @@ import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Empty,
 	EmptyContent,
@@ -11,21 +11,21 @@ import {
 	EmptyHeader,
 	EmptyMedia,
 	EmptyTitle,
-} from "@hack-the-andes-project/ui/components/empty";
+} from "@iathon-kiro/ui/components/empty";
 import {
 	Progress,
 	ProgressLabel,
 	ProgressValue,
-} from "@hack-the-andes-project/ui/components/progress";
-import { MapPinIcon } from "@hack-the-andes-project/ui/components/showcase/icons";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
-import { ShowcaseToastViewport } from "@hack-the-andes-project/ui/components/showcase/toast-viewport";
-import { Skeleton } from "@hack-the-andes-project/ui/components/skeleton";
-import { Toaster } from "@hack-the-andes-project/ui/components/sonner";
+} from "@iathon-kiro/ui/components/progress";
+import { MapPinIcon } from "@iathon-kiro/ui/components/showcase/icons";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
+import { ShowcaseToastViewport } from "@iathon-kiro/ui/components/showcase/toast-viewport";
+import { Skeleton } from "@iathon-kiro/ui/components/skeleton";
+import { Toaster } from "@iathon-kiro/ui/components/sonner";
 import {
 	toast as baseToast,
 	ToastProvider,
-} from "@hack-the-andes-project/ui/components/toast";
+} from "@iathon-kiro/ui/components/toast";
 import { toast } from "sonner";
 import { SHOWCASE_PROGRESS_PERCENT, SHOWCASE_TOASTER_ID } from "@/constants";
 import { m } from "@/paraglide/messages";

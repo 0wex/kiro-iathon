@@ -2,11 +2,11 @@ import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { RouteDiagram } from "@hack-the-andes-project/ui/components/showcase/route-diagram";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+} from "@iathon-kiro/ui/components/alert";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { RouteDiagram } from "@iathon-kiro/ui/components/showcase/route-diagram";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 import { RISK_LEVELS } from "@/constants";
 import { m } from "@/paraglide/messages";
 

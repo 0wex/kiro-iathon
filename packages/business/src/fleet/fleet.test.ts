@@ -1,9 +1,9 @@
-import { createDb } from "@hack-the-andes-project/db";
+import { createDb } from "@iathon-kiro/db";
 import type {
 	gpsConnection,
 	trip,
 	vehicle,
-} from "@hack-the-andes-project/db/schema/fleet";
+} from "@iathon-kiro/db/schema/fleet";
 import { createLogger } from "evlog";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
@@ -195,12 +195,12 @@ describe("syncConnection with real Drizzle queries", () => {
 			positionsInserted: 1,
 		});
 		const historyWrites = query.mock.calls.filter(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_vehicle_position`"),
+			options.sql.startsWith("insert into `iathon_kiro_vehicle_position`"),
 		);
 		expect(historyWrites).toHaveLength(2);
 		expect(historyWrites[0]?.[1][0]).toBe(historyWrites[1]?.[1][0]);
 		const firstHistoryIndex = query.mock.calls.findIndex(([options]) =>
-			options.sql.includes("insert into `hack_the_andes_vehicle_position`"),
+			options.sql.includes("insert into `iathon_kiro_vehicle_position`"),
 		);
 		const firstCheckpointIndex = query.mock.calls.findIndex(([options]) =>
 			options.sql.includes("if("),
@@ -208,7 +208,7 @@ describe("syncConnection with real Drizzle queries", () => {
 		expect(firstHistoryIndex).toBeLessThan(firstCheckpointIndex);
 		const checkpointSql = query.mock.calls[firstCheckpointIndex]?.[0].sql;
 		expect(checkpointSql).toContain(
-			"values(`last_position_at`) > `hack_the_andes_vehicle`.`last_position_at`",
+			"values(`last_position_at`) > `iathon_kiro_vehicle`.`last_position_at`",
 		);
 		expect(JSON.stringify(query.mock.calls)).not.toContain("secret-token");
 	});
@@ -228,14 +228,14 @@ describe("syncConnection with real Drizzle queries", () => {
 			}),
 		).toMatchObject({ ok: true, vehiclesSynced: DEMO_VEHICLES.length });
 		const vehicleWrite = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_vehicle`"),
+			options.sql.startsWith("insert into `iathon_kiro_vehicle`"),
 		);
 		expect(vehicleWrite?.[1]).toEqual(
 			expect.arrayContaining(["t2s3", 5, 43_000, "t3s3", 6, 48_000]),
 		);
 		for (const column of ["vehicle_type_id", "axle_count", "gross_weight_kg"]) {
 			expect(vehicleWrite?.[0].sql).toContain(
-				`coalesce(\`hack_the_andes_vehicle\`.\`${column}\`, values(\`${column}\`))`,
+				`coalesce(\`iathon_kiro_vehicle\`.\`${column}\`, values(\`${column}\`))`,
 			);
 		}
 	});
@@ -320,7 +320,7 @@ describe("syncConnection with real Drizzle queries", () => {
 			options.sql.includes("left join"),
 		);
 		expect(fleetQuery?.[0].sql).toContain(
-			"coalesce(`hack_the_andes_trip`.`started_at`, `hack_the_andes_trip`.`created_at`)",
+			"coalesce(`iathon_kiro_trip`.`started_at`, `iathon_kiro_trip`.`created_at`)",
 		);
 		expect(fleetQuery?.[1]).toEqual(
 			expect.arrayContaining(["active", connection.id]),
@@ -337,7 +337,7 @@ describe("syncConnection with real Drizzle queries", () => {
 			now,
 		);
 		const historyWrite = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_vehicle_position`"),
+			options.sql.startsWith("insert into `iathon_kiro_vehicle_position`"),
 		);
 		expect(historyWrite?.[1]).toEqual(
 			expect.arrayContaining([
@@ -405,7 +405,7 @@ describe("evaluateTrip with real Drizzle queries", () => {
 			error: "No se pudo consultar una ruta alternativa.",
 		});
 		const alertWrite = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_alert`"),
+			options.sql.startsWith("insert into `iathon_kiro_alert`"),
 		);
 		expect(alertWrite?.[1]).toContain("open");
 		expect(alertWrite?.[1]).toContain(null);
@@ -441,7 +441,7 @@ describe("evaluateTrip with real Drizzle queries", () => {
 		});
 		expect(fetchMock).not.toHaveBeenCalled();
 		const alertWrite = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_alert`"),
+			options.sql.startsWith("insert into `iathon_kiro_alert`"),
 		);
 		expect(alertWrite?.[1]).toEqual(
 			expect.arrayContaining([hazard.id, JSON.stringify(alternativeRoute)]),
@@ -490,11 +490,11 @@ describe("evaluateTrip with real Drizzle queries", () => {
 		});
 		expect(result).toMatchObject({ ok: true, alertsUpdated: 1 });
 		const alertWrite = query.mock.calls.find(([options]) =>
-			options.sql.startsWith("insert into `hack_the_andes_alert`"),
+			options.sql.startsWith("insert into `iathon_kiro_alert`"),
 		);
 		const updateSql = alertWrite?.[0].sql.split("on duplicate key update")[1];
 		expect(updateSql).toContain(
-			"`status` = if(`hack_the_andes_alert`.`status` = 'resolved', 'open', `hack_the_andes_alert`.`status`)",
+			"`status` = if(`iathon_kiro_alert`.`status` = 'resolved', 'open', `iathon_kiro_alert`.`status`)",
 		);
 		expect(updateSql).toContain("`resolved_at` = ?");
 		expect(alertWrite?.[1].at(-1)).toBeNull();
@@ -588,9 +588,9 @@ it("resolves obsolete alerts for ended trips and inactive or no longer alertable
 	const resolution = query.mock.calls[0];
 	expect(resolution?.[0].sql).toContain("not exists");
 	expect(resolution?.[0].sql).toContain(
-		"`hack_the_andes_trip`.`organization_id` = `hack_the_andes_alert`.`organization_id`",
+		"`iathon_kiro_trip`.`organization_id` = `iathon_kiro_alert`.`organization_id`",
 	);
-	expect(resolution?.[0].sql).toContain("`hack_the_andes_incident`.`active`");
+	expect(resolution?.[0].sql).toContain("`iathon_kiro_incident`.`active`");
 	expect(resolution?.[1]).toEqual(
 		expect.arrayContaining([
 			"resolved",
@@ -604,7 +604,7 @@ it("resolves obsolete alerts for ended trips and inactive or no longer alertable
 		]),
 	);
 	expect(resolution?.[0].sql).toContain(
-		"`hack_the_andes_incident`.`severity` in",
+		"`iathon_kiro_incident`.`severity` in",
 	);
 });
 
@@ -668,7 +668,7 @@ it("prunes expired position history in a bounded batch without deleting vehicle 
 	expect(query.mock.calls).toHaveLength(1);
 	const deletion = query.mock.calls[0];
 	expect(deletion?.[0].sql).toContain(
-		"delete from `hack_the_andes_vehicle_position`",
+		"delete from `iathon_kiro_vehicle_position`",
 	);
 	expect(deletion?.[0].sql).toContain("`recorded_at` < ? limit ?");
 	expect(deletion?.[1]).toEqual([
@@ -700,7 +700,7 @@ it("batches hazard upserts while preserving acknowledgement timestamps", async (
 		log: createLogger(),
 	});
 	const writes = query.mock.calls.filter(([options]) =>
-		options.sql.startsWith("insert into `hack_the_andes_alert`"),
+		options.sql.startsWith("insert into `iathon_kiro_alert`"),
 	);
 	expect(writes).toHaveLength(2);
 	expect(result).toMatchObject({

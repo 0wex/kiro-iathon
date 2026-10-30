@@ -1,4 +1,4 @@
-import type { IncidentCategory } from "@hack-the-andes-project/db/schema/scraper";
+import type { IncidentCategory } from "@iathon-kiro/db/schema/scraper";
 
 import {
 	COEN_API_BASE,

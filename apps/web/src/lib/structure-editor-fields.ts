@@ -1,4 +1,4 @@
-import { fleetNameSchema } from "@hack-the-andes-project/api/schemas";
+import { fleetNameSchema } from "@iathon-kiro/api/schemas";
 import {
 	BRIDGE_PARAMETERS,
 	BYPASS_PARAMETERS,
@@ -7,18 +7,18 @@ import {
 	STRUCTURE_STATUSES,
 	TUNNEL_PARAMETERS,
 	TUNNEL_SECTION_SHAPES,
-} from "@hack-the-andes-project/business/structures/catalog";
-import { MAX_STRUCTURE_NOTES_LENGTH_CHARS } from "@hack-the-andes-project/business/structures/constants";
+} from "@iathon-kiro/business/structures/catalog";
+import { MAX_STRUCTURE_NOTES_LENGTH_CHARS } from "@iathon-kiro/business/structures/constants";
 import {
 	formatStructureLength,
 	structureLengthM,
-} from "@hack-the-andes-project/business/structures/geometry";
-import type { StructureEditorLabels } from "@hack-the-andes-project/ui/components/structure-editor-labels";
-import type { StructureEditorField } from "@hack-the-andes-project/ui/components/structure-editor-parameters";
+} from "@iathon-kiro/business/structures/geometry";
+import type { StructureEditorLabels } from "@iathon-kiro/ui/components/structure-editor-labels";
+import type { StructureEditorField } from "@iathon-kiro/ui/components/structure-editor-parameters";
 import type {
 	SceneStructure,
 	StructureElement,
-} from "@hack-the-andes-project/ui/lib/structure-scene";
+} from "@iathon-kiro/ui/lib/structure-scene";
 import {
 	ENGINEERING_COORDINATE_DIGITS,
 	ENGINEERING_ELEVATION_FRACTION_DIGITS,

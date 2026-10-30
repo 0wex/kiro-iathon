@@ -1,5 +1,5 @@
 import type { Scene, TransformNode } from "@babylonjs/core";
-import type { XrSessionMember } from "@hack-the-andes-project/xr-simulator/viewer";
+import type { XrSessionMember } from "@iathon-kiro/xr-simulator/viewer";
 import type { LocalPoint, StructureTerrain } from "./structure-terrain";
 
 export interface StructureXrLabels {

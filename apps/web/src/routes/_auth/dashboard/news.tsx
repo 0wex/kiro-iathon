@@ -2,24 +2,24 @@ import {
 	Alert,
 	AlertDescription,
 	AlertTitle,
-} from "@hack-the-andes-project/ui/components/alert";
-import { Badge } from "@hack-the-andes-project/ui/components/badge";
-import { Button } from "@hack-the-andes-project/ui/components/button";
+} from "@iathon-kiro/ui/components/alert";
+import { Badge } from "@iathon-kiro/ui/components/badge";
+import { Button } from "@iathon-kiro/ui/components/button";
 import {
 	Card,
 	CardContent,
 	CardHeader,
-} from "@hack-the-andes-project/ui/components/card";
+} from "@iathon-kiro/ui/components/card";
 import {
 	Empty,
 	EmptyDescription,
 	EmptyHeader,
 	EmptyTitle,
-} from "@hack-the-andes-project/ui/components/empty";
-import { Field, FieldLabel } from "@hack-the-andes-project/ui/components/field";
-import { NewsArticleCard } from "@hack-the-andes-project/ui/components/news-article-card";
-import { Skeleton } from "@hack-the-andes-project/ui/components/skeleton";
-import { Switch } from "@hack-the-andes-project/ui/components/switch";
+} from "@iathon-kiro/ui/components/empty";
+import { Field, FieldLabel } from "@iathon-kiro/ui/components/field";
+import { NewsArticleCard } from "@iathon-kiro/ui/components/news-article-card";
+import { Skeleton } from "@iathon-kiro/ui/components/skeleton";
+import { Switch } from "@iathon-kiro/ui/components/switch";
 import { useQuery } from "@tanstack/react-query";
 import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";

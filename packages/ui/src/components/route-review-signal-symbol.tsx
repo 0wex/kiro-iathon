@@ -1,5 +1,5 @@
-import { peakRiskAssessment } from "@hack-the-andes-project/business/route-review/ranking";
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
+import { peakRiskAssessment } from "@iathon-kiro/business/route-review/ranking";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
 import type {
 	RouteReviewSegment,
 	RouteReviewSignal,

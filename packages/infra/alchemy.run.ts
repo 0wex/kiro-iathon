@@ -14,7 +14,7 @@ export { type ScraperEnv, scraper } from "./scraper.ts";
 export { type ServerEnv, server } from "./server.ts";
 
 export default Alchemy.Stack(
-	"hack-the-andes-project",
+	"iathon-kiro",
 	{
 		providers: Cloudflare.providers(),
 		state: Alchemy.localState(),

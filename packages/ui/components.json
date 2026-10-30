@@ -12,11 +12,11 @@
 	},
 	"iconLibrary": "lucide",
 	"aliases": {
-		"components": "@hack-the-andes-project/ui/components",
-		"utils": "@hack-the-andes-project/ui/lib/utils",
-		"hooks": "@hack-the-andes-project/ui/hooks",
-		"lib": "@hack-the-andes-project/ui/lib",
-		"ui": "@hack-the-andes-project/ui/components"
+		"components": "@iathon-kiro/ui/components",
+		"utils": "@iathon-kiro/ui/lib/utils",
+		"hooks": "@iathon-kiro/ui/hooks",
+		"lib": "@iathon-kiro/ui/lib",
+		"ui": "@iathon-kiro/ui/components"
 	},
 	"menuColor": "default",
 	"menuAccent": "subtle",

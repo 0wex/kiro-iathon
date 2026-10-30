@@ -86,7 +86,7 @@ Illapa is the Andean god of thunder, lightning and rain. In the stories he fills
 
 Mayu turns that into a calm interface: misty river-light by day and deep river-night after dark, an aqua current as the one brand colour, starlight for warmth, and soft rounded geometry. The product has to stay calm when a road is closing; the risk colours carry the urgency, the brand never does.
 
-The same system serves the dashboard (`apps/web`, dash.illapa.app), the marketing site (`apps/illapa`, illapa.app) and the native app later. The pitch deck does **not** use Mayu: it keeps the Hack the Andes black with the phoenix colours of Equipo Fénix.
+The same system serves the dashboard (`apps/web`, dash.illapa.app), the marketing site (`apps/illapa`, illapa.app) and the native app later. The pitch deck does **not** use Mayu: it keeps the Iathon Kiro black with the phoenix colours of Equipo Fénix.
 
 Live reference: `/design-system` in the web app (`pnpm dev:web`, http://localhost:3001/design-system), in Spanish and English, dark and light.
 

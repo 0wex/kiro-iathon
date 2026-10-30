@@ -1,4 +1,4 @@
-import { userRoleSchema } from "@hack-the-andes-project/api/structure-schemas";
+import { userRoleSchema } from "@iathon-kiro/api/structure-schemas";
 import {
 	inferAdditionalFields,
 	organizationClient,

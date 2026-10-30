@@ -2,7 +2,7 @@ import type {
 	incident,
 	newsArticle,
 	poi,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import type { InferInsertModel } from "drizzle-orm";
 import type { RequestLogger } from "evlog";
 

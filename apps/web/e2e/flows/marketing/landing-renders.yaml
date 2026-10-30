@@ -50,7 +50,7 @@ tags:
     timeout: 20000
 - takeScreenshot: 05-demo-cta
 - scrollUntilVisible:
-    element: "Equipo Fénix · Hack the Andes"
+    element: "Equipo Fénix · Iathon Kiro"
     timeout: 20000
 - takeScreenshot: 06-footer
 - openLink: https://staging.getillapa.com/
@@ -73,6 +73,6 @@ tags:
     timeout: 30000
 - takeScreenshot: 09-fuentes-dark
 - scrollUntilVisible:
-    element: "Equipo Fénix · Hack the Andes"
+    element: "Equipo Fénix · Iathon Kiro"
     timeout: 30000
 - takeScreenshot: 10-footer-dark

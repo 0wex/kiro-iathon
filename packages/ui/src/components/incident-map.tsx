@@ -1,4 +1,4 @@
-import type { Incident } from "@hack-the-andes-project/ui/lib/incident";
+import type { Incident } from "@iathon-kiro/ui/lib/incident";
 import { useState } from "react";
 
 import { Alert, AlertDescription, AlertTitle } from "./alert";

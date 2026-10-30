@@ -1,6 +1,6 @@
 import { NullEngine, Quaternion, Scene } from "@babylonjs/core";
-import { MAX_STRUCTURE_EXTENT_M } from "@hack-the-andes-project/business/structures/constants";
-import { createDefaultStructureTemplate } from "@hack-the-andes-project/business/structures/placement";
+import { MAX_STRUCTURE_EXTENT_M } from "@iathon-kiro/business/structures/constants";
+import { createDefaultStructureTemplate } from "@iathon-kiro/business/structures/placement";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 import { clampPoint, createPlacement, snapHandlePoint } from "../placement";
 import { elementRotation, elementRotationDegrees } from "../transforms";

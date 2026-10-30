@@ -1,15 +1,15 @@
-import type { UserRole } from "@hack-the-andes-project/api/structure-schemas";
+import type { UserRole } from "@iathon-kiro/api/structure-schemas";
 import {
 	MIN_PASSWORD_LENGTH_CHARS,
 	MS_PER_HOUR,
 	MS_PER_MINUTE,
-} from "@hack-the-andes-project/business/constants";
-import type { DemoProfile } from "@hack-the-andes-project/business/demo-account";
-import type { AuthShellLabels } from "@hack-the-andes-project/ui/components/auth-shell";
+} from "@iathon-kiro/business/constants";
+import type { DemoProfile } from "@iathon-kiro/business/demo-account";
+import type { AuthShellLabels } from "@iathon-kiro/ui/components/auth-shell";
 import type {
 	Incident,
 	IncidentTimePreset,
-} from "@hack-the-andes-project/ui/lib/incident";
+} from "@iathon-kiro/ui/lib/incident";
 import { m } from "@/paraglide/messages";
 
 export const SHOWCASE_SECTIONS = [

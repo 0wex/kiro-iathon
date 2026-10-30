@@ -1,11 +1,11 @@
-import type { ProfiledVehicleSummary } from "@hack-the-andes-project/api/route-review-schemas";
-import type { VehicleTypeId } from "@hack-the-andes-project/business/route-review/vehicle-types";
+import type { ProfiledVehicleSummary } from "@iathon-kiro/api/route-review-schemas";
+import type { VehicleTypeId } from "@iathon-kiro/business/route-review/vehicle-types";
 import type {
 	FleetRouteVehicle,
 	VehicleProfileDialogLabels,
 	VehicleProfileDraft,
-} from "@hack-the-andes-project/ui/lib/fleet";
-import { vehicleTypeShortLabel } from "@hack-the-andes-project/ui/lib/route-review";
+} from "@iathon-kiro/ui/lib/fleet";
+import { vehicleTypeShortLabel } from "@iathon-kiro/ui/lib/route-review";
 import {
 	type UseMutationResult,
 	useMutation,

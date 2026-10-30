@@ -1,4 +1,4 @@
-import { StructureEditorConfirmDialog } from "@hack-the-andes-project/ui/components/structure-editor-dialogs";
+import { StructureEditorConfirmDialog } from "@iathon-kiro/ui/components/structure-editor-dialogs";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useBlocker } from "@tanstack/react-router";
 import {

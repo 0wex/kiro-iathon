@@ -1,4 +1,4 @@
-import { GPS_PROVIDER_LABELS } from "@hack-the-andes-project/business/providers/index";
+import { GPS_PROVIDER_LABELS } from "@iathon-kiro/business/providers/index";
 
 import type { FleetConnection } from "../lib/fleet";
 import { Button } from "./button";

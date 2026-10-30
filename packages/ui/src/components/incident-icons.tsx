@@ -1,5 +1,5 @@
-import type { INCIDENT_CATEGORY_LABELS } from "@hack-the-andes-project/ui/lib/incident-constants";
-import { cn } from "@hack-the-andes-project/ui/lib/utils";
+import type { INCIDENT_CATEGORY_LABELS } from "@iathon-kiro/ui/lib/incident-constants";
+import { cn } from "@iathon-kiro/ui/lib/utils";
 import type { ComponentType, SVGProps } from "react";
 
 export interface IncidentIconProps extends SVGProps<SVGSVGElement> {}

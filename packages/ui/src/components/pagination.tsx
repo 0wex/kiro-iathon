@@ -1,4 +1,4 @@
-import { Button } from "@hack-the-andes-project/ui/components/button";
+import { Button } from "@iathon-kiro/ui/components/button";
 import { cn } from "cn";
 import {
 	ChevronLeftIcon,

@@ -1,1 +1,1 @@
-ALTER TABLE `hack_the_andes_user` MODIFY COLUMN `role` varchar(32);
+ALTER TABLE `iathon_kiro_user` MODIFY COLUMN `role` varchar(32);

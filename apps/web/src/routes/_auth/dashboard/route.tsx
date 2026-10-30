@@ -1,14 +1,14 @@
-import { isDemoAccountEmail } from "@hack-the-andes-project/business/demo-account";
-import { canUseSimulators } from "@hack-the-andes-project/business/simulators";
-import { DashboardSidebar } from "@hack-the-andes-project/ui/components/dashboard-sidebar";
-import { DemoBanner } from "@hack-the-andes-project/ui/components/demo-banner";
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
+import { isDemoAccountEmail } from "@iathon-kiro/business/demo-account";
+import { canUseSimulators } from "@iathon-kiro/business/simulators";
+import { DashboardSidebar } from "@iathon-kiro/ui/components/dashboard-sidebar";
+import { DemoBanner } from "@iathon-kiro/ui/components/demo-banner";
+import { Separator } from "@iathon-kiro/ui/components/separator";
 import {
 	SidebarInset,
 	SidebarProvider,
 	SidebarTrigger,
-} from "@hack-the-andes-project/ui/components/sidebar";
-import { useSidebarPreference } from "@hack-the-andes-project/ui/hooks/use-sidebar-preference";
+} from "@iathon-kiro/ui/components/sidebar";
+import { useSidebarPreference } from "@iathon-kiro/ui/hooks/use-sidebar-preference";
 import { useQuery } from "@tanstack/react-query";
 import {
 	createFileRoute,

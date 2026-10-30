@@ -3,14 +3,14 @@ import {
 	DEMO_ACCOUNTS,
 	DEMO_SIGN_IN_AUTH_PATH,
 	type DemoProfile,
-} from "@hack-the-andes-project/business/demo-account";
+} from "@iathon-kiro/business/demo-account";
 import {
 	Alert,
 	AlertDescription,
-} from "@hack-the-andes-project/ui/components/alert";
-import { AuthShell } from "@hack-the-andes-project/ui/components/auth-shell";
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { Spinner } from "@hack-the-andes-project/ui/components/spinner";
+} from "@iathon-kiro/ui/components/alert";
+import { AuthShell } from "@iathon-kiro/ui/components/auth-shell";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { Spinner } from "@iathon-kiro/ui/components/spinner";
 import { useMutation } from "@tanstack/react-query";
 import {
 	Link,

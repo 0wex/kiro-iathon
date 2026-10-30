@@ -1,10 +1,10 @@
-import type { Database } from "@hack-the-andes-project/db";
+import type { Database } from "@iathon-kiro/db";
 import {
 	incident,
 	newsArticle,
 	poi,
 	scrapeRun,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { and, eq, getTableColumns, inArray, lt, sql } from "drizzle-orm";
 import type { MySqlColumn, MySqlTable } from "drizzle-orm/mysql-core";
 import type { RequestLogger } from "evlog";

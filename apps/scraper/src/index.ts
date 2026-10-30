@@ -1,14 +1,14 @@
-import { verifySecret } from "@hack-the-andes-project/business/crypto/index";
+import { verifySecret } from "@iathon-kiro/business/crypto/index";
 import {
 	type AssessRoadRiskResult,
 	assessRoadRisk,
-} from "@hack-the-andes-project/business/risk/assess";
-import { createDb } from "@hack-the-andes-project/db";
+} from "@iathon-kiro/business/risk/assess";
+import { createDb } from "@iathon-kiro/db";
 import {
 	SCRAPER_DAILY_CRON,
 	SCRAPER_FREQUENT_CRON,
 	SCRAPER_HOURLY_CRON,
-} from "@hack-the-andes-project/infra/constants";
+} from "@iathon-kiro/infra/constants";
 import { createLogger } from "evlog";
 import { initWorkersLogger } from "evlog/workers";
 

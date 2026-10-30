@@ -14,7 +14,7 @@ import pymysql
 
 from .config import DATABASE_ENV_FILE, OUTPUT_DIR
 
-TABLE_PREFIX = "hack_the_andes_"
+TABLE_PREFIX = "iathon_kiro_"
 INSERT_BATCH_ROWS = 2_000
 
 SEGMENT_COLUMNS = [

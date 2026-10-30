@@ -1,5 +1,5 @@
-import type { GpsCredentialsInput } from "@hack-the-andes-project/business/providers/index";
-import type { VehicleTypeId } from "@hack-the-andes-project/business/route-review/vehicle-types";
+import type { GpsCredentialsInput } from "@iathon-kiro/business/providers/index";
+import type { VehicleTypeId } from "@iathon-kiro/business/route-review/vehicle-types";
 import type { Geometry, LineString } from "geojson";
 import type { SeverityProps } from "../components/severity";
 import type {

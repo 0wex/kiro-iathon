@@ -1,4 +1,4 @@
-import type { SceneStructure } from "@hack-the-andes-project/ui/lib/structure-scene";
+import type { SceneStructure } from "@iathon-kiro/ui/lib/structure-scene";
 import { ENGINEERING_MAX_UNDO_STEPS_COUNT } from "../constants";
 
 export interface StructureHistoryStep {

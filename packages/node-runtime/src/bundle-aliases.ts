@@ -9,5 +9,5 @@ export const NODE_BUNDLE_ALIASES = {
 		import.meta.resolve("./cloudflare-workers.ts"),
 	),
 	"evlog/workers": fileURLToPath(import.meta.resolve("./evlog-workers.ts")),
-	"@hack-the-andes-project/db$": fileURLToPath(import.meta.resolve("./db.ts")),
+	"@iathon-kiro/db$": fileURLToPath(import.meta.resolve("./db.ts")),
 };

@@ -1,13 +1,13 @@
 import { createRequire } from "node:module";
-import { DEMO_NAME_MAX_LENGTH_CHARS } from "@hack-the-andes-project/business/constants";
-import { DEMO_REQUESTS_PATH } from "@hack-the-andes-project/business/demo-request";
+import { DEMO_NAME_MAX_LENGTH_CHARS } from "@iathon-kiro/business/constants";
+import { DEMO_REQUESTS_PATH } from "@iathon-kiro/business/demo-request";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import { HTTP_STATUS_BAD_REQUEST, HTTP_STATUS_CREATED } from "./constants";
 import { handleDemoRequest } from "./demo-request";
 
 const databaseRequire = createRequire(
-	import.meta.resolve("@hack-the-andes-project/db"),
+	import.meta.resolve("@iathon-kiro/db"),
 );
 vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	default: {
@@ -18,7 +18,7 @@ vi.doMock(databaseRequire.resolve("mysql2/promise"), () => ({
 	},
 }));
 
-const { createDb } = await import("@hack-the-andes-project/db");
+const { createDb } = await import("@iathon-kiro/db");
 const database = await createDb({
 	host: "mock",
 	port: Number.NaN,
@@ -90,7 +90,7 @@ describe("demo requests", () => {
 		expect(createDatabase).toHaveBeenCalledExactlyOnceWith();
 		expect(database.$client.query).toHaveBeenCalledExactlyOnceWith(
 			expect.objectContaining({
-				sql: expect.stringContaining("`hack_the_andes_demo_request`"),
+				sql: expect.stringContaining("`iathon_kiro_demo_request`"),
 			}),
 			[expect.any(String), ...stored],
 		);

@@ -1,5 +1,5 @@
-import { PUBLIC_PROCEDURE_PATHS } from "@hack-the-andes-project/api/constants";
-import type { AppRouterClient } from "@hack-the-andes-project/api/routers/index";
+import { PUBLIC_PROCEDURE_PATHS } from "@iathon-kiro/api/constants";
+import type { AppRouterClient } from "@iathon-kiro/api/routers/index";
 import { createORPCClient } from "@orpc/client";
 import { RPCLink } from "@orpc/client/fetch";
 import { BatchLinkPlugin } from "@orpc/client/plugins";

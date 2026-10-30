@@ -1,9 +1,9 @@
-import { isDemoAccountEmail } from "@hack-the-andes-project/business/demo-account";
+import { isDemoAccountEmail } from "@iathon-kiro/business/demo-account";
 import {
 	AuthForm,
 	type AuthMode,
-} from "@hack-the-andes-project/ui/components/auth-form";
-import { AuthShell } from "@hack-the-andes-project/ui/components/auth-shell";
+} from "@iathon-kiro/ui/components/auth-form";
+import { AuthShell } from "@iathon-kiro/ui/components/auth-shell";
 import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 

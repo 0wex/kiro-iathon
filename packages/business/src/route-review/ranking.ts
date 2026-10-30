@@ -1,7 +1,7 @@
 import {
 	RISK_HORIZONS_HOURS,
 	type RiskHorizonHours,
-} from "@hack-the-andes-project/db/schema/risk";
+} from "@iathon-kiro/db/schema/risk";
 import { MS_PER_HOUR, MS_PER_SECOND } from "../constants";
 import type { RouteRiskHorizon } from "./risk";
 

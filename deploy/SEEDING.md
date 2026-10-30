@@ -1,6 +1,6 @@
 # Seeding a fresh database
 
-The server's migrations create the 24 `hack_the_andes_*` tables, all empty. Nothing in the repo copies rows from one database to another. Every row comes from one of three places: the running services, the offline risk pipeline, or people using the app. This file covers where each table's rows come from, the order that makes a new environment demo-ready, and what only the old database holds.
+The server's migrations create the 24 `iathon_kiro_*` tables, all empty. Nothing in the repo copies rows from one database to another. Every row comes from one of three places: the running services, the offline risk pipeline, or people using the app. This file covers where each table's rows come from, the order that makes a new environment demo-ready, and what only the old database holds.
 
 ## Where each table's rows come from
 
@@ -58,7 +58,7 @@ Order matters in three places:
 
 ### 1. Create the schema
 
-Nothing to run: the server applies every migration in `packages/db/src/migrations` to its `DATABASE_URL` when it boots in step 2, leaving 24 `hack_the_andes_*` tables. To create them from a checkout instead, run `pnpm db:migrate` with `DATABASE_URL` set in the shell (varlock gives it priority over `packages/db/.env`). If MySQL is only reachable from the box, open a tunnel first, for example `ssh -N -L 3307:<mysql-host>:3306 <user>@<box>`. `<mysql-host>` is `127.0.0.1` if the port is published on the box; otherwise use the container's IP from `docker inspect`.
+Nothing to run: the server applies every migration in `packages/db/src/migrations` to its `DATABASE_URL` when it boots in step 2, leaving 24 `iathon_kiro_*` tables. To create them from a checkout instead, run `pnpm db:migrate` with `DATABASE_URL` set in the shell (varlock gives it priority over `packages/db/.env`). If MySQL is only reachable from the box, open a tunnel first, for example `ssh -N -L 3307:<mysql-host>:3306 <user>@<box>`. `<mysql-host>` is `127.0.0.1` if the port is published on the box; otherwise use the container's IP from `docker inspect`.
 
 ### 2. Start the services
 
@@ -151,17 +151,17 @@ This moves the demo trucks, evaluates their trips and creates the hazard alert. 
 ### 8. Check
 
 ```sql
-SELECT 'active incidents', COUNT(*) FROM hack_the_andes_incident WHERE active
-UNION ALL SELECT 'active pois', COUNT(*) FROM hack_the_andes_poi WHERE active
-UNION ALL SELECT 'news articles', COUNT(*) FROM hack_the_andes_news_article
-UNION ALL SELECT 'road segments', COUNT(*) FROM hack_the_andes_road_segment
-UNION ALL SELECT 'road edges', COUNT(*) FROM hack_the_andes_road_edge
-UNION ALL SELECT 'assessments', COUNT(*) FROM hack_the_andes_segment_risk_assessment
-UNION ALL SELECT 'vehicles', COUNT(*) FROM hack_the_andes_vehicle
-UNION ALL SELECT 'active trips', COUNT(*) FROM hack_the_andes_trip WHERE status = 'active'
-UNION ALL SELECT 'open alerts', COUNT(*) FROM hack_the_andes_alert WHERE status = 'open';
+SELECT 'active incidents', COUNT(*) FROM iathon_kiro_incident WHERE active
+UNION ALL SELECT 'active pois', COUNT(*) FROM iathon_kiro_poi WHERE active
+UNION ALL SELECT 'news articles', COUNT(*) FROM iathon_kiro_news_article
+UNION ALL SELECT 'road segments', COUNT(*) FROM iathon_kiro_road_segment
+UNION ALL SELECT 'road edges', COUNT(*) FROM iathon_kiro_road_edge
+UNION ALL SELECT 'assessments', COUNT(*) FROM iathon_kiro_segment_risk_assessment
+UNION ALL SELECT 'vehicles', COUNT(*) FROM iathon_kiro_vehicle
+UNION ALL SELECT 'active trips', COUNT(*) FROM iathon_kiro_trip WHERE status = 'active'
+UNION ALL SELECT 'open alerts', COUNT(*) FROM iathon_kiro_alert WHERE status = 'open';
 
-SELECT source, ok, fetched, error_message FROM hack_the_andes_scrape_run ORDER BY started_at DESC LIMIT 20;
+SELECT source, ok, fetched, error_message FROM iathon_kiro_scrape_run ORDER BY started_at DESC LIMIT 20;
 ```
 
 In the dashboard, check for:
@@ -249,6 +249,6 @@ curl -sS -b old-session.txt "$API_URL/api/auth/organization/get-full-organizatio
 
 ## Other data
 
-- **Demo request leads:** new submissions go to the API server's `POST /api/demo-requests` and are stored in the MySQL table `hack_the_andes_demo_request`. Old leads stay in the Cloudflare KV namespace `hack-the-andes-illapa-demo-requests` until exported. Keys are `<ISO time>:<uuid>`; values are JSON with the name, company, phone and email. Export them before that namespace is deleted.
+- **Demo request leads:** new submissions go to the API server's `POST /api/demo-requests` and are stored in the MySQL table `iathon_kiro_demo_request`. Old leads stay in the Cloudflare KV namespace `iathon-kiro-illapa-demo-requests` until exported. Keys are `<ISO time>:<uuid>`; values are JSON with the name, company, phone and email. Export them before that namespace is deleted.
 - **SRATMA photos:** they live in the Backblaze B2 bucket `illapa-media`. The scraper lists the bucket and links the stored photos again, so nothing is downloaded twice.
-- **Route review data:** saved reviews live in `hack_the_andes_route_review`, linked to `hack_the_andes_vehicle`; planned trips live in `hack_the_andes_trip`. Keep these rows with the environment's database. They are no longer dashboard localStorage fixtures.
+- **Route review data:** saved reviews live in `iathon_kiro_route_review`, linked to `iathon_kiro_vehicle`; planned trips live in `iathon_kiro_trip`. Keep these rows with the environment's database. They are no longer dashboard localStorage fixtures.

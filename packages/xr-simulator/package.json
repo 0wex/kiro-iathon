@@ -1,5 +1,5 @@
 {
-	"name": "@hack-the-andes-project/xr-simulator",
+	"name": "@iathon-kiro/xr-simulator",
 	"private": true,
 	"type": "module",
 	"exports": {
@@ -20,7 +20,7 @@
 	"dependencies": {
 		"@babylonjs/core": "catalog:",
 		"@babylonjs/gui": "catalog:",
-		"@hack-the-andes-project/tiles-schema": "workspace:*",
+		"@iathon-kiro/tiles-schema": "workspace:*",
 		"fast-png": "^8.0.0",
 		"geotiff": "^3.0.5",
 		"lil-gui": "^0.21.0"

@@ -1,5 +1,5 @@
-import type { RouteRiskHorizon } from "@hack-the-andes-project/business/route-review/risk";
-import { ROUTE_SIGNAL_KINDS } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteRiskHorizon } from "@iathon-kiro/business/route-review/risk";
+import { ROUTE_SIGNAL_KINDS } from "@iathon-kiro/business/route-review/risk";
 import { cn } from "cn";
 import {
 	ArrowRightIcon,

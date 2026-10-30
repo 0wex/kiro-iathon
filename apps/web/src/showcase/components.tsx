@@ -1,7 +1,7 @@
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
-import { ShowcaseSection } from "@hack-the-andes-project/ui/components/showcase/section";
-import { ShowcaseTier } from "@hack-the-andes-project/ui/components/showcase/tier";
-import { StructureArt } from "@hack-the-andes-project/ui/components/structure-art";
+import { Separator } from "@iathon-kiro/ui/components/separator";
+import { ShowcaseSection } from "@iathon-kiro/ui/components/showcase/section";
+import { ShowcaseTier } from "@iathon-kiro/ui/components/showcase/tier";
+import { StructureArt } from "@iathon-kiro/ui/components/structure-art";
 import type { ComponentProps } from "react";
 import { m } from "@/paraglide/messages";
 import { ActionsShowcase } from "./components/actions";

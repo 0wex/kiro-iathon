@@ -14,8 +14,8 @@ import { type Control, Rectangle, TextBlock } from "@babylonjs/gui";
 import {
 	BYPASS_PARAMETERS,
 	PRIMITIVE_SIZE_RANGE_M,
-} from "@hack-the-andes-project/business/structures/catalog";
-import { MAX_BYPASS_POINTS } from "@hack-the-andes-project/business/structures/constants";
+} from "@iathon-kiro/business/structures/catalog";
+import { MAX_BYPASS_POINTS } from "@iathon-kiro/business/structures/constants";
 import type {
 	SceneStructure,
 	StructureElement,

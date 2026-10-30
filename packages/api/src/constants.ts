@@ -45,7 +45,7 @@ export {
 	VEHICLE_NOT_FOUND_MESSAGE,
 	VEHICLE_PROFILE_REQUIRED_MESSAGE,
 	VEHICLE_TRIP_ALREADY_ACTIVE_MESSAGE,
-} from "@hack-the-andes-project/business/fleet/constants";
+} from "@iathon-kiro/business/fleet/constants";
 export const ALERT_NOT_FOUND_MESSAGE = "No encontramos esa alerta.";
 export const ALERT_NOT_OPEN_MESSAGE =
 	"Solo se pueden confirmar alertas abiertas.";

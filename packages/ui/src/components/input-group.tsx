@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "@hack-the-andes-project/ui/components/button";
-import { Input } from "@hack-the-andes-project/ui/components/input";
-import { Textarea } from "@hack-the-andes-project/ui/components/textarea";
+import { Button } from "@iathon-kiro/ui/components/button";
+import { Input } from "@iathon-kiro/ui/components/input";
+import { Textarea } from "@iathon-kiro/ui/components/textarea";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import type * as React from "react";

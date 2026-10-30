@@ -1,8 +1,8 @@
-import { FLEET_SYNC_CRON } from "@hack-the-andes-project/infra/constants";
+import { FLEET_SYNC_CRON } from "@iathon-kiro/infra/constants";
 import {
 	scheduleWorker,
 	serveWorker,
-} from "@hack-the-andes-project/node-runtime/serve";
+} from "@iathon-kiro/node-runtime/serve";
 
 import worker from "./index";
 

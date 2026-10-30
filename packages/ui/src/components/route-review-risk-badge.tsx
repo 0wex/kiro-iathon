@@ -1,4 +1,4 @@
-import type { RouteRiskLevel } from "@hack-the-andes-project/business/route-review/risk";
+import type { RouteRiskLevel } from "@iathon-kiro/business/route-review/risk";
 import { cn } from "cn";
 import { Badge } from "./badge";
 

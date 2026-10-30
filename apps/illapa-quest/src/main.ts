@@ -70,10 +70,10 @@ import {
 	XR_TABLE_OFFSET_X_M,
 	XR_TABLE_OFFSET_Y_M,
 	XR_TABLE_OFFSET_Z_M,
-} from "@hack-the-andes-project/ui/lib/route-review-3d/constants";
-import { loadRouteCorridors } from "@hack-the-andes-project/ui/lib/route-review-3d/route";
-import { buildSceneElements } from "@hack-the-andes-project/ui/lib/route-review-3d/scene";
-import type { CameraPreset } from "@hack-the-andes-project/ui/lib/route-review-3d/types";
+} from "@iathon-kiro/ui/lib/route-review-3d/constants";
+import { loadRouteCorridors } from "@iathon-kiro/ui/lib/route-review-3d/route";
+import { buildSceneElements } from "@iathon-kiro/ui/lib/route-review-3d/scene";
+import type { CameraPreset } from "@iathon-kiro/ui/lib/route-review-3d/types";
 import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { ARButton } from "three/addons/webxr/ARButton.js";

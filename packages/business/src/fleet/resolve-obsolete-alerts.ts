@@ -1,9 +1,9 @@
-import type { Database } from "@hack-the-andes-project/db";
-import { alert, trip } from "@hack-the-andes-project/db/schema/fleet";
+import type { Database } from "@iathon-kiro/db";
+import { alert, trip } from "@iathon-kiro/db/schema/fleet";
 import {
 	INCIDENT_CATEGORIES,
 	incident,
-} from "@hack-the-andes-project/db/schema/scraper";
+} from "@iathon-kiro/db/schema/scraper";
 import { and, eq, inArray, notExists, or } from "drizzle-orm";
 
 import { ALERTABLE_INCIDENTS } from "../hazards/alertable";

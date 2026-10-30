@@ -1,5 +1,5 @@
-import { Label } from "@hack-the-andes-project/ui/components/label";
-import { Separator } from "@hack-the-andes-project/ui/components/separator";
+import { Label } from "@iathon-kiro/ui/components/label";
+import { Separator } from "@iathon-kiro/ui/components/separator";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "cn";
 import { useMemo } from "react";
