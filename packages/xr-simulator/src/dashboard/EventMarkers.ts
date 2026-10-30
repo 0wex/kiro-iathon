@@ -6,6 +6,7 @@ import type {
 } from "../map/PeruOverview";
 import { lonLatToWorld } from "../map/tileMath";
 import { DISASTER_KIND_LABELS, type DisasterEvent } from "./events";
+import type { EventReport } from "./reports";
 
 interface Marker {
 	event: DisasterEvent;
@@ -13,11 +14,13 @@ interface Marker {
 	/** Local (x, z) in the overview's kilometres. */
 	x: number;
 	z: number;
+	/** Pins appear with the event's first report. */
+	reported: boolean;
 }
 
 /**
- * One clickable pin per event over the map canvas: HTML buttons placed every frame where the
- * event's ground point projects, so they stay crisp and readable at any zoom.
+ * One clickable pin per reported event over the map canvas: HTML buttons placed every frame
+ * where the event's ground point projects, so they stay crisp and readable at any zoom.
  */
 export class EventMarkers implements OverviewOverlay {
 	private readonly markers: Marker[];
@@ -43,12 +46,26 @@ export class EventMarkers implements OverviewOverlay {
 			container.append(button);
 			const world = lonLatToWorld(event.location.lon, event.location.lat);
 			const [x, z] = worldToLocal(context.frame, world.x, world.y);
-			return { event, button, x, z };
+			return { event, button, x, z, reported: false };
 		});
 	}
 
 	setExaggeration(exaggeration: number): void {
 		this.exaggeration = exaggeration;
+	}
+
+	/** Shows the event's pin with its status and sends a ripple from it. */
+	report(report: EventReport): void {
+		const marker = this.markers.find(
+			({ event }) => event.id === report.eventId,
+		);
+		if (!marker) return;
+		marker.reported = true;
+		marker.button.dataset.status = report.status;
+		const ripple = document.createElement("span");
+		ripple.className = "dash-marker-ripple";
+		ripple.onanimationend = () => ripple.remove();
+		marker.button.append(ripple);
 	}
 
 	setSelected(eventId: string | null): void {
@@ -83,7 +100,8 @@ export class EventMarkers implements OverviewOverlay {
 				this.screen,
 			);
 			// Behind the camera or past the far plane: the projection is meaningless.
-			marker.button.hidden = this.screen.z < 0 || this.screen.z > 1;
+			marker.button.hidden =
+				!marker.reported || this.screen.z < 0 || this.screen.z > 1;
 			marker.button.style.transform = `translate(${this.screen.x * cssPerRenderPixel}px, ${this.screen.y * cssPerRenderPixel}px)`;
 		}
 	}

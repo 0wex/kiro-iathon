@@ -76,7 +76,7 @@ See the [dashboard plan and operations notes](docs/dashboard-plan.md), [fleet-sy
 1. `TILES_STORAGE=fs uv run --project services/tiles tiles serve --port 8080`
 2. `pnpm --filter @iathon-kiro/xr-simulator dev`, then open `http://localhost:5173/dashboard.html`.
 
-Events live in `packages/xr-simulator/src/dashboard/events.json` (kind, place, start time, rain, location). They are example data until a real source replaces them.
+Events live in `packages/xr-simulator/src/dashboard/events.json` (kind, place, start time, rain, location). An example live feed (`src/dashboard/reports.ts`) reports them every 3–9 s: an event appears on the map with its first report, its pin ripples on every report, and it turns from "Reportado" to "Confirmado" at the third. The "Reportes en vivo" panel lists the latest reports. Both the events and the feed are example data until a real source replaces them.
 
 ## Predictive risk engine
 

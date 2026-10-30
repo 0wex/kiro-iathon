@@ -122,9 +122,6 @@
 	display: none;
 }
 
-.dash-card {
-	grid-area: card;
-}
 .dash-card-kind {
 	margin: 0 0 4px;
 }
@@ -171,6 +168,151 @@
 	margin: -13px 0 0 -13px;
 	outline: 3px solid var(--dash-accent);
 	outline-offset: 2px;
+}
+
+.dash-side {
+	grid-area: card;
+	display: grid;
+	grid-template-rows: auto minmax(0, 1fr);
+	gap: var(--xr-gap);
+	min-height: 0;
+}
+.dash-live {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	font-size: 0.8rem;
+	font-weight: 600;
+	color: var(--xr-destructive);
+}
+.dash-live-dot {
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--xr-destructive);
+	animation: dash-blink 1.6s ease-in-out infinite;
+}
+.dash-waiting {
+	margin: 0;
+	color: var(--xr-muted-foreground);
+}
+.dash-status {
+	margin-left: auto;
+	padding: 0 6px;
+	border-radius: var(--xr-radius-sm);
+	font-size: 0.7rem;
+	background: var(--xr-secondary);
+	color: var(--xr-secondary-foreground);
+}
+.dash-status[data-status="confirmado"] {
+	background: var(--xr-destructive);
+	color: var(--xr-destructive-foreground);
+}
+.dash .dash-event-list button.dash-fresh {
+	animation: dash-flash 1.2s ease-out;
+}
+
+.dash-feed {
+	background: var(--xr-card);
+	color: var(--xr-card-foreground);
+	border: 1px solid var(--xr-border);
+	border-radius: var(--xr-radius-lg);
+	padding: var(--xr-card-spacing);
+	min-height: 0;
+	overflow-y: auto;
+}
+.dash-feed-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: grid;
+	gap: 4px;
+}
+.dash-feed-list li:first-child {
+	animation: dash-slide-in 0.4s ease-out;
+}
+.dash .dash-feed-list button {
+	display: flex;
+	justify-content: space-between;
+	gap: 8px;
+	width: 100%;
+	height: auto;
+	padding: 6px 8px;
+	border: none;
+	border-left: 3px solid var(--dash-accent);
+	text-align: left;
+	white-space: normal;
+	text-transform: none;
+	letter-spacing: normal;
+	font-family: var(--xr-font-sans);
+	font-weight: 400;
+	font-size: 0.85rem;
+}
+.dash-ago {
+	flex-shrink: 0;
+	color: var(--xr-muted-foreground);
+	font-variant-numeric: tabular-nums;
+}
+
+/* Reported events breathe; each new report sends a ripple out of the pin. */
+.dash .dash-marker {
+	overflow: visible;
+}
+.dash .dash-marker[data-status="reportado"] {
+	animation: dash-breathe 2.4s ease-in-out infinite;
+}
+.dash-marker-ripple {
+	position: absolute;
+	inset: -2px;
+	border-radius: 50%;
+	border: 3px solid var(--dash-accent);
+	pointer-events: none;
+	animation: dash-ripple 1.6s ease-out forwards;
+}
+
+@keyframes dash-blink {
+	50% {
+		opacity: 0.25;
+	}
+}
+@keyframes dash-breathe {
+	50% {
+		box-shadow:
+			0 1px 4px rgb(0 0 0 / 0.45),
+			0 0 0 6px color-mix(in srgb, var(--dash-accent) 35%, transparent);
+	}
+}
+@keyframes dash-ripple {
+	from {
+		transform: scale(1);
+		opacity: 1;
+	}
+	to {
+		transform: scale(5);
+		opacity: 0;
+	}
+}
+@keyframes dash-flash {
+	from {
+		background: color-mix(in srgb, var(--dash-accent) 30%, var(--xr-card));
+	}
+}
+@keyframes dash-slide-in {
+	from {
+		opacity: 0;
+		transform: translateY(-6px);
+	}
+}
+@media (prefers-reduced-motion: reduce) {
+	.dash-live-dot,
+	.dash .dash-marker[data-status="reportado"],
+	.dash .dash-event-list button.dash-fresh,
+	.dash-feed-list li:first-child {
+		animation: none;
+	}
+	.dash-marker-ripple {
+		display: none;
+	}
 }
 
 @media (max-width: 900px) {

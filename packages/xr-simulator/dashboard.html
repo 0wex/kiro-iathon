@@ -9,21 +9,29 @@
     <div class="dash xr-viewer">
       <header class="dash-header">
         <h1>Desastres naturales</h1>
+        <span class="dash-live" role="status"><span class="dash-live-dot" aria-hidden="true"></span>En vivo</span>
         <span class="badge badge-info">Datos de ejemplo</span>
       </header>
       <aside class="dash-events" aria-label="Eventos">
         <h2>Eventos</h2>
+        <p class="dash-waiting">Esperando reportes…</p>
         <ul class="dash-event-list"></ul>
       </aside>
       <main class="dash-map" aria-label="Mapa 3D"></main>
-      <aside class="dash-card" aria-live="polite">
-        <p class="dash-card-empty">Elige un evento de la lista o del mapa.</p>
-        <div class="dash-card-body" hidden>
-          <p class="dash-card-kind"></p>
-          <h2 class="dash-card-title">Evento</h2>
-          <dl class="dash-card-facts"></dl>
-        </div>
-      </aside>
+      <div class="dash-side">
+        <aside class="dash-card" aria-live="polite">
+          <p class="dash-card-empty">Elige un evento reportado en la lista o en el mapa.</p>
+          <div class="dash-card-body" hidden>
+            <p class="dash-card-kind"></p>
+            <h2 class="dash-card-title">Evento</h2>
+            <dl class="dash-card-facts"></dl>
+          </div>
+        </aside>
+        <section class="dash-feed" aria-label="Reportes en vivo">
+          <h2>Reportes en vivo</h2>
+          <ol class="dash-feed-list" aria-live="polite"></ol>
+        </section>
+      </div>
     </div>
     <script type="module" src="/src/pages/dashboard.ts"></script>
   </body>
