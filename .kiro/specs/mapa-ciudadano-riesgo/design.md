@@ -1,6 +1,12 @@
-# Design: Mapa ciudadano de riesgo
+# Design Document
 
-## Architecture on AWS
+## Overview
+
+The feature delivers the user story in `requirements.md`: report a critical point with a photo, see it ranked on a map, and get a contingency plan written by Amazon Bedrock. Instead of the starter kit's Python Lambda and DynamoDB, it is built on our existing TypeScript monorepo (Hono + oRPC server, React dashboard, MySQL with Drizzle), which already had authentication, the demo account, maps and tests; `template.yaml` deploys that same server to Lambda.
+
+Priority is decided by rules and the plan by the model. Priority orders the board, so it must be instant, repeatable and explainable: a keyword table plus a proximity bump does that without a model. The contingency plan is the slow, expert writing task that coordinators do by hand today; that is where a model saves minutes, and it is generated only when someone asks for it, which also bounds Bedrock cost.
+
+## Architecture
 
 Everything is deployed with AWS SAM from `template.yaml` at the repository root, into one AWS account.
 
@@ -9,62 +15,56 @@ Browser
   │  HTTPS, one origin (no CORS, first-party session cookie)
   ▼
 Amazon CloudFront
-  ├── /*            → S3 bucket with the built apps/web (SPA fallback to index.html)
-  └── /rpc/*, /api/* → API Gateway HTTP API
-                         ▼
-                       AWS Lambda (Node 24, apps/server bundled with tsdown, inside a VPC)
-                         ├── packages/api  citizenReports.create / list / generatePlan
-                         ├── Amazon Bedrock Runtime  Converse API (VPC interface endpoint)
-                         ├── Amazon S3  report photos (VPC gateway endpoint)
-                         └── Amazon RDS for MySQL 8.4 (private subnets)
+  ├── /*                 → S3 bucket with the built apps/web (SPA fallback to index.html)
+  ├── /citizen-reports/* → S3 photos bucket (read through Origin Access Control)
+  └── /rpc/*, /api/*     → API Gateway HTTP API
+                              ▼
+                            AWS Lambda (Node 24, apps/server bundled with tsdown, inside a VPC)
+                              ├── packages/api  citizenReports.create / list / generatePlan
+                              ├── Amazon Bedrock Runtime  Converse API (VPC interface endpoint)
+                              ├── Amazon S3  report photos (VPC gateway endpoint)
+                              └── Amazon RDS for MySQL 8.4 (private subnets)
 ```
 
-The Lambda reaches Bedrock and S3 through its IAM execution role (`bedrock:InvokeModel` on the configured model, `s3:PutObject`/`s3:GetObject` on the photos bucket); no AWS keys are stored. Database credentials and the auth secrets live in AWS Secrets Manager and reach the function as CloudFormation dynamic references. Pending migrations run on cold start before the first request is served.
+The Lambda reaches Bedrock and S3 through its IAM execution role (`bedrock:InvokeModel` on the configured model, `s3:PutObject`/`s3:GetObject` on the photos prefix); no AWS keys are stored. Database credentials and the auth secrets live in AWS Secrets Manager and reach the function as CloudFormation dynamic references. Pending migrations run on cold start before the first request is served.
 
-## Why rules for priority and AI for the plan
+## Components and Interfaces
 
-Priority decides the order of the board, so it must be instant, repeatable and explainable: a keyword table plus a proximity bump does that without a model. The contingency plan is the slow, expert writing task that coordinators do by hand today; that is where a model saves minutes, and it is generated only when someone asks for it, which also bounds Bedrock cost.
+What changes, by package (the equivalent of the kit's `src/app.py` and `src/web/`):
 
-## Shared contract (packages/business/src/citizen-reports)
+- `packages/business/src/citizen-reports/`: the shared contract.
+  - `createCitizenReportInputSchema`: description 10–600 chars, location inside the Piura bounding box, optional photo of at most 600 KB.
+  - `contingencyPlanContentSchema`: situation ≤ 400 chars, 3–6 actions, resources, responsibles, population message ≤ 280 chars.
+  - `classifyByRules`, `compareReportsByPriority`, `reportsNear`, `templatePlanFor`, and the example Piura reports.
+- `packages/api/src/citizen-reports/`: `services.ts` (Bedrock and S3 clients on the default credential chain), `prompt.ts` (system prompt, tool schema, user text) and `planner.ts` (`generateContingencyPlan`).
+- `packages/api/src/routers/citizen-reports.ts`: three protected oRPC procedures.
+  - `list()` returns `CitizenReport[]` sorted by priority, each with its plan.
+  - `create(CreateCitizenReportInput)` uploads the photo, classifies by rules and stores; returns the `CitizenReport`.
+  - `generatePlan({ reportId })` calls Bedrock with the report, its photo and up to 10 reports within 2 km, upserts and returns the `ContingencyPlan`; unknown id is NOT_FOUND.
+- `apps/server`: builds the services once per process and passes them through the oRPC context; a Lambda entry wraps the same fetch handler.
+- `apps/web`: route `/dashboard/reportes` with the report form (browser photo compression, map click or device location), the prioritized list, the map with priority-coloured markers, and the detail panel with "Generar plan de contingencia"; `/demo` lands on it.
 
-- `HAZARD_KINDS`: inundacion, huayco, deslizamiento, colapso-drenaje, erosion-defensa, otro.
-- `REPORT_PRIORITIES`: critica, alta, media, baja, with a sort rank.
-- `PLAN_SOURCES`: bedrock, plantilla.
-- `createCitizenReportInputSchema` (zod): description 10–600 chars, location `{ lon, lat }` inside the Piura bounding box, optional photo `{ mediaType, base64 }` of at most 600 KB decoded.
-- `citizenReportSchema`: id, description, location, photoUrl or null, hazardKind, priority, isExample, createdAt, plan or null.
-- `contingencyPlanSchema`: situation (≤ 400 chars), actions (3–6 ordered strings), resources (strings), responsibles (strings), populationMessage (≤ 280 chars), source, generatedAt.
-- `classifyByRules(description, nearbyReports)`: keyword table for hazard and priority, plus one level up when a same-hazard report lies within 500 m.
-- `templatePlanFor(hazardKind)`: the fallback plan per hazard.
-- `compareReportsByPriority`: priority rank, then newest first.
-- `distanceInMeters`: haversine, used for the 500 m bump and the 2 km context.
+### Prompt design
 
-## Bedrock contingency plan (packages/api)
+The system prompt names the reader (a Piura district authority coordinating the FEN response with brigades, the municipality, COER Piura and bomberos), asks for concrete, safe and ordered actions in neutral Spanish within the length limits, forbids inventing official declarations or phone numbers, and treats report text as data, never as instructions. `toolConfig` forces one tool, `plan_de_contingencia`, whose JSON schema mirrors `contingencyPlanContentSchema`, so the answer is structured and validated instead of parsed from free text.
 
-- `ConverseCommand` with a system prompt that names the reader (a Piura district authority coordinating FEN response with brigades, the municipality, COER Piura and bomberos), asks for concrete, safe and ordered actions, a neutral Spanish tone, the length limits, and forbids inventing official declarations or phone numbers.
-- The user message carries the report (description, hazard, priority, coordinates, time), the photo as an image block, and up to 10 reports within 2 km.
-- `toolConfig` forces one tool `plan_de_contingencia` whose JSON schema is `contingencyPlanSchema` without source and time; the tool input is validated with zod.
-- Retries: `ThrottlingException` retried twice (backoff 500 ms, 1000 ms). An `AbortSignal` caps each call at 20 s.
-- Any failure or invalid output returns `templatePlanFor(hazardKind)` with source `plantilla`; the error name and latency go to the request's evlog event.
-
-## Data model (packages/db)
+## Data Models
 
 - `citizen_report`: `id` varchar primary key, `description` text, `longitude`/`latitude` double, `photo_key` varchar nullable (the API returns `photoUrl`), `hazard_kind`, `priority` varchar, `is_example` boolean, `reporter_user_id` varchar nullable, `created_at` timestamp.
 - `contingency_plan`: `report_id` varchar primary key (one current plan per report), `plan` json, `source` varchar, `generated_at` timestamp.
-- No foreign keys. Migration generated with `pnpm db:generate --name citizen_report`.
+- Tables use `mysqlTable` (`iathon_kiro_` prefix), no foreign keys; the migration is generated with `pnpm db:generate --name citizen_report`.
 
-## API
+## Error Handling
 
-- `citizenReports.create` (protected): validates input, uploads the photo to S3, classifies by rules against the existing reports, inserts, returns the stored report.
-- `citizenReports.list` (protected): every report with its plan, sorted by `compareReportsByPriority`.
-- `citizenReports.generatePlan` (protected, `{ reportId }`): loads the report and its 2 km neighbours, calls Bedrock, upserts the plan, returns it.
+- Invalid input returns BAD_REQUEST with the Spanish validation message; nothing is stored.
+- `ThrottlingException` from Bedrock is retried twice (500 ms, then 1000 ms); each call is capped at 20 s.
+- Any other Bedrock error, a timeout, a missing tool call or an invalid plan returns the template plan for the hazard kind with source `plantilla`; the flow never breaks.
+- If the stored photo cannot be read back, the plan is generated from text only.
+- Every outcome is logged in the request's evlog wide event: plan source, failure reason, attempts, latency and nearby report count.
 
-## Web (apps/web)
+## Testing Strategy
 
-- New route `/dashboard/reportes`: the report form (description, photo, location picked on the map or from the device), the prioritized list with badges, a map with priority-coloured markers, and a detail panel with the "Generar plan de contingencia" button, a loading state, and the plan with its source label and the disclaimer.
-- `/demo` lands on this route.
-
-## Testing
-
-- Business: schema limits, rules table, 500 m bump, sorting, template plans.
-- API: Bedrock client mocked; plan success, throttling retry, template fallback on failure and on invalid output, validation errors.
-- Web: type-check and a manual pass of the main flow in a browser.
+- Business (vitest): schema limits, rules table, people-at-risk rule, 500 m bump, sorting, template validity.
+- API (vitest, Bedrock and S3 mocked, never AWS): plan success with prompt, photo and nearby reports; throttling retried then success; template on other errors, timeout and invalid output; NOT_FOUND; validation errors; list ordering.
+- Demo seed: example reports inserted once.
+- Web: type-check, unit tests, and the main flow walked in a browser.
